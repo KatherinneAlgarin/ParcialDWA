@@ -1,0 +1,22 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Empresa</title><link rel="stylesheet" href="css/style.css"/></head><body><div id="navbar"></div>
+<main class="container">
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>Perfil de empresa</h2>
+      <form id="company-form">
+        <label>Nombre <input class="input" name="name" required/></label>
+        <label>Descripción <textarea class="input" name="description" rows="4"></textarea></label>
+        <label>Sitio web <input class="input" name="website"/></label>
+        <label>Contacto <input class="input" name="contact"/></label>
+        <div style="margin-top:.6rem"><button class="btn" type="submit">Guardar perfil</button></div>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Vista del perfil</h3>
+      <div id="company-view"></div>
+    </div>
+  </div>
+</main>
+<script>if(!requireRole('empresa')){/* redirected */}</script>
+  <script src="js/nav.js"></script>
+  <script src="js/app.js"></script></body></html>

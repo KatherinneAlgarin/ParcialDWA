@@ -1,0 +1,32 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Ajustes</title><link rel="stylesheet" href="css/style.css"/></head><body>
+<div id="navbar"></div>
+<main class="container">
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Personal</h3>
+      <form id="settings-form">
+        <label>Nombre <input class="input" name="personalName"/></label>
+        <label>Email <input class="input" name="personalEmail" type="email"/></label>
+        <label>Bio <textarea class="input" name="profileBio" rows="4"></textarea></label>
+        <div style="margin-top:.6rem"><button class="btn" type="submit">Guardar</button></div>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Vista previa</h3>
+      <div id="settings-preview" class="small"></div>
+    </div>
+  </div>
+</main>
+<script>
+// live preview
+document.addEventListener('input', (e)=>{
+  if(!document.getElementById('settings-form')) return;
+  const name = document.getElementById('settings-form').elements['personalName'].value || '';
+  const email = document.getElementById('settings-form').elements['personalEmail'].value || '';
+  const bio = document.getElementById('settings-form').elements['profileBio'].value || '';
+  document.getElementById('settings-preview').innerHTML = `<strong>${escapeHtml(name)}</strong><div class="small">${escapeHtml(email)}</div><div style="margin-top:.5rem">${escapeHtml(bio)}</div>`;
+});
+// show saved on load handled by showSettings in app.js
+</script>
+<script src="js/nav.js"></script>
+  <script src="js/app.js"></script></body></html>
