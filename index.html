@@ -1,353 +1,279 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inicio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        .navbar {
-            background-color: #3498db;
-            padding: 20px;
-            color: #fff;
-            text-align: right;
-        }
-        .navbar a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .navbar a:hover {
-            text-decoration: underline;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            padding: 40px;
-        }
-        .header h1 {
-            font-size: 32px;
-            color: #2c3e50;
-        }
-        .header p {
-            color: #7f8c8d;
-        }
-        .search-bar {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            background-color: #fff;
-        }
-        .search-bar input[type="text"] {
-            padding: 12px;
-            width: 40%;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            margin-right: 10px;
-        }
-        .search-bar button {
-            padding: 12px 20px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .search-bar button:hover {
-            background-color: #2980b9;
-        }
-        .info {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            background-color: #fff;
-            margin-top: 20px;
-        }
-        .info .box {
-            text-align: center;
-            padding: 30px;
-            width: 22%;
-            background-color: #ecf0f1;
-            border-radius: 8px;
-        }
-        .info .box h2 {
-            font-size: 28px;
-            color: #3498db;
-            margin-bottom: 10px;
-        }
-        .info .box p {
-            font-size: 14px;
-            color: #7f8c8d;
-        }
-        .how-it-works {
-            background-color: #ecf0f1;
-            padding: 40px;
-            text-align: center;
-        }
-        .how-it-works h2 {
-            font-size: 24px;
-            color: #2c3e50;
-        }
-        .how-it-works .step {
-            display: inline-block;
-            width: 30%;
-            padding: 20px;
-            background-color: #fff;
-            margin: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .how-it-works .step h3 {
-            font-size: 18px;
-            color: #3498db;
-        }
-        .how-it-works .step p {
-            color: #7f8c8d;
-        }
-        .companies {
-            padding: 40px;
-            background-color: #fff;
-        }
-        .companies h2 {
-            font-size: 24px;
-            color: #2c3e50;
-        }
-        .companies .company {
-            display: inline-block;
-            width: 23%;
-            margin: 10px;
-            text-align: center;
-            padding: 20px;
-            background-color: #ecf0f1;
-            border-radius: 8px;
-        }
-        .companies .company img {
-            max-width: 100%;
-        }
-        .candidates-employers {
-            display: flex;
-            justify-content: space-between;
-            padding: 40px;
-            background-color: #ecf0f1;
-        }
-        .candidates-employers .box {
-            text-align: center;
-            padding: 30px;
-            width: 48%;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .candidates-employers .box h3 {
-            font-size: 22px;
-            color: #3498db;
-        }
-        .candidates-employers .box p {
-            color: #7f8c8d;
-        }
-        .footer {
-            background-color: #34495e;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .job-card {
-            background-color: #ecf0f1;
-            padding: 20px;
-            margin-top: 10px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .job-card h3 {
-            color: #2c3e50;
-        }
-        .apply-button {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .apply-button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-    
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empleadores.html">Empleadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="candidatos.html">Candidatos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empresas.html">Empresas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html">Recursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="foro.html">Foro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="valoracion.html">Valoración de empresas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfil.html">Perfil</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                    <a class="nav-link" href="signin.html">Iniciar Sesión</a>
+                </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="empleadores.html">Empleadores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="candidatos.html">Candidatos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="empresas.html">Empresas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="recursos.html">Recursos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="foro.html">Foro</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="valoracion.html">Valoración de empresas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="perfil.html">Perfil</a>
-                </li>
-                <li class="nav-item"><a href="signin.html">Iniciar Sesión</a></li>
-                </li>
-                <li class="nav-item"><a href="crear-cuenta.html">Registrarse</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+                    <a class="nav-link" href="crear-cuenta.html">Registrarse</a>
+                </li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
 
-    <div class="header">
-        <div>
+    <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+        <div class="ms-5 ps-5 d-flex align-items-center">
+            <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
+            <h2 class="fw-bold">WorkLink</h2>
+        </div>
+        <div class="me-5 pe-5">
+            <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
+            <a href="crear-cuenta.html" class="btn btn-primary">Registrarse</a>
+        </div>
+    </div>
+
+    <div class="row m-5 d-flex justify-content-center align-items-center">
+        <div class="col-md-6 w-50 ms-5 ps-5">
             <h1>Encuentra un trabajo que se adapte a tus intereses y habilidades.</h1>
             <p>Algunos detalles aplicados según lo que deseas. Empezar con lo mejor que podemos ofrecerte.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Nombre del puesto o ubicación">
+                <button>Buscar Trabajo</button>
+            </div>
         </div>
-        <img src="./Captura de pantalla 2025-09-08 223123.png" alt="Trabajo" style="max-width: 200px;">
+        <img class="col-md-6" src="./imagenes/4565.jpg" alt="Trabajo" style="max-width: 600px;">
+
+        <div class="d-flex justify-content-evenly align-items-center p-3 mt-5">
+            <div class="text-center rounded-3 p-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded"
+                style="background-color: rgb(255, 255, 255); width: 15%;">
+                <h2>1,75M</h2>
+                <p>Trabajos</p>
+                <i class="bi bi-suitcase-lg fs-1"></i>
+            </div>
+            <div class="text-center b rounded-3 p-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded"
+                style="background-color: rgb(255, 255, 255); width: 15%;">
+                <h2>97K</h2>
+                <p>Empleados</p>
+                <i class="bi bi-buildings fs-1"></i>
+            </div>
+            <div class="text-center b rounded-3 p-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded"
+                style="background-color: rgb(255, 255, 255); width: 15%;">
+                <h2>38M</h2>
+                <p>Candidatos</p>
+                <i class="bi bi-person-workspace fs-1"></i>
+            </div>
+        </div>
     </div>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Nombre del puesto o ubicación">
-        <button>Buscar Trabajo</button>
-    </div>
 
-    <div class="info">
-        <div class="box">
-            <h2>1,75M</h2>
-            <p>Trabajos</p>
-        </div>
-        <div class="box">
-            <h2>97K</h2>
-            <p>Empleados</p>
-        </div>
-        <div class="box">
-            <h2>38M</h2>
-            <p>Candidatos</p>
-        </div>
-        <div class="box">
-            <h2>7,532</h2>
-            <p>Trabajos Nuevos</p>
-        </div>
-    </div>
 
-    <div class="how-it-works">
-        <h2>Cómo funciona WorkLink</h2>
-        <div class="step">
-            <h3>Crea una cuenta</h3>
-            <p>Rellena tus datos personales para comenzar tu viaje profesional.</p>
-        </div>
-        <div class="step">
-            <h3>Sube tu currículum</h3>
-            <p>Adjunta tu CV para aplicar a trabajos rápidamente.</p>
-        </div>
-        <div class="step">
-            <h3>Aplica a trabajos</h3>
-            <p>Encuentra el puesto ideal y aplica fácilmente.</p>
+    <div class="bg-body-secondary text-center p-5">
+        <h2 class="text-center fw-bold mb-5">Cómo funciona WorkLink</h2>
+        <div class="d-flex justify-content-around align-items-center mt-4">
+            <div style=" width: 25%;">
+                <i class="bi bi-person-plus text-primary text-center fs-2 rounded-circle bg-white p-3 mb-5"></i>
+                <h3 class="mt-3">Crea una cuenta</h3>
+                <p>Rellena tus datos personales para comenzar tu viaje profesional.</p>
+            </div>
+            <div style=" width: 25%;">
+                <i class="bi bi-cloud-upload text-primary text-center fs-2 rounded-circle bg-white p-3 mb-5"></i>
+                <h3 class="mt-3">Sube tu currículum</h3>
+                <p>Adjunta tu CV para aplicar a trabajos rápidamente.</p>
+            </div>
+            <div style=" width: 25%;">
+                <i class="bi bi-patch-check text-primary text-center fs-2 rounded-circle bg-white p-3 mb-5"></i>
+                <h3 class="mt-3">Aplica a trabajos</h3>
+                <p>Encuentra el puesto ideal y aplica fácilmente.</p>
+            </div>
         </div>
     </div>
 
     <div class="container my-5">
-        <h2 class="text-center">Trabajos</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-semibold ">Trabajos Destacados</h2>
+            <button class="border-1 border border-primary p-2 text-primary bg-white rounded-2" style=" width: 8%;">Ver
+                más</button>
+        </div>
         <div class="job-card">
             <div>
-                <h3>Diseñador UX Senior</h3>
-                <p>Hasta $90K | 4 Days remaining</p>
+                <h3>Vacante</h3>
+                <div class="d-flex gap-2 align-items-center">
+                    <span class="badge text-secondary">Tipo</span>
+                    <div class="d-flex gap-1 align-items-center p-0">
+                        <i class="bi bi-currency-dollar text-secondary"></i>
+                        <span class="badge text-secondary">salario</span>
+                    </div>
+                    <div class="d-flex gap-1 align-items-center p-0">
+                        <i class="bi bi-geo-alt text-secondary"></i>
+                        <span class="badge text-secondary">ubicación</span>
+                    </div>
+
+                </div>
             </div>
-            <button class="apply-button">Aplicar</button>
+            <button class="bg-primary-subtle text-primary rounded-1 p-1 border-primary pe-3 ps-3">Aplicar</button>
         </div>
 
         <div class="job-card">
             <div>
-                <h3>Ingeniero de Software</h3>
-                <p>Hasta $150K | Quedan 4 días</p>
+                <h3>Vacante</h3>
+                <div class="d-flex gap-2 align-items-center">
+                    <span class="badge text-secondary">Tipo</span>
+                    <div class="d-flex gap-1 align-items-center p-0">
+                        <i class="bi bi-currency-dollar text-secondary"></i>
+                        <span class="badge text-secondary">salario</span>
+                    </div>
+                    <div class="d-flex gap-1 align-items-center p-0">
+                        <i class="bi bi-geo-alt text-secondary"></i>
+                        <span class="badge text-secondary">ubicación</span>
+                    </div>
+
+                </div>
             </div>
-            <button class="apply-button">Aplicar</button>
+            <button class="bg-primary-subtle text-primary rounded-1 p-1 border-primary pe-3 ps-3">Aplicar</button>
         </div>
 
         <div class="job-card">
             <div>
-                <h3>Diseñador Gráfico Junior</h3>
-                <p>Hasta $50K | Quedan 4 días</p>
+                <h3>Vacante</h3>
+                <div class="d-flex gap-2 align-items-center">
+                    <span class="badge text-secondary">Tipo</span>
+                    <div class="d-flex gap-1 align-items-center p-0">
+                        <i class="bi bi-currency-dollar text-secondary"></i>
+                        <span class="badge text-secondary">salario</span>
+                    </div>
+                    <div class="d-flex gap-1 align-items-center p-0">
+                        <i class="bi bi-geo-alt text-secondary"></i>
+                        <span class="badge text-secondary">ubicación</span>
+                    </div>
+
+                </div>
             </div>
-            <button class="apply-button">Aplicar</button>
+            <button class="bg-primary-subtle text-primary rounded-1 p-1 border-primary pe-3 ps-3">Aplicar</button>
         </div>
     </div>
 
-    <div class="companies">
-        <h2>Principales Empresas</h2>
-        <div class="company">
-            <img src="images/dribbble.png" alt="Dribbble">
-            <p>Posiciones Abiertas</p>
+    <div class="justify-content-center align-items-center">
+        <h2 class="text-primary-emphasis text-center">Principales Empresas</h2>
+        <div class="d-flex justify-content-center align-items-center p-5">
+            <div class="border border-primary rounded-3 p-3 m-2">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
+                    <div>
+                        <h6>Dribbble</h6>
+                        <div class="d-flex align-items-center text-secondary">
+                            <i class="bi bi-geo-alt"></i>
+                            <h6 class="mt-2">ubicación</h6>
+                        </div>
+                        
+                    </div>
+                </div>
+                <button class="bg-primary-subtle text-primary rounded-2 border border-primary-subtle w-100 ">Aplicar</button>
+            </div>
+
+            <div class="border border-primary rounded-3 p-3 m-2">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
+                    <div>
+                        <h6>Dribbble</h6>
+                        <div class="d-flex align-items-center text-secondary">
+                            <i class="bi bi-geo-alt"></i>
+                            <h6 class="mt-2">ubicación</h6>
+                        </div>
+                        
+                    </div>
+                </div>
+                <button class="bg-primary-subtle text-primary rounded-2 border border-primary-subtle w-100 ">Aplicar</button>
+            </div>
+
+            <div class="border border-primary rounded-3 p-3 m-2">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
+                    <div>
+                        <h6>Dribbble</h6>
+                        <div class="d-flex align-items-center text-secondary">
+                            <i class="bi bi-geo-alt"></i>
+                            <h6 class="mt-2">ubicación</h6>
+                        </div>
+                        
+                    </div>
+                </div>
+                <button class="bg-primary-subtle text-primary rounded-2 border border-primary-subtle w-100 ">Aplicar</button>
+            </div>
+
+            <div class="border border-primary rounded-3 p-3 m-2">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
+                    <div>
+                        <h6>Dribbble</h6>
+                        <div class="d-flex align-items-center text-secondary">
+                            <i class="bi bi-geo-alt"></i>
+                            <h6 class="mt-2">ubicación</h6>
+                        </div>
+                        
+                    </div>
+                </div>
+                <button class="bg-primary-subtle text-primary rounded-2 border border-primary-subtle w-100 ">Aplicar</button>
+            </div>
         </div>
-        <div class="company">
-            <img src="images/upwork.png" alt="Upwork">
-            <p>Posiciones Abiertas</p>
-        </div>
-        <div class="company">
-            <img src="images/slack.png" alt="Slack">
-            <p>Posiciones Abiertas</p>
-        </div>
-        <div class="company">
-            <img src="images/google.png" alt="Google">
-            <p>Posiciones Abiertas</p>
-        </div>
+
+
     </div>
 
-    <div class="candidates-employers">
-        <div class="box">
+    <div class="d-flex justify-content-around align-items-center p-5 bg-body-secondary">
+        <div class="rounded-3 bg-white p-5">
             <h3>Convierte en Candidato</h3>
             <p>Únete a nosotros y encuentra las mejores oportunidades de empleo.</p>
-            <button class="btn">Registrarse</button>
+            <button class="bg-primary text-white rounded-2 border border-primary-subtle w-50 p-2">Registrarse</button>
         </div>
-        <div class="box">
+        <div class="rounded-3 bg-primary-subtle p-5">
             <h3>Convierte en Empleador</h3>
             <p>Publica vacantes y encuentra candidatos ideales para tu empresa.</p>
-            <button class="btn">Registrarse</button>
+            <button class="bg-primary text-white rounded-2 border border-primary-subtle w-50 p-2">Registrarse</button>
         </div>
     </div>
 
     <div class="footer">
-        <p>&copy; 2023 WorkLink. Todos los derechos reservados.</p>
+        <p>&copy; 2025 WorkLink. Todos los derechos reservados.</p>
+    </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
 </body>
+
 </html>
