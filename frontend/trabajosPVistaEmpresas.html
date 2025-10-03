@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mis Trabajos - WorkLink</title>
+      <link rel="stylesheet" href="css/trabajosPVistaEmpresa.css">
+
+
+    <!-- Bootstrap 5.3.6 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .sidebar {
+        min-height: 100vh;
+        border-right: 1px solid #dee2e6;
+        background-color: #fff;
+        padding: 20px;
+      }
+      .sidebar .nav-link.active {
+        background-color: #f1f5ff;
+        border-radius: 5px;
+        color: #0d6efd;
+        font-weight: 500;
+      }
+      .job-row {
+        background-color: #fff;
+        border-bottom: 1px solid #dee2e6;
+        padding: 15px 10px;
+      }
+      .job-row:hover {
+        background-color: #f9fafc;
+      }
+      .job-title {
+        font-weight: 500;
+      }
+      .status-active {
+        color: #198754;
+        font-weight: 500;
+      }
+      .status-expire {
+        color: #dc3545;
+        font-weight: 500;
+      }
+      .footer {
+        border-top: 1px solid #dee2e6;
+        padding: 20px;
+        text-align: center;
+        color: #6c757d;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="logo" width="30" class="me-2">
+          <span>WorkLink</span>
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Buscar empleos</a></li>
+          <li class="nav-item"><a class="nav-link active fw-semibold" href="#">Empleadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Candidatos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Recursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
+        </ul>
+        <button class="btn btn-outline-primary me-2">Publicar Trabajo</button>
+        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="28" alt="Instagram"></a>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+          <h6 class="text-muted mb-3">Panel de empleadores</h6>
+          <nav class="nav flex-column">
+            <a class="nav-link" href="#">General</a>
+            <a class="nav-link" href="#">Publicar trabajo</a>
+            <a class="nav-link active" href="#">Mis trabajos</a>
+            <a class="nav-link" href="#">Ajustes</a>
+          </nav>
+          <div class="mt-5">
+            <a href="#" class="text-muted small">Cerrar sesión</a>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10 p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Mis trabajos</h5>
+            <div>
+              <select class="form-select form-select-sm">
+                <option>Estado de trabajos</option>
+                <option>Todos</option>
+                <option>Activos</option>
+                <option>Expirados</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Table header -->
+          <div class="row fw-semibold border-bottom pb-2 mb-2">
+            <div class="col-md-4">Trabajos</div>
+            <div class="col-md-2">Estado</div>
+            <div class="col-md-3">Candidatos</div>
+            <div class="col-md-3">Acciones</div>
+          </div>
+
+          <!-- Jobs list -->
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">UI/UX Designer</div>
+              <small class="text-muted">Full Time • 27 days remaining</small>
+            </div>
+            <div class="col-md-2 status-active">Active</div>
+            <div class="col-md-3">798 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Senior UX Designer</div>
+              <small class="text-muted">Internship • 8 days remaining</small>
+            </div>
+            <div class="col-md-2 status-active">Active</div>
+            <div class="col-md-3">185 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Junior Graphic Designer</div>
+              <small class="text-muted">Full Time • 24 days remaining</small>
+            </div>
+            <div class="col-md-2 status-active">Active</div>
+            <div class="col-md-3">583 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Front End Developer</div>
+              <small class="text-muted">Full Time • Dec 7, 2019</small>
+            </div>
+            <div class="col-md-2 status-expire">Expire</div>
+            <div class="col-md-3">740 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Technical Support Specialist</div>
+              <small class="text-muted">Part Time • 4 days remaining</small>
+            </div>
+            <div class="col-md-2 status-active">Active</div>
+            <div class="col-md-3">556 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Interaction Designer</div>
+              <small class="text-muted">Contract Base • Feb 2, 2019</small>
+            </div>
+            <div class="col-md-2 status-expire">Expire</div>
+            <div class="col-md-3">426 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Software Engineer</div>
+              <small class="text-muted">Temporary • 9 days remaining</small>
+            </div>
+            <div class="col-md-2 status-active">Active</div>
+            <div class="col-md-3">922 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Product Designer</div>
+              <small class="text-muted">Full Time • 7 days remaining</small>
+            </div>
+            <div class="col-md-2 status-active">Active</div>
+            <div class="col-md-3">994 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Project Manager</div>
+              <small class="text-muted">Full Time • Dec 4, 2019</small>
+            </div>
+            <div class="col-md-2 status-expire">Expire</div>
+            <div class="col-md-3">166 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+          <div class="job-row row align-items-center">
+            <div class="col-md-4">
+              <div class="job-title">Marketing Manager</div>
+              <small class="text-muted">Full Time • 4 days remaining</small>
+            </div>
+            <div class="col-md-2 status-active">Active</div>
+            <div class="col-md-3">492 Applications</div>
+            <div class="col-md-3"><button class="btn btn-primary btn-sm">Ver Candidatos</button></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2025 WorkLink - All rights Reserved
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

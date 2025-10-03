@@ -1,1 +1,205 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Ajustes</title><link rel="stylesheet" href="css/style.css"/></head><body><div id="navbar"></div><main class="container"><div class="card"><h2>Ajustes de cuenta</h2><div class="grid grid-2"><div><h3>Perfil</h3><form id="user-settings-form"><label>Nombre <input class="input" name="name" required/></label><label>Email <input class="input" name="email" type="email" required/></label><label>Bio <textarea class="input" name="bio" rows="4"></textarea></label><div style="margin-top:.6rem"><button class="btn" type="submit">Guardar perfil</button></div></form></div><div><h3>Cambiar contraseña</h3><form id="change-password-form"><label>Contraseña actual <input class="input" name="current" type="password" required/></label><label>Nueva contraseña <input class="input" name="newpass" type="password" required/></label><div style="margin-top:.6rem"><button class="btn" type="submit">Cambiar contraseña</button></div></form><div id="settings-msg" class="small" style="margin-top:.6rem"></div></div></div></div></main><footer class="footer">Ajustes — Demo</footer><script>function requireUser(){ const u = (localStorage.getItem('demo_user_v1')?JSON.parse(localStorage.getItem('demo_user_v1')):null); if(!u){ location.href='signin.html?returnTo='+encodeURIComponent(location.pathname); return false; } return u; }document.addEventListener('DOMContentLoaded', ()=>{ const user = requireUser(); if(!user) return; const users = JSON.parse(localStorage.getItem('demo_users_v3')||'[]'); const full = users.find(x=>x.email===user.email); const f = document.getElementById('user-settings-form'); f.elements['name'].value = full.name || ''; f.elements['email'].value = full.email || ''; f.elements['bio'].value = full.bio || ''; f.addEventListener('submit', (e)=>{ e.preventDefault(); const name = f.elements['name'].value.trim(); const email = f.elements['email'].value.trim(); const bio = f.elements['bio'].value.trim(); const idx = users.findIndex(x=>x.email===user.email); if(idx>-1){ users[idx].name = name; users[idx].email = email; users[idx].bio = bio; localStorage.setItem('demo_users_v3', JSON.stringify(users)); const publicUser = { id: users[idx].id, name: users[idx].name, email: users[idx].email, role: users[idx].role }; localStorage.setItem('demo_user_v1', JSON.stringify(publicUser)); showAlert('Perfil actualizado', 'success'); renderNavbar(); } }); const cp = document.getElementById('change-password-form'); cp.addEventListener('submit', (e)=>{ e.preventDefault(); const current = cp.elements['current'].value; const novo = cp.elements['newpass'].value; const idx = users.findIndex(x=>x.email===user.email); if(idx===-1){ showAlert('Usuario no encontrado','danger'); return; } if(users[idx].password !== current){ showAlert('Contraseña actual incorrecta','danger'); return; } users[idx].password = novo; localStorage.setItem('demo_users_v3', JSON.stringify(users)); showAlert('Contraseña actualizada','success'); cp.reset(); }); });</script><script src="js/nav.js"></script><script src="js/app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajustes - WorkLink</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="/frontend/css/ajustes.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+    <a class="navbar-brand fw-bold text-primary" href="#">WorkLink</a>
+    <form class="d-flex ms-4 flex-grow-1">
+      <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+    </form>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Buscar Empleos</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Empleadores</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Candidatos</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Recursos</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
+    </ul>
+    <div class="ms-3"><i class="fa-solid fa-circle-user fa-2x"></i></div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- SIDEBAR -->
+      <div class="col-md-3 col-lg-2 bg-light border-end vh-100 p-3">
+        <h6 class="text-uppercase fw-bold mb-3">Panel de Candidatos</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item"><a href="#" class="nav-link">General</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Solicitudes enviadas</a></li>
+          <li class="nav-item"><a href="#" class="nav-link active fw-bold">Ajustes</a></li>
+        </ul>
+        <div class="mt-5">
+          <a href="#" class="text-danger text-decoration-none"><i class="fa-solid fa-power-off"></i> Cerrar sesión</a>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="col-md-9 col-lg-10 p-4">
+        <h4 class="fw-bold mb-4">AJUSTES</h4>
+
+        <!-- INFORMACION BASICA -->
+        <div class="card shadow-sm p-4 mb-4">
+          <h5 class="fw-bold mb-3">Información Básica</h5>
+          <div class="row g-3">
+            <div class="col-md-3 text-center">
+              <div class="border rounded p-4 d-flex align-items-center justify-content-center flex-column upload-box">
+                <i class="fa-solid fa-user fa-3x mb-2"></i>
+                <p class="small">Seleccione un archivo<br><span class="text-muted">Tamaño máximo 5 MB</span></p>
+                <input type="file" class="form-control mt-2">
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Nombre Completo">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Título">
+                </div>
+                <div class="col-md-6">
+                  <select class="form-select"><option>Experiencia</option></select>
+                </div>
+                <div class="col-md-6">
+                  <select class="form-select"><option>Educación</option></select>
+                </div>
+                <div class="col-md-12">
+                  <input type="url" class="form-control" placeholder="Sitio Personal (URL)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CURRICULUM -->
+        <div class="card shadow-sm p-4 mb-4">
+          <h5 class="fw-bold mb-3">Su Curriculum</h5>
+          <div class="d-flex flex-wrap gap-3">
+            <div class="file-card">
+              <i class="fa-solid fa-file-pdf fa-2x text-danger"></i>
+              <p class="mb-1">Curriculum Vitae</p>
+              <small class="text-muted">3.3 MB</small>
+            </div>
+            <div class="file-card">
+              <i class="fa-solid fa-file fa-2x text-primary"></i>
+              <p class="mb-1">Diseño de producto</p>
+              <small class="text-muted">4.7 MB</small>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light border mt-1 dropdown-toggle" data-bs-toggle="dropdown">Opciones</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Editar</a></li>
+                  <li><a class="dropdown-item text-danger" href="#">Eliminar</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="file-card">
+              <i class="fa-solid fa-file fa-2x text-info"></i>
+              <p class="mb-1">Diseño Visual</p>
+              <small class="text-muted">1.3 MB</small>
+            </div>
+            <div class="file-card add-file d-flex flex-column justify-content-center align-items-center">
+              <i class="fa-solid fa-plus fa-2x"></i>
+              <p class="mb-0">Agregar</p>
+              <small class="text-muted">Sólo PDF</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- DATOS PERSONALES -->
+        <div class="card shadow-sm p-4 mb-4">
+          <div class="row g-3">
+            <div class="col-md-4"><select class="form-select"><option>Nacionalidad</option></select></div>
+            <div class="col-md-4"><input type="date" class="form-control" placeholder="Fecha de Nacimiento"></div>
+            <div class="col-md-4"><select class="form-select"><option>Género</option></select></div>
+            <div class="col-md-4"><select class="form-select"><option>Estado Civil</option></select></div>
+            <div class="col-md-4"><select class="form-select"><option>Educación</option></select></div>
+            <div class="col-md-4"><select class="form-select"><option>Experiencia</option></select></div>
+            <div class="col-md-12"><textarea class="form-control" rows="4" placeholder="Escriba su biografía..."></textarea></div>
+          </div>
+        </div>
+
+        <!-- SOCIAL LINKS -->
+        <div class="card shadow-sm p-4 mb-4">
+          <h5 class="fw-bold mb-3">Redes Sociales</h5>
+          <div class="row g-3">
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="fa-brands fa-facebook fa-lg me-2 text-primary"></i>
+              <input type="url" class="form-control" placeholder="Facebook link">
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="fa-brands fa-twitter fa-lg me-2 text-info"></i>
+              <input type="url" class="form-control" placeholder="Twitter link">
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="fa-brands fa-instagram fa-lg me-2 text-danger"></i>
+              <input type="url" class="form-control" placeholder="Instagram link">
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="fa-brands fa-youtube fa-lg me-2 text-danger"></i>
+              <input type="url" class="form-control" placeholder="YouTube link">
+            </div>
+          </div>
+          <button class="btn btn-outline-primary btn-sm mt-3"><i class="fa-solid fa-plus"></i> Agregar link de nueva red social</button>
+        </div>
+
+        <!-- CONTACTO -->
+        <div class="card shadow-sm p-4 mb-4">
+          <h5 class="fw-bold mb-3">Contacto</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="tel" class="form-control" placeholder="+503 Teléfono">
+            </div>
+            <div class="col-md-6">
+              <input type="email" class="form-control" placeholder="Correo electrónico">
+            </div>
+          </div>
+        </div>
+
+        <!-- CAMBIAR CONTRASEÑA -->
+        <div class="card shadow-sm p-4 mb-4">
+          <h5 class="fw-bold mb-3">Cambiar contraseña</h5>
+          <div class="row g-3">
+            <div class="col-md-4"><input type="password" class="form-control" placeholder="Contraseña actual"></div>
+            <div class="col-md-4"><input type="password" class="form-control" placeholder="Nueva contraseña"></div>
+            <div class="col-md-4"><input type="password" class="form-control" placeholder="Confirmar contraseña"></div>
+          </div>
+        </div>
+
+        <!-- NOTIFICACIONES -->
+        <div class="card shadow-sm p-4 mb-4">
+          <h5 class="fw-bold mb-3">Notificaciones</h5>
+          <div class="form-check"><input type="checkbox" class="form-check-input" id="n1"><label for="n1" class="form-check-label">Notify me when employers shortlisted me</label></div>
+          <div class="form-check"><input type="checkbox" class="form-check-input" id="n2"><label for="n2" class="form-check-label">Notify me when my applied jobs are expire</label></div>
+          <div class="form-check"><input type="checkbox" class="form-check-input" id="n3"><label for="n3" class="form-check-label">Notify me when I have up to 5 job alerts</label></div>
+          <div class="form-check"><input type="checkbox" class="form-check-input" id="n4"><label for="n4" class="form-check-label">Notify me when employers saved my profile</label></div>
+          <div class="form-check"><input type="checkbox" class="form-check-input" id="n5"><label for="n5" class="form-check-label">Notify me when employers rejected me</label></div>
+        </div>
+
+        <!-- ELIMINAR CUENTA -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <button class="btn btn-outline-danger">Cerrar Cuenta</button>
+          <button class="btn btn-primary">Guardar Cambios</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-muted py-3 border-top">
+    © 2024 WorkLink - Portal de trabajo. Todos los derechos reservados
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

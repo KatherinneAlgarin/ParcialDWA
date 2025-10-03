@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publicar Trabajo - WorkLink</title>
+     <link rel="stylesheet" href="css/publicarTrabajo.css">
+
+    <!-- Bootstrap 5.3.6 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="logo" width="30" class="me-2">
+          <span>WorkLink</span>
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Buscar empleos</a></li>
+          <li class="nav-item"><a class="nav-link active fw-semibold" href="#">Empleadores</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Candidatos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Recursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
+        </ul>
+        <button class="btn btn-outline-primary me-2">Publicar Trabajo</button>
+        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="28" alt="Instagram"></a>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+          <h6 class="text-muted mb-3">Panel de empleadores</h6>
+          <nav class="nav flex-column">
+            <a class="nav-link" href="#">General</a>
+            <a class="nav-link active" href="#">Publicar trabajo</a>
+            <a class="nav-link" href="#">Mis trabajos</a>
+            <a class="nav-link" href="#">Ajustes</a>
+          </nav>
+          <div class="mt-5">
+            <a href="#" class="text-muted small">Cerrar sesión</a>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10 p-4">
+          <h5 class="mb-4 fw-bold">PUBLICAR TRABAJO</h5>
+
+          <form>
+            <!-- Título -->
+            <div class="mb-3">
+              <label class="form-label">Título de trabajo</label>
+              <input type="text" class="form-control" placeholder="Trabajo, vacante, etc.">
+            </div>
+
+            <!-- Rol -->
+            <div class="mb-3 col-md-4">
+              <label class="form-label">Rol</label>
+              <select class="form-select">
+                <option selected>Seleccionar...</option>
+                <option>Diseñador</option>
+                <option>Desarrollador</option>
+                <option>Marketing</option>
+              </select>
+            </div>
+
+            <!-- Salario -->
+            <div class="mb-4">
+              <label class="form-label">Salario</label>
+              <div class="row g-2">
+                <div class="col-md-3">
+                  <input type="number" class="form-control" placeholder="Salario mínimo">
+                </div>
+                <div class="col-md-1">
+                  <input type="text" class="form-control" value="USD" disabled>
+                </div>
+                <div class="col-md-3">
+                  <input type="number" class="form-control" placeholder="Salario máximo">
+                </div>
+                <div class="col-md-1">
+                  <input type="text" class="form-control" value="USD" disabled>
+                </div>
+                <div class="col-md-4">
+                  <select class="form-select">
+                    <option>Seleccionar..</option>
+                    <option>Mensual</option>
+                    <option>Quincenal</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Información avanzada -->
+            <h6 class="fw-semibold mt-4">Información avanzada</h6>
+            <div class="row g-3 mb-4">
+              <div class="col-md-4">
+                <label class="form-label">Educación</label>
+                <select class="form-select">
+                  <option>Seleccionar...</option>
+                  <option>Universidad</option>
+                  <option>Bachillerato</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Experiencia</label>
+                <select class="form-select">
+                  <option>Seleccionar...</option>
+                  <option>Sin experiencia</option>
+                  <option>1-2 años</option>
+                  <option>3-5 años</option>
+                  <option>5+ años</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Tipo de trabajo</label>
+                <select class="form-select">
+                  <option>Select...</option>
+                  <option>Tiempo completo</option>
+                  <option>Medio tiempo</option>
+                  <option>Contrato</option>
+                  <option>Temporal</option>
+                  <option>Pasantía</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Cantidad de vacantes</label>
+                <input type="number" class="form-control" value="2">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Fecha de expiración</label>
+                <input type="text" class="form-control" placeholder="DD/MM/YYYY">
+              </div>
+            </div>
+
+            <!-- Descripción y responsabilidades -->
+            <h6 class="fw-semibold mt-4">Descripción y responsabilidades</h6>
+            <div class="mb-3">
+              <label class="form-label">Descripción</label>
+              <textarea class="form-control" rows="4" placeholder="Agregar descripción..."></textarea>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Responsabilidades</label>
+              <textarea class="form-control" rows="4" placeholder="Agregar responsabilidades..."></textarea>
+            </div>
+
+            <!-- Botón -->
+            <button type="submit" class="btn btn-primary">Publicar Trabajo</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      © 2025 WorkLink - All rights Reserved
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

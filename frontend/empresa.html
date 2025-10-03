@@ -21,6 +21,9 @@
                             <a class="nav-link" aria-current="page" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="empleadores.html">Empleadores</a>
                         </li>
                         <li class="nav-item">
@@ -58,19 +61,19 @@
 
      <div class="container-fluid">
     <div class="row">
-      <div class="col-md-2 bg-white border-end min-vh-100 p-4">
-        <h6 class="fw-bold text-secondary">PANEL DE EMPLEADORES</h6>
-        <ul class="nav flex-column mt-3">
-          <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-grid me-2"></i>General</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-plus-square me-2"></i>Publicar trabajo</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-briefcase me-2"></i>Mis trabajos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
-        </ul>
-        <div class="mt-5">
-          <a href="#" class="text-danger text-decoration-none"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
-        </div>
-      </div>
 
+      <div class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
+  <h6 class="fw-bold text-secondary">PANEL DE EMPLEADORES</h6>
+  <ul class="nav flex-column mt-3">
+    <li class="nav-item"><a class="nav-link active" href="#"><i class="bi bi-grid me-2"></i>General</a></li>
+    <li class="nav-item"><a class="nav-link" href="publicarTrabajo.html"><i class="bi bi-plus-square me-2"></i>Publicar trabajo</a></li>
+    <li class="nav-item"><a class="nav-link" href="trabajosPVistaEmpresas.html"><i class="bi bi-briefcase me-2"></i>Mis trabajos</a></li>
+    <li class="nav-item"><a class="nav-link" href="ajustesEmpresa.html"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
+  </ul>
+  <div class="mt-auto">
+    <a href="#" class="text-danger text-decoration-none"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
+  </div>
+</div>
       
       <div class="col-md-10 p-5">
         <h4>Hello, Instagram</h4>
@@ -88,7 +91,7 @@
           <div class="col-md-3">
             <div class="card stats-card">
               <div class="card-body text-center">
-                <h3 class="fw-bold">2,517</h3>
+                <h3 class="fw-bold">2,517</h3> 
                 <p class="text-muted mb-1">Candidatos</p>
                 <i class="bi bi-people fs-3 text-warning"></i>
               </div>
@@ -113,43 +116,22 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>UI/UX Designer<br><small class="text-muted">Tiempo completo • 27 days remaining</small></td>
-                  <td><span class="badge bg-success">Active</span></td>
-                  <td>798 Candidatos</td>
-                  <td><button class="btn btn-primary btn-sm">Ver Candidatos</button></td>
-                </tr>
-                <tr>
-                  <td>Senior UX Designer<br><small class="text-muted">Pasantía • 8 days remaining</small></td>
-                  <td><span class="badge bg-success">Active</span></td>
-                  <td>185 Candidatos</td>
-                  <td><button class="btn btn-primary btn-sm">Ver Candidatos</button></td>
-                </tr>
-                <tr>
                   <td>Technical Support Specialist<br><small class="text-muted">Tiempo completo • 4 days remaining</small></td>
                   <td><span class="badge bg-success">Active</span></td>
                   <td>556 Candidatos</td>
                   <td>
-                    <div class="btn-group">
-                      <button class="btn btn-primary btn-sm">Ver Candidatos</button>
-                      <button class="btn btn-light btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"></button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Detalles</a></li>
-                        <li><a class="dropdown-item" href="#">Marcar como vencida</a></li>
-                      </ul>
+                    <div class="btn-group gap-2">
+                      <button class="btn btn-primary btn-sm rounded-1">Ver Candidatos</button>
+                      <div class="btn-group">
+                        <i  type="button" class="btn btn-secondary rounded-1 bi bi-three-dots-vertical btn-secondary" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></i>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                          <li><a class="dropdown-item" href="detalleEmpleo.html">Detalles</a></li>
+                          <li><a class="dropdown-item" href="#">Marcar como vencida</a></li>
+                        </ul>
+                      </div>
                     </div>
+                    
                   </td>
-                </tr>
-                <tr>
-                  <td>Junior Graphic Designer<br><small class="text-muted">Tiempo completo • 24 days remaining</small></td>
-                  <td><span class="badge bg-success">Active</span></td>
-                  <td>583 Candidatos</td>
-                  <td><button class="btn btn-primary btn-sm">Ver Candidatos</button></td>
-                </tr>
-                <tr>
-                  <td>Front End Developer<br><small class="text-muted">Tiempo completo • Dec 7, 2019</small></td>
-                  <td><span class="badge bg-danger">Expired</span></td>
-                  <td>740 Candidatos</td>
-                  <td><button class="btn btn-primary btn-sm">Ver Candidatos</button></td>
                 </tr>
               </tbody>
             </table>
@@ -160,7 +142,7 @@
     </div>
   </div>
 
-  <footer class="text-center p-3 mt-5 text-muted">
+  <footer class="text-center p-3 text-muted">
     © 2025 WorkLink - All rights Reserved
   </footer>
 

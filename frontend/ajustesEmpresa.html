@@ -1,0 +1,162 @@
+ 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajustes Empresa - WorkLink</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="bg-light p-3 border-end" style="width:250px; min-height:100vh;">
+      <div class="d-flex align-items-center mb-4">
+        <img src="./imagenes/Logo.PNG" alt="logo" width="30" class="me-2">
+        <span class="fw-bold">WorkLink</span>
+      </div>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="#" class="nav-link text-dark">General</a></li>
+        <li class="nav-item mb-2"><a href="#" class="nav-link text-dark">Publicar trabajo</a></li>
+        <li class="nav-item mb-2"><a href="#" class="nav-link text-dark">Mis trabajos</a></li>
+        <li class="nav-item"><a href="#" class="nav-link active text-primary">Ajustes</a></li>
+      </ul>
+      <div class="mt-auto pt-5">
+        <a href="#" class="text-muted small">Cerrar sesión</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <a href="#" class="me-3 text-dark">Home</a>
+          <a href="#" class="me-3 text-dark">Buscar Empleos</a>
+          <a href="#" class="me-3 text-dark fw-bold">Empleadores</a>
+          <a href="#" class="me-3 text-dark">Candidatos</a>
+          <a href="#" class="me-3 text-dark">Recursos</a>
+          <a href="#" class="text-dark">Foro</a>
+        </div>
+        <div>
+          <button class="btn btn-primary me-2">Publicar Trabajo</button>
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="30" alt="instagram">
+        </div>
+      </div>
+
+      <h4 class="fw-bold mb-4">AJUSTES</h4>
+
+      <!-- Formulario -->
+      <form>
+        <!-- Logo y Banner -->
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Logo</label>
+            <div class="border d-flex align-items-center justify-content-center bg-light" style="height:150px;">
+              Logo Placeholder
+            </div>
+            <div class="small mt-2">3.5 MB <a href="#" class="text-danger">Borrar</a> <a href="#" class="text-primary">Reemplazar</a></div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Banner</label>
+            <div class="border d-flex align-items-center justify-content-center bg-light" style="height:150px;">
+              Banner Placeholder
+            </div>
+            <div class="small mt-2">4.3 MB <a href="#" class="text-danger">Borrar</a> <a href="#" class="text-primary">Reemplazar</a></div>
+          </div>
+        </div>
+
+        <!-- Nombre de empresa -->
+        <div class="mb-3">
+          <label class="form-label">Nombre de la empresa</label>
+          <input type="text" class="form-control">
+        </div>
+
+        <!-- Sobre la empresa -->
+        <div class="mb-3">
+          <label class="form-label">Sobre la empresa</label>
+          <textarea class="form-control" rows="4"></textarea>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="mb-3">
+          <label class="form-label">Red social link 1</label>
+          <div class="input-group mb-2">
+            <span class="input-group-text bg-white"><i class="bi bi-facebook text-primary"></i> Facebook</span>
+            <input type="text" class="form-control" placeholder="Profile link/url...">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Red social link 2</label>
+          <div class="input-group mb-2">
+            <span class="input-group-text bg-white"><i class="bi bi-twitter text-info"></i> Twitter</span>
+            <input type="text" class="form-control" placeholder="Profile link/url...">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Red social link 3</label>
+          <div class="input-group mb-2">
+            <span class="input-group-text bg-white"><i class="bi bi-instagram text-danger"></i> Instagram</span>
+            <input type="text" class="form-control" placeholder="Profile link/url...">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Red social link 4</label>
+          <div class="input-group mb-2">
+            <span class="input-group-text bg-white"><i class="bi bi-youtube text-danger"></i> Youtube</span>
+            <input type="text" class="form-control" placeholder="Profile link/url...">
+          </div>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm mb-3">➕ Agregar nuevo link</button>
+
+        <!-- Contacto -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Teléfono</label>
+            <div class="input-group">
+              <span class="input-group-text">+880</span>
+              <input type="text" class="form-control" placeholder="Phone number...">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Correo</label>
+            <input type="email" class="form-control" placeholder="Email address">
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <h6 class="fw-bold mt-4">Cambiar contraseña</h6>
+        <div class="row mb-4">
+          <div class="col-md-4">
+            <input type="password" class="form-control" placeholder="Contraseña actual">
+          </div>
+          <div class="col-md-4">
+            <input type="password" class="form-control" placeholder="Nueva contraseña">
+          </div>
+          <div class="col-md-4">
+            <input type="password" class="form-control" placeholder="Confirmar contraseña">
+          </div>
+        </div>
+
+        <!-- Eliminar -->
+        <div class="mb-4">
+          <h6 class="fw-bold">Eliminar compañía</h6>
+          <p class="small text-muted">If you delete your Jobpilot account, you will no longer be able to get information about the matched jobs, following employers, job alert, shortlisted jobs and more. You will be abandoned from all the services of Jobpilot.com.</p>
+          <button class="btn btn-outline-danger">Close Account</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="text-center mt-5 small text-muted">
+    © 2025 WorkLink - All rights reserved
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
