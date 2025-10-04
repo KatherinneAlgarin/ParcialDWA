@@ -1,0 +1,36 @@
+.card h5 {
+    font-weight: 600;
+}
+
+.card a {
+    color: #0d6efd;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.accordion-button {
+    background-color: #f8f9fa;
+    color: #0d6efd;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e9ecef;
+}
+
+.accordion-body {
+    background-color: #f8f9fa;
+}
+
+footer {
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #fff;
+}
+
+footer a:hover {
+    color: #e9ecef;
+}

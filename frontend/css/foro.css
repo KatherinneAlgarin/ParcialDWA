@@ -1,0 +1,11 @@
+.card h5 {
+  font-weight: 600;
+}
+
+.card a {
+  color: #0d6efd;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
