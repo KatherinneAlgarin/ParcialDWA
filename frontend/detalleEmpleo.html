@@ -11,35 +11,43 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <i class="bi bi-briefcase-fill fs-3 text-primary me-2"></i>
-        <span class="fw-bold">WorkLink</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold text-primary" href="#">Buscar Empleos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Empleadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Candidatos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Recursos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
-        </ul>
-        <div class="d-flex align-items-center">
-          <img src="https://via.placeholder.com/40" class="rounded-circle" alt="perfil">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav gap-4">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="vistaEmpleos.html">Buscar Empleos</a></li>
+              <li class="nav-item"><a class="nav-link" href="empleadores.html">Empleadores</a></li>
+              <li class="nav-item"><a class="nav-link" href="candidatos.html">Candidatos</a></li>
+              <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+              <li class="nav-item"><a class="nav-link" href="foro.html">Foro</a></li>
+              <li class="nav-item"><a class="nav-link" href="valoracion.html">Empresas</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </nav>
+      
+      <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+        <div class="ms-5 ps-5 d-flex align-items-center">
+            <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
+            <h2 class="fw-bold">WorkLink</h2>
+        </div>
+
+        <!-- ACA ESTOS BOTONES DE INICIAR SESION Y REGISTRARSE DEBEN MOSTRARSE SI SE ACCEDE SIN INICIAR SESION, SI HA INICIADO SESION SE DEBE MOSTRAR LA IMAGEN DE PERFIL COMO EN LAS DEMAS PAGINAS -->
+        <div class="me-5 pe-5 d-flex">
+            <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
+            <a href="crear-cuenta.html" class="btn btn-primary">Registrarse</a>
+            <div class="me-5 pe-5">
+                <img src="./imagenes/imagen.png" alt="User" class="rounded-circle ms-2"
+                    style="max-width: 40px; border-radius: 50%;">
+            </div>
+        </div>
     </div>
-  </nav>
 
   <!-- Encabezado -->
-  <div class="container my-4">
-    <h6 class="text-muted">Detalles del trabajo</h6>
-  </div>
+
+    <h3 class="bg-body-secondary text-center p-3 mb-3">Detalles del trabajo</h3>
+
 
   <!-- Detalle del trabajo -->
   <div class="container mb-5">
@@ -92,24 +100,29 @@
             <li class="mb-2"><i class="bi bi-mortarboard-fill me-2 text-primary"></i>Educación: Universidad</li>
             <li class="mb-2"><i class="bi bi-cash-stack me-2 text-primary"></i>Salario: $50k - $80k/mes</li>
             <li class="mb-2"><i class="bi bi-geo-alt-fill me-2 text-primary"></i>Ubicación: Nueva York, Estados Unidos</li>
-            <li><i class="bi bi-laptop me-2 text-primary"></i>Tipo: Remoto</li>
+            <li class="mb-2"><i class="bi bi-laptop me-2 text-primary"></i>Tipo: Remoto</li>
+            <li class="mb-2"><i class="bi bi-laptop me-2 text-primary"></i>Experiencia: 10-15 años</li>
           </ul>
-          <p class="small mt-2"><i class="bi bi-briefcase-fill me-2 text-primary"></i>Experiencia: 10-15 años</p>
         </div>
 
         <!-- Empresa -->
         <div class="card p-3 shadow-sm">
-          <h6 class="fw-bold">Instagram</h6>
+          <div class="mb-3">
+            <h6 class="fw-bold">Instagram</h6>
           <p class="small text-muted mb-1">Servicio de redes sociales</p>
+
+          </div>
+          
           <ul class="list-unstyled small">
-            <li><strong>Fundada en:</strong> 21 de marzo de 2006</li>
-            <li><strong>Organización:</strong> Empresa privada</li>
-            <li><strong>Tamaño:</strong> 120–300 empleados</li>
-            <li><strong>Teléfono:</strong> 8888-8888</li>
-            <li><strong>Email:</strong> instagram@gmail.com</li>
-            <li><strong>Sitio web:</strong> <a href="https://instagram.com">https://instagram.com</a></li>
+            <li class="mb-2"><strong>Fundada en:</strong> 21 de marzo de 2006</li>
+            <li class="mb-2"><strong>Organización:</strong> Empresa privada</li>
+            <li class="mb-2"><strong>Tamaño:</strong> 120–300 empleados</li>
+            <li class="mb-2"><strong>Teléfono:</strong> 8888-8888</li>
+            <li class="mb-2"><strong>Email:</strong> instagram@gmail.com</li>
+            <li class="mb-2"><strong>Sitio web:</strong> <a href="https://instagram.com">https://instagram.com</a></li>
           </ul>
           <div class="d-flex gap-2">
+            <!-- ACA SE MUESTRAN LOS LINKS QUE LA EMPRESA TENGA, SI NO TIENE FACEBOOK NO DEBE SALIR -->
             <a href="#" class="text-dark"><i class="bi bi-facebook fs-5"></i></a>
             <a href="#" class="text-dark"><i class="bi bi-twitter fs-5"></i></a>
             <a href="#" class="text-dark"><i class="bi bi-linkedin fs-5"></i></a>
@@ -187,17 +200,20 @@
       </div>
       <div>
         <h6 class="fw-bold">Candidatos</h6>
-        <p class="mb-1"><a href="#" class="text-decoration-none text-light">Explorar empleos</a></p>
-        <p><a href="#" class="text-decoration-none text-light">Panel de candidatos</a></p>
+        <p class="mb-1"><a href="vistaEmpleos.html" class="text-decoration-none text-light">Explorar empleos</a></p>
+
+         <!-- ESTE PANEL DEBE DIRIGIR A LA VISTA PRINCIPAL DE CANDIDATOS SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
+        <p><a href="homeCandidato.html" class="text-decoration-none text-light">Panel de candidatos</a></p>
       </div>
       <div>
+        <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
         <h6 class="fw-bold">Empleadores</h6>
-        <p class="mb-1"><a href="#" class="text-decoration-none text-light">Publicar un trabajo</a></p>
+        <p class="mb-1"><a href="publicarTrabajo.html" class="text-decoration-none text-light">Publicar un trabajo</a></p>
         <p><a href="#" class="text-decoration-none text-light">Buscar candidatos</a></p>
       </div>
       <div>
         <h6 class="fw-bold">Soporte</h6>
-        <p class="mb-1"><a href="#" class="text-decoration-none text-light">Foro</a></p>
+        <p class="mb-1"><a href="foro.html" class="text-decoration-none text-light">Foro</a></p>
         <p class="mb-1"><a href="#" class="text-decoration-none text-light">Política de privacidad</a></p>
         <p><a href="#" class="text-decoration-none text-light">Términos y condiciones</a></p>
       </div>

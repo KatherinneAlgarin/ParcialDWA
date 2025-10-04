@@ -11,51 +11,75 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <i class="bi bi-briefcase-fill fs-3 text-primary me-2"></i>
-        <span class="fw-bold">WorkLink</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link fw-bold text-primary" href="#">Buscar Empleos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Empleadores</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Candidatos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Recursos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
-        </ul>
-        <div class="d-flex align-items-center">
-          <img src="https://via.placeholder.com/40" class="rounded-circle" alt="perfil">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav gap-4">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empleadores.html">Empleadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="candidatos.html">Candidatos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html">Recursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="foro.html">Foro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="valoracion.html">Empresas</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+        <div class="ms-5 ps-5 d-flex align-items-center">
+            <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
+            <h2 class="fw-bold">WorkLink</h2>
         </div>
-      </div>
+
+        <!-- ACA ESTOS BOTONES DE INICIAR SESION Y REGISTRARSE DEBEN MOSTRARSE SI SE ACCEDE SIN INICIAR SESION, SI HA INICIADO SESION SE DEBE MOSTRAR LA IMAGEN DE PERFIL COMO EN LAS DEMAS PAGINAS -->
+        <div class="me-5 pe-5 d-flex">
+            <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
+            <a href="crear-cuenta.html" class="btn btn-primary">Registrarse</a>
+            <div class="me-5 pe-5">
+                <img src="./imagenes/imagen.png" alt="User" class="rounded-circle ms-2"
+                    style="max-width: 40px; border-radius: 50%;">
+            </div>
+        </div>
     </div>
-  </nav>
 
   <!-- Buscador -->
   <div class="bg-light py-4">
     <div class="container">
       <form class="row g-2">
-        <div class="col-md-4">
-          <input type="text" class="form-control" placeholder="Nombre del puesto">
+        <div class="col-md-3">
+          <input type="text" class="form-control" placeholder="⌕ Nombre del puesto">
         </div>
         <div class="col-md-3">
-          <input type="text" class="form-control" placeholder="Ubicación">
+          <input type="text" class="form-control" placeholder= "⚲ Ubicación">
         </div>
         <div class="col-md-3">
           <select class="form-select">
-            <option selected>Categoría</option>
-            <option value="1">Diseño</option>
-            <option value="2">Programación</option>
-            <option value="3">Marketing</option>
+            <option selected>☰ Categoría</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select">
+            <option selected>Filtro</option>
           </select>
         </div>
         <div class="col-md-2 d-grid">
-          <button class="btn btn-primary" type="submit">Buscar</button>
+          <button class="btn btn-primary w-50" type="submit">Buscar</button>
         </div>
       </form>
     </div>
@@ -64,15 +88,13 @@
   <!-- Filtros -->
   <div class="container py-4 d-flex justify-content-between align-items-center">
     <div>
-      <span class="badge bg-light text-dark me-2">Diseño</span>
-      <span class="badge bg-light text-dark">El Salvador</span>
+      <span class="badge bg-light text-dark me-2">Caracteristicas seleccionadas  ej categoria, lugar, ...</span>
     </div>
     <div class="d-flex align-items-center gap-2">
       <select class="form-select form-select-sm" style="width:auto;">
-        <option>Latest</option>
-        <option>Popular</option>
+        <option>Recientes</option>
+        <option>Populares</option>
       </select>
-      <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-grid-3x3-gap-fill"></i></button>
     </div>
   </div>
 
@@ -82,7 +104,8 @@
 
       <!-- Card ejemplo -->
       <div class="col-md-4">
-        <div class="job-card shadow-sm p-3 h-100">
+        <a href="detalleEmpleo.html" class="text-decoration-none">
+          <div class="job-card shadow-sm p-3 h-100">
           <div class="d-flex align-items-center mb-2">
             <img src="https://cdn-icons-png.flaticon.com/512/3670/3670215.png" width="32" height="32" class="me-2">
             <h6 class="mb-0">Reddit</h6>
@@ -92,49 +115,61 @@
           <p class="text-muted small mb-1">Reino Unido</p>
           <p class="text-primary fw-semibold small">Remoto • $30k-$35k</p>
         </div>
+        </a>
       </div>
 
       <div class="col-md-4">
-        <div class="job-card featured-card shadow-sm p-3 h-100 border-primary">
+        <a href="detalleEmpleo.html" class="text-decoration-none">
+          <div class="job-card shadow-sm p-3 h-100">
           <div class="d-flex align-items-center mb-2">
-            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" width="32" height="32" class="me-2">
-            <h6 class="mb-0">Dribbble</h6>
+            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670215.png" width="32" height="32" class="me-2">
+            <h6 class="mb-0">Reddit</h6>
             <span class="badge bg-danger ms-2">Featured</span>
           </div>
-          <h5 class="fw-bold text-primary">Senior UX Designer.</h5>
-          <p class="text-muted small mb-1">California</p>
-          <p class="text-primary fw-semibold small">Remoto • $50k-$80k/month</p>
+          <h5 class="fw-bold">Marketing Officer</h5>
+          <p class="text-muted small mb-1">Reino Unido</p>
+          <p class="text-primary fw-semibold small">Remoto • $30k-$35k</p>
         </div>
+        </a>
       </div>
 
       <div class="col-md-4">
-        <div class="job-card shadow-sm p-3 h-100">
+        <a href="detalleEmpleo.html" class="text-decoration-none">
+          <div class="job-card shadow-sm p-3 h-100">
           <div class="d-flex align-items-center mb-2">
-            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968703.png" width="32" height="32" class="me-2">
-            <h6 class="mb-0">Freepik</h6>
+            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670215.png" width="32" height="32" class="me-2">
+            <h6 class="mb-0">Reddit</h6>
             <span class="badge bg-danger ms-2">Featured</span>
           </div>
-          <h5 class="fw-bold">Visual Designer</h5>
-          <p class="text-muted small mb-1">China</p>
-          <p class="text-primary fw-semibold small">Remoto • $10k-$15k</p>
+          <h5 class="fw-bold">Marketing Officer</h5>
+          <p class="text-muted small mb-1">Reino Unido</p>
+          <p class="text-primary fw-semibold small">Remoto • $30k-$35k</p>
         </div>
+        </a>
       </div>
-
-      <!-- 🔽 Aquí agregas todas las demás tarjetas igual que en la imagen -->
-      <!-- ... -->
 
     </div>
 
     <!-- Paginación -->
-    <nav class="d-flex justify-content-center mt-4">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">01</a></li>
-        <li class="page-item"><a class="page-link" href="#">02</a></li>
-        <li class="page-item"><a class="page-link" href="#">03</a></li>
-        <li class="page-item"><a class="page-link active bg-primary text-white" href="#">04</a></li>
-        <li class="page-item"><a class="page-link" href="#">05</a></li>
-      </ul>
-    </nav>
+
+    <nav class="d-flex justify-content-center mt-4" aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
   </div>
 
   <!-- Footer -->
@@ -146,17 +181,20 @@
       </div>
       <div>
         <h6 class="fw-bold">Candidatos</h6>
-        <p class="mb-1"><a href="#" class="text-decoration-none text-light">Explorar empleos</a></p>
+        <p class="mb-1"><a href="vistaEmpleos.html" class="text-decoration-none text-light">Explorar empleos</a></p>
+
+        <!-- ESTE PANEL DEBE DIRIGIR A LA VISTA PRINCIPAL DE CANDIDATOS SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
         <p><a href="#" class="text-decoration-none text-light">Panel de candidatos</a></p>
       </div>
       <div>
-        <h6 class="fw-bold">Empleadores</h6>
-        <p class="mb-1"><a href="#" class="text-decoration-none text-light">Publicar un trabajo</a></p>
+        <h6 class="fw-bold">Empleadores</h6>´
+        <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
+        <p class="mb-1"><a href="publicarTrabajo.html" class="text-decoration-none text-light">Publicar un trabajo</a></p>
         <p><a href="#" class="text-decoration-none text-light">Buscar candidatos</a></p>
       </div>
       <div>
         <h6 class="fw-bold">Soporte</h6>
-        <p class="mb-1"><a href="#" class="text-decoration-none text-light">Foro</a></p>
+        <p class="mb-1"><a href="foro.html" class="text-decoration-none text-light">Foro</a></p>
         <p class="mb-1"><a href="#" class="text-decoration-none text-light">Política de privacidad</a></p>
         <p><a href="#" class="text-decoration-none text-light">Términos y condiciones</a></p>
       </div>

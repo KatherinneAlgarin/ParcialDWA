@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -28,16 +29,13 @@
                         <a class="nav-link" href="candidatos.html">Candidatos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="empresas.html">Empresas</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="recursos.html">Recursos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="foro.html">Foro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="valoracion.html">Valoración de empresas</a>
+                        <a class="nav-link" href="valoracion.html">Empresas</a>
                     </li>
                 </ul>
             </div>
@@ -91,11 +89,11 @@
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="programacion" checked>
+                            <input class="form-check-input" type="checkbox" id="programacion">
                             <label class="form-check-label" for="programacion">Programación</label>
                         </div>
 
-                        
+
                             </div>
                         </div>
                     </div>
@@ -116,9 +114,65 @@
             <!-- Publicaciones -->
             <div class="col-md-8 col-lg-9">
                 <!-- ESTE BOTON DE PUBLCAR DEBE DEJAR PUBLICAR SOLO SI EL USUARIO HA INICIADO SESION -->
-                <div class="d-flex justify-content-end mb-3">
-                    <a class="p-2 bg-primary rounded-2 text-white text-decoration-none" href="publicarForo.html">Publicar En El Foro</a>
+
+                <!-- MODAL -->
+            <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="postModalLabel">Discusión de foro</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="topic" class="form-label">Tema</label>
+                                    <input type="text" class="form-control" id="topic" placeholder="Tema de foro">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Descripción</label>
+                                    <textarea class="form-control" id="description" rows="3" placeholder="Escribe tu biografía aquí. Deja que los empleadores sepan quién eres..."></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" id="publishPost">Publicar</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Botón para abrir el modal -->
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#postModal">
+                    Publicar En El Foro
+                </button>
+            </div>
+
+            <script>
+                // O
+                // publicación del formulario o cierre del modal aquí
+                document.getElementById('publishPost').addEventListener('click', function() {
+                    const topic = document.getElementById('topic').value;
+                    const description = document.getElementById('description').value;
+
+                    if(topic && description) {
+                        // Aquí puedes implementar la funcionalidad para enviar los datos o simplemente mostrarlos en consola
+                        console.log('Tema:', topic);
+                        console.log('Descripción:', description);
+
+                        // Cerrar el modal después de la publicación
+                        var modal = bootstrap.Modal.getInstance(document.getElementById('postModal'));
+                        modal.hide();
+                    } else {
+                        alert('Por favor, complete todos los campos.');
+                    }
+                });
+            </script>
+
+
+                <!--FIN MODAL-->
 
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
@@ -126,7 +180,7 @@
                         <h5 class="mt-2">Entrevistas en el sector financiero</h5>
                         <p class="text-muted">Me gustaría saber qué preguntas son comunes en entrevistas de banca y
                             finanzas. Estoy aplicando a un banco regional.</p>
-                        <a href="#" class="fw-bold text-decoration-none">Respuestas →</a>
+                        <a href="publicarForo.html" class="fw-bold text-decoration-none">Respuestas →</a>
                     </div>
                 </div>
 
@@ -136,7 +190,7 @@
                         <h5 class="mt-2">Recomendaciones de empresas de marketing digital</h5>
                         <p class="text-muted">¿Alguien tiene experiencia trabajando en agencias de marketing digital en
                             Latinoamérica? ¿Cuáles recomiendan?</p>
-                        <a href="#" class="fw-bold text-decoration-none">Respuestas →</a>
+                        <a href="publicarForo.html" class="fw-bold text-decoration-none">Respuestas →</a>
                     </div>
                 </div>
             </div>
@@ -155,21 +209,25 @@
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold">Candidatos</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Explorar empleos</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Panel de candidatos</a></li>
+                        <li><a href="vistaEmpleos.html" class="text-white text-decoration-none">Explorar empleos</a></li>
+
+                         <!-- ESTE PANEL DEBE DIRIGIR A LA VISTA PRINCIPAL DE CANDIDATOS SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
+                        <li><a href="homeCandidato.html" class="text-white text-decoration-none">Panel de candidatos</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold">Empleadores</h6>
+
+                    <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Publicar un trabajo</a></li>
+                        <li><a href="publicarTrabajo.html" class="text-white text-decoration-none">Publicar un trabajo</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Buscar Candidatos</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold">Soporte</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Foro</a></li>
+                        <li><a href="foro.html" class="text-white text-decoration-none">Foro</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Políticas de Privacidad</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Términos y Condiciones</a></li>
                     </ul>

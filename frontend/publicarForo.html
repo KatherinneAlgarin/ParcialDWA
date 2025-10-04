@@ -30,16 +30,13 @@
                         <a class="nav-link" href="candidatos.html">Candidatos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="empresas.html">Empresas</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="recursos.html">Recursos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="foro.html">Foro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="valoracion.html">Valoración de empresas</a>
+                        <a class="nav-link" href="valoracion.html">Empresas</a>
                     </li>
                 </ul>
             </div>
@@ -68,20 +65,6 @@
 
     <div class="container">
         <div class="row">
-
-            <!-- Sidebar -->
-            <!-- <aside class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
-                <h6 class="fw-bold text-secondary">PANEL DE CANDIDATOS</h6>
-                <ul class="nav flex-column mt-3">
-                    <li class="nav-item"><a class="nav-link active" href="homeCandidato.html"><i class="bi bi-grid me-2"></i>General</a></li>
-                    <li class="nav-item"><a class="nav-link" href="trabajosAplicados.html"><i class="bi bi-suitcase-lg me-2"></i>Solicitudes enviadas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="alertasCandidato.html"><i class="bi bi-bell me-2"></i>Alertas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="ajustes.html"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
-                </ul>
-                <div class="mt-auto">
-                    <a href="#" class="text-danger text-decoration-none"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
-                </div>
-            </aside> -->
             
             <aside class="col-md-4 col-lg-3 mb-4">
                 <!-- Búsqueda -->
@@ -105,7 +88,7 @@
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="programacion" checked>
+                            <input class="form-check-input" type="checkbox" id="programacion">
                             <label class="form-check-label" for="programacion">Programación</label>
                         </div>
 
@@ -135,7 +118,6 @@
                         <small class="text-muted">10 de Noviembre 2024</small>
                         <h5 class="mt-2">Recomendaciones de empresas de marketing digital</h5>
                         <p class="text-muted">¿Alguien tiene experiencia trabajando en agencias de marketing digital en Latinoamérica? ¿Cuáles recomiendan?</p>
-                        <a href="#" class="fw-bold text-decoration-none">Respuestas →</a>
                     </div>
                 </div>
 
@@ -150,7 +132,6 @@
                                 <p class="mt-2">“Ut ultramoper hendrerit tempor. Aliquam in rutrum dui. Maecenas ac placerat metus, in faucibus est.”</p>
                             </div>
                         </div>
-                        <a href="#" class="fw-bold text-decoration-none">Ver más respuestas →</a>
                     </div>
                 </div>
 
@@ -160,7 +141,7 @@
                     <div class="mb-3">
                         <textarea class="form-control" rows="4" placeholder="Escribe tu respuesta..."></textarea>
                     </div>
-                    <button class="btn btn-primary">Publicar</button>
+                    <button class="btn btn-primary w-25">Publicar</button>
                 </div>
             </div>
             
@@ -179,21 +160,25 @@
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold">Candidatos</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Explorar empleos</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Panel de candidatos</a></li>
+                        <li><a href="vistaEmpleos.html" class="text-white text-decoration-none">Explorar empleos</a></li>
+
+                        <!-- ESTE PANEL DEBE DIRIGIR A LA VISTA PRINCIPAL DE CANDIDATOS SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
+                        <li><a href="homeCandidato.html" class="text-white text-decoration-none">Panel de candidatos</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold">Empleadores</h6>
+
+                    <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Publicar un trabajo</a></li>
+                        <li><a href="publicarTrabajo.html" class="text-white text-decoration-none">Publicar un trabajo</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Buscar Candidatos</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h6 class="fw-bold">Soporte</h6>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none">Foro</a></li>
+                        <li><a href="foro.html" class="text-white text-decoration-none">Foro</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Políticas de Privacidad</a></li>
                         <li><a href="#" class="text-white text-decoration-none">Términos y Condiciones</a></li>
                     </ul>
