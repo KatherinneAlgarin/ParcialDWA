@@ -3,50 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ajustes - WorkLink</title>
+  <title>WorkLink</title>
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Estilos personalizados -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="/frontend/css/ajustes.css">
 </head>
 <body>
 
   <!-- HEADER -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
-    <a class="navbar-brand fw-bold text-primary" href="#">WorkLink</a>
-    <form class="d-flex ms-4 flex-grow-1">
-      <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-    </form>
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Buscar Empleos</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Empleadores</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Candidatos</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Recursos</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
-    </ul>
-    <div class="ms-3"><i class="fa-solid fa-circle-user fa-2x"></i></div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav gap-4">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="empleadores.html">Empleadores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="candidatos.html">Candidatos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="empresas.html">Empresas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="recursos.html">Recursos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="foro.html">Foro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
+
+  <!-- Banner -->
+  <div class="d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+    <div class="ms-5 ps-5 d-flex align-items-center">
+      <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
+      <h2 class="fw-bold">WorkLink</h2>
+    </div>
+    <div class="me-5 pe-5">
+      <img src="./imagenes/imagen.png" alt="User" class="rounded-circle" style="max-width: 40px; border-radius: 50%;">
+    </div>
+  </div>
 
   <div class="container-fluid">
     <div class="row">
       <!-- SIDEBAR -->
-      <div class="col-md-3 col-lg-2 bg-light border-end vh-100 p-3">
-        <h6 class="text-uppercase fw-bold mb-3">Panel de Candidatos</h6>
-        <ul class="nav flex-column">
-          <li class="nav-item"><a href="#" class="nav-link">General</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">Solicitudes enviadas</a></li>
-          <li class="nav-item"><a href="#" class="nav-link active fw-bold">Ajustes</a></li>
+      <div class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
+        <h6 class="fw-bold text-secondary">PANEL DE CANDIDATOS</h6>
+        <ul class="nav flex-column mt-3">
+          <li class="nav-item"><a class="nav-link active" href="homeCandidato.html"><i class="bi bi-grid me-2"></i>General</a></li>
+          <li class="nav-item"><a class="nav-link" href="trabajosAplicados.html"><i class="bi bi-suitcase-lg me-2"></i>Solicitudes enviadas</a></li>
+          <li class="nav-item"><a class="nav-link" href="alertasCandidato.html"><i class="bi bi-bell me-2"></i>Alertas</a></li>
+          <li class="nav-item"><a class="nav-link" href="ajustes.html"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
         </ul>
-        <div class="mt-5">
-          <a href="#" class="text-danger text-decoration-none"><i class="fa-solid fa-power-off"></i> Cerrar sesión</a>
+        <div class="mt-auto">
+          <a href="#" class="text-danger text-decoration-none"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
         </div>
       </div>
 
       <!-- MAIN CONTENT -->
-      <div class="col-md-9 col-lg-10 p-4">
+      <div class="col-md-10 p-5">
         <h4 class="fw-bold mb-4">AJUSTES</h4>
 
         <!-- INFORMACION BASICA -->
@@ -87,13 +111,8 @@
           <h5 class="fw-bold mb-3">Su Curriculum</h5>
           <div class="d-flex flex-wrap gap-3">
             <div class="file-card">
-              <i class="fa-solid fa-file-pdf fa-2x text-danger"></i>
-              <p class="mb-1">Curriculum Vitae</p>
-              <small class="text-muted">3.3 MB</small>
-            </div>
-            <div class="file-card">
               <i class="fa-solid fa-file fa-2x text-primary"></i>
-              <p class="mb-1">Diseño de producto</p>
+              <p class="mb-1">Ejemplo de archivo</p>
               <small class="text-muted">4.7 MB</small>
               <div class="dropdown">
                 <button class="btn btn-sm btn-light border mt-1 dropdown-toggle" data-bs-toggle="dropdown">Opciones</button>
@@ -103,16 +122,17 @@
                 </ul>
               </div>
             </div>
-            <div class="file-card">
-              <i class="fa-solid fa-file fa-2x text-info"></i>
-              <p class="mb-1">Diseño Visual</p>
-              <small class="text-muted">1.3 MB</small>
-            </div>
-            <div class="file-card add-file d-flex flex-column justify-content-center align-items-center">
+            <!-- <div class="file-card add-file d-flex flex-column justify-content-center align-items-center">
+              <i class="fa-solid fa-plus fa-2x"></i>
+              <p class="mb-0">Agregar</p>
+              <small class="text-muted">Sólo PDF</small>
+            </div> -->
+            <div class="file-card add-file d-flex flex-column justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#addFileModal">
               <i class="fa-solid fa-plus fa-2x"></i>
               <p class="mb-0">Agregar</p>
               <small class="text-muted">Sólo PDF</small>
             </div>
+
           </div>
         </div>
 
@@ -150,7 +170,6 @@
               <input type="url" class="form-control" placeholder="YouTube link">
             </div>
           </div>
-          <button class="btn btn-outline-primary btn-sm mt-3"><i class="fa-solid fa-plus"></i> Agregar link de nueva red social</button>
         </div>
 
         <!-- CONTACTO -->
@@ -196,10 +215,40 @@
     </div>
   </div>
 
-  <footer class="text-center text-muted py-3 border-top">
-    © 2024 WorkLink - Portal de trabajo. Todos los derechos reservados
+  <footer class="text-center p-3 text-muted">
+    © 2025 WorkLink - All rights Reserved
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <div class="modal fade" id="addFileModal" tabindex="-1" aria-labelledby="addFileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addFileModalLabel">Agregar archivos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="fileName" class="form-label">Nombre de CV/Carta de presentación/Diplomas</label>
+              <input type="text" class="form-control" id="fileName" placeholder="Ejemplo: CV o Carta de presentación">
+            </div>
+            <div class="mb-3">
+              <label for="fileUpload" class="form-label">Subir archivo</label>
+              <input class="form-control" type="file" id="fileUpload" accept=".pdf">
+              <small class="text-muted">Only PDF format available. Max file size 12 MB.</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Subir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </body>
 </html>
