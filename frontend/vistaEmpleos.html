@@ -59,31 +59,145 @@
     </div>
 
   <!-- Buscador -->
-  <div class="bg-light py-4">
-    <div class="container">
-      <form class="row g-2">
-        <div class="col-md-3">
-          <input type="text" class="form-control" placeholder="⌕ Nombre del puesto">
+  <!-- Buscador -->
+<div class="bg-light py-4">
+  <div class="container">
+    <form class="row d-flex align-items-center">
+      <!-- Botón de Filtros -->
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-outline-tertiary border-secondary-subtle bg-white dropdown-toggle" type="button" id="filtroBtn" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+            Ver Filtros
+          </button>
+          <ul class="dropdown-menu p-3" aria-labelledby="filtroBtn" id="filtrosDropdown">
+            <div class="container-fluid">
+              <div class="row" >
+                <!-- Experiencia -->
+                <div class="col-md-2">
+                  <h6>Experiencia</h6>
+                  <div>
+                    <input type="radio" id="junior" name="experiencia" value="junior">
+                    <label for="junior">junior</label><br>
+                    <input type="radio" id="1-2" name="experiencia" value="1-2">
+                    <label for="1-2">1 - 2 Años</label><br>
+                    <input type="radio" id="2-4" name="experiencia" value="2-4">
+                    <label for="2-4">2 - 4 Años</label><br>
+                    <input type="radio" id="4-6" name="experiencia" value="4-6" checked>
+                    <label for="4-6">4 - 6 Años</label><br>
+                    <input type="radio" id="6-8" name="experiencia" value="6-8">
+                    <label for="6-8">6 - 8 Años</label><br>
+                    <input type="radio" id="8-10" name="experiencia" value="8-10">
+                    <label for="8-10">8 - 10 Años</label><br>
+                    <input type="radio" id="10-15" name="experiencia" value="10-15">
+                    <label for="10-15">10 - 15 Años</label><br>
+                    <input type="radio" id="15+" name="experiencia" value="15+">
+                    <label for="15+">15+ Años</label><br>
+                  </div>
+                </div>
+  
+                <!-- Salario -->
+                <div class="col-md-2">
+                  <h6>Salario</h6>
+                  <div>
+                    <input type="radio" id="salario1" name="salario" value="$50-$1000">
+                    <label for="salario1">$50 - $1000</label><br>
+                    <input type="radio" id="salario2" name="salario" value="$1000-$2000">
+                    <label for="salario2">$1000 - $2000</label><br>
+                    <input type="radio" id="salario3" name="salario" value="$3000-$4000">
+                    <label for="salario3">$3000 - $4000</label><br>
+                    <input type="radio" id="salario4" name="salario" value="$4000-$6000">
+                    <label for="salario4">$4000 - $6000</label><br>
+                    <input type="radio" id="salario5" name="salario" value="$6000-$8000" checked>
+                    <label for="salario5">$6000 - $8000</label><br>
+                    <input type="radio" id="salario6" name="salario" value="$8000-$10000">
+                    <label for="salario6">$8000 - $10000</label><br>
+                    <input type="radio" id="salario7" name="salario" value="$10000-$15000">
+                    <label for="salario7">$10000 - $15000</label><br>
+                    <input type="radio" id="salario8" name="salario" value="$15000+">
+                    <label for="salario8">$15000+</label><br>
+                  </div>
+                </div>
+  
+                <!-- Tipo -->
+                <div class="col-md-2">
+                  <h6>Tipo</h6>
+                  <div>
+                    <input type="checkbox" id="tiempoCompleto" name="tipo" value="Tiempo Completo" checked>
+                    <label for="tiempoCompleto">Tiempo Completo</label><br>
+                    <input type="checkbox" id="medioTiempo" name="tipo" value="Medio Tiempo">
+                    <label for="medioTiempo">Medio Tiempo</label><br>
+                    <input type="checkbox" id="internado" name="tipo" value="Internado">
+                    <label for="internado">Internado</label><br>
+                    <input type="checkbox" id="remoto" name="tipo" value="Remoto">
+                    <label for="remoto">Remoto</label><br>
+                    <input type="checkbox" id="temporal" name="tipo" value="Temporal">
+                    <label for="temporal">Temporal</label><br>
+                    <input type="checkbox" id="profesionales" name="tipo" value="Servicios profesionales">
+                    <label for="profesionales">Servicios profesionales</label><br>
+                  </div>
+                </div>
+  
+                <!-- Educación -->
+                <div class="col-md-2">
+                  <h6>Educación</h6>
+                  <div>
+                    <input type="checkbox" id="educacionTodos" name="educacion" value="Todos">
+                    <label for="educacionTodos">Todos</label><br>
+                    <input type="checkbox" id="secundaria" name="educacion" value="Secundaria">
+                    <label for="secundaria">Secundaria</label><br>
+                    <input type="checkbox" id="bachillerato" name="educacion" value="Bachillerato">
+                    <label for="bachillerato">Bachillerato</label><br>
+                    <input type="checkbox" id="universitario" name="educacion" value="Universitario" checked>
+                    <label for="universitario">Universitario</label><br>
+                    <input type="checkbox" id="master" name="educacion" value="Master">
+                    <label for="master">Master</label><br>
+                    <input type="checkbox" id="doctorado" name="educacion" value="Doctorado">
+                    <label for="doctorado">Doctorado</label><br>
+                  </div>
+                </div>
+  
+                <!-- Nivel -->
+                <div class="col-md-2">
+                  <h6>Nivel</h6>
+                  <div>
+                    <input type="radio" id="nivelEntrada" name="nivel" value="Entrada">
+                    <label for="nivelEntrada">Entrada</label><br>
+                    <input type="radio" id="nivelIntermedio" name="nivel" value="Intermedio" checked>
+                    <label for="nivelIntermedio">Intermedio</label><br>
+                    <input type="radio" id="nivelAvanzado" name="nivel" value="Avanzado">
+                    <label for="nivelAvanzado">Avanzado</label><br>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </ul>
         </div>
-        <div class="col-md-3">
-          <input type="text" class="form-control" placeholder= "⚲ Ubicación">
-        </div>
-        <div class="col-md-3">
-          <select class="form-select">
-            <option selected>☰ Categoría</option>
-          </select>
-        </div>
-        <div class="col-md-3">
-          <select class="form-select">
-            <option selected>Filtro</option>
-          </select>
-        </div>
-        <div class="col-md-2 d-grid">
-          <button class="btn btn-primary w-50" type="submit">Buscar</button>
-        </div>
-      </form>
-    </div>
+      </div>
+
+
+      <!-- Nombre del puesto -->
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="⌕ Nombre del puesto">
+      </div>
+      <!-- Ubicación -->
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="⚲ Ubicación">
+      </div>
+      <!-- Categoría -->
+      <div class="col-md-3">
+        <select class="form-select">
+          <option selected>☰ Categoría</option>
+        </select>
+      </div>
+
+            <div class="text-center mt-3">
+              <button class="btn btn-primary">Buscar</button>
+            </div>
+    </form>
   </div>
+</div>
+
 
   <!-- Filtros -->
   <div class="container py-4 d-flex justify-content-between align-items-center">
@@ -188,7 +302,7 @@
         <p><a href="#" class="text-decoration-none text-light">Panel de candidatos</a></p>
       </div>
       <div>
-        <h6 class="fw-bold">Empleadores</h6>´
+        <h6 class="fw-bold">Empleadores</h6>
         <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
         <p class="mb-1"><a href="publicarTrabajo.html" class="text-decoration-none text-light">Publicar un trabajo</a></p>
         <p><a href="#" class="text-decoration-none text-light">Buscar candidatos</a></p>
