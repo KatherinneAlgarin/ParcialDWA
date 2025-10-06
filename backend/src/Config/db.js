@@ -11,18 +11,18 @@ const sequelize = new Sequelize(
     dialect: "mariadb",
     port: process.env.DB_PORT,
     dialectOptions: {
-      connectTimeout: 10000, // 10 segundos
+      connectTimeout: 30000, 
       timezone: 'Etc/GMT-6',
+    },
+    pool: {
+      max: 10,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+      evict: 10000
     }
   }
 );
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("✅ Conectado a MariaDB con Sequelize!");
-  } catch (err) {
-    console.error("❌ Error de conexión con Sequelize:", err);
-  }
-})();
+
 
 export default sequelize;

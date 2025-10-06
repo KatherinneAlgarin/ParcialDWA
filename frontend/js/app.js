@@ -1,5 +1,4 @@
 
-// Application logic for demo local portal
 const Storage = {
   jobs: 'demo_jobs_v1',
   guides: 'demo_guides_v1',

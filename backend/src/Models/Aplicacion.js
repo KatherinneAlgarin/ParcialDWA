@@ -1,32 +1,19 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../Config/db.js";
-const oferta = sequelize.define("Oferta", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  nombre: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  descripcion: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
-  fecha_creacion: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-  },
-  sueldoBase: {
-    type: DataTypes.DECIMAL(10, 2),
-    allowNull: false,
-    defaultValue: 0.00,
-  },
+import Usuario from "./Usuario.js";
+import Oferta from "./Oferta.js";
+
+const Aplicacion = sequelize.define("Aplicacion", {
+  idaplicacion: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  cv: { type: DataTypes.STRING },
+  fecha_aplicacion: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, {
-  tableName: "oferta",
-  timestamps: false,
+  tableName: "aplicaciones",
+  timestamps: false
 });
 
-export default oferta;
+
+Usuario.belongsToMany(Oferta, { through: Aplicacion, foreignKey: "idusuario" });
+Oferta.belongsToMany(Usuario, { through: Aplicacion, foreignKey: "idoferta" });
+
+export default Aplicacion;

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>WorkLink - Nueva Contraseña</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      background: url('imagenes/img.jpg') no-repeat center center / cover;
+      height: 100vh;
+      color: white;
+    }
+    .bg-overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      height: 100vh;
+    }
+    .logo-img {
+      max-width: 80px;
+    }
+    .password-toggle {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid h-100">
+  <div class="row h-100">
+
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center p-5 bg-overlay">
+      <div class="d-flex text-center mb-4 align-items-center gap-3">
+        <img src="imagenes/Logo.PNG" alt="Logo" class="img-fluid logo-img">
+        <h1 class="fw-bold">WorkLink</h1>
+      </div>
+
+      <h3 class="mb-4">Establecer Nueva Contraseña</h3>
+
+      <form id="formNuevaContrasena" class="w-100" style="max-width: 400px;" novalidate>
+        
+        <!-- Nueva contraseña -->
+        <div class="mb-3">
+          <label for="nuevaPassword" class="form-label">Nueva Contraseña</label>
+          <div class="input-group">
+            <input type="password" id="nuevaPassword" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
+            <button class="btn btn-outline-secondary password-toggle" type="button" data-target="nuevaPassword">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+          <div class="form-text text-light">Debe tener al menos 6 caracteres</div>
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div class="mb-3">
+          <label for="confirmarPassword" class="form-label">Confirmar Contraseña</label>
+          <div class="input-group">
+            <input type="password" id="confirmarPassword" class="form-control" placeholder="Repite la contraseña" required minlength="6">
+            <button class="btn btn-outline-secondary password-toggle" type="button" data-target="confirmarPassword">
+              <i class="bi bi-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="alertaContainer"></div>
+
+        <button type="submit" id="btnRestablecerPassword" class="btn btn-primary w-100">Restablecer Contraseña</button>
+      </form>
+
+      <p class="mt-3">
+        <a href="signin.html" class="text-decoration-none text-info">Volver al inicio de sesión</a>
+      </p>
+    </div>
+
+    <div class="col-md-6 d-none d-md-flex justify-content-center align-items-center">
+      <img src="imagenes/Logo.PNG" alt="Logo WorkLink" class="img-fluid opacity-25" style="max-width: 300px;">
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/nueva-contrasena.js"></script>
+
+</body>
+</html>

@@ -1,125 +1,89 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mis Trabajos - WorkLink</title>
-      <link rel="stylesheet" href="css/trabajosPVistaEmpresa.css">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mis Trabajos - WorkLink</title>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/trabajosPVistaEmpresa.css">
+</head>
 
-    <div class="container-fluid">
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      protegerPagina('Empleador');
+    });
+  </script>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav gap-4">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="empleadores.html">Empleadores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="candidatos.html">Candidatos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="recursos.html">Recursos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="foro.html">Foro</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="valoracion.html">Empresas</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
-        <div class="ms-5 ps-5 d-flex align-items-center">
-            <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
-            <h2 class="fw-bold">WorkLink</h2>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav gap-4">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="vistaEmpleos.html">Buscar Empleos</a></li>
+            </ul>
         </div>
-        <div class="me-5 pe-5">
-            <a href="publicarTrabajo.html" class="btn btn-outline-primary">Publicar Trabajo</a>
-            <img src="./imagenes/imagen.png" alt="User" class="rounded-circle" style="max-width: 40px; border-radius: 50%;">
-        </div>
-    </div>
-
-      <div class="row">
-        <div class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
-  <h6 class="fw-bold text-secondary">PANEL DE EMPLEADORES</h6>
-  <ul class="nav flex-column mt-3">
-    <li class="nav-item"><a class="nav-link" href="empresa.html"><i class="bi bi-grid me-2"></i>General</a></li>
-    <li class="nav-item"><a class="nav-link" href="publicarTrabajo.html"><i class="bi bi-plus-square me-2"></i>Publicar trabajo</a></li>
-    <li class="nav-item"><a class="nav-link active" href="trabajosPVistaEmpresas.html"><i class="bi bi-briefcase me-2"></i>Mis trabajos</a></li>
-    <li class="nav-item"><a class="nav-link" href="ajustesEmpresa.html"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
-  </ul>
-  <div class="mt-auto">
-    <a href="#" class="text-danger text-decoration-none"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
-  </div>
-</div>
-
-        <!-- Main Content -->
-        <div class="col-md-10 p-4">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="mb-0">Mis trabajos</h5>
-            <div>
-              <select class="form-select form-select-sm">
-                <option>Estado de trabajos</option>
-                <option>Todos</option>
-                <option>Activos</option>
-                <option>Expirados</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Table header -->
-          <div class="row fw-semibold border-bottom pb-2 mb-2">
-            <div class="col-md-4">Trabajos</div>
-            <div class="col-md-2">Estado</div>
-            <div class="col-md-3">Candidatos</div>
-            <div class="col-md-3">Acciones</div>
-          </div>
-
-          <!-- Jobs list -->
-          <div class="job-row row align-items-center">
-            <div class="col-md-4">
-              <div class="job-title">UI/UX Designer</div>
-              <small class="text-muted">Full Time • 27 days remaining</small>
-            </div>
-            <div class="col-md-2 status-active">Active</div>
-            <div class="col-md-3">798 Applications</div>
-            <div class="col-md-3">
-              <a class="btn btn-primary btn-sm p-2" href="verCandidatos.html">Ver Candidatos</a>
-              <div class="btn-group">
-                        <i  type="button" class="btn btn-secondary rounded-1 bi bi-three-dots-vertical btn-secondary" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></i>
-                        <ul class="dropdown-menu dropdown-menu-lg-end">
-                          <li><a class="dropdown-item text-danger" href="">Eliminar</a></li>
-                        </ul>
-                      </div>
-            </div>
-            
-          </div>
-
-        </div>
+      </div>
+    </nav>
+    <div class="d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+      <div class="ms-5 ps-5 d-flex align-items-center">
+        <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
+        <h2 class="fw-bold">WorkLink</h2>
+      </div>
+      <div class="me-5 pe-5">
+        <a href="publicarTrabajo.html" class="btn btn-outline-primary">Publicar Trabajo</a>
+        <img src="./imagenes/imagen.png" alt="User" class="rounded-circle" style="max-width: 40px;">
       </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-      © 2025 WorkLink - All rights Reserved
-    </div>
+    <div class="d-flex">
+      <div class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
+        <h6 class="fw-bold text-secondary">PANEL DE EMPLEADORES</h6>
+        <ul class="nav flex-column mt-3">
+          <li class="nav-item"><a class="nav-link" href="empresa.html"><i class="bi bi-grid me-2"></i>General</a></li>
+          <li class="nav-item"><a class="nav-link" href="publicarTrabajo.html"><i class="bi bi-plus-square me-2"></i>Publicar trabajo</a></li>
+          <li class="nav-item"><a class="nav-link active" href="trabajosPVistaEmpresas.html"><i class="bi bi-briefcase me-2"></i>Mis trabajos</a></li>
+          <li class="nav-item"><a class="nav-link" href="ajustesEmpresa.html"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
+        </ul>
+        <div class="mt-auto">
+          <button id="btnLogout" onclick="cerrarSesion()" class="btn btn-link text-danger text-decoration-none p-0 bg-transparent">
+            <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+          </button>
+        </div>
+      </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+      <div class="col-md-10 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0 fw-bold">MIS TRABAJOS PUBLICADOS</h5>
+          </div>
+
+        <div class="row fw-semibold border-bottom pb-2 mb-2 d-none d-md-flex">
+          <div class="col-md-5">Trabajo</div>
+          <div class="col-md-2">Aplicantes</div>
+          <div class="col-md-2">Plazas</div>
+          <div class="col-md-3">Acciones</div>
+        </div>
+
+        <div id="lista-ofertas-contenedor">
+            <div class="text-center p-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center p-3 mt-5 small text-muted">
+    © 2025 WorkLink - All rights reserved
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/misTrabajos.js"></script> </body>
 </html>

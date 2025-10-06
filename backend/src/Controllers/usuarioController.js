@@ -1,6 +1,13 @@
+// backend/src/Controllers/usuarioController.js
 import * as usuarioService from "../Services/usuarioService.js";
-import uploadProfile from '../Config/multerProfile.js';
-import uploadCV from '../Config/multerCurriculums.js';
+import jwt from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 export const postCrearUsuario = async (req, res, next) => {
   try {
     const { nombre, correo, password, rol } = req.body;
@@ -36,7 +43,51 @@ export const loginUsuario = async (req, res, next) => {
       throw error;
     }
 
-    res.status(200).json({ mensaje: "Login exitoso", usuario });
+    if (usuario.rol !== 'Empleador' && usuario.rol !== 'Candidato') {
+      const error = new Error("Rol de usuario no válido");
+      error.statusCode = 403;
+      throw error;
+    }
+    const token = jwt.sign(
+      { 
+        id: usuario.id, 
+        correo: usuario.correo,
+        rol: usuario.rol,
+        idempresa: usuario.idempresa,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
+    res.status(200).json({ 
+      mensaje: "Login exitoso", 
+      token,
+      usuario: {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        correo: usuario.correo,
+        rol: usuario.rol,
+        idempresa: usuario.idempresa,
+        foto_perfil: usuario.foto_perfil
+      }
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const obtenerPerfil = async (req, res, next) => {
+  try {
+    const usuario = await usuarioService.obtenerUsuarioPorId(req.usuario.id);
+
+    if (!usuario) {
+      const error = new Error("Usuario no encontrado");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    res.status(200).json(usuario);
   } catch (err) {
     next(err);
   }
@@ -45,10 +96,77 @@ export const loginUsuario = async (req, res, next) => {
 export const putActualizarUsuario = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const datosActualizados = req.body;
+    if (req.usuario.id !== parseInt(id)) {
+      if (req.file) {
+        const rutaArchivo = path.join(__dirname, '../uploads/fotoPerfil', req.file.filename);
+        if (fs.existsSync(rutaArchivo)) {
+          fs.unlinkSync(rutaArchivo);
+        }
+      }
+      const error = new Error("No tienes permisos para actualizar este usuario");
+      error.statusCode = 403;
+      throw error;
+    }
 
+    let datosActualizados = { ...req.body };
+    if (req.file) {
+      datosActualizados.foto_perfil = req.file.filename;
+    }
+    delete datosActualizados.password;
+    delete datosActualizados.contraseña;
+    delete datosActualizados.rol;
+    delete datosActualizados.id;
+    delete datosActualizados.curriculum_path; 
+    delete datosActualizados.idempresa; 
+    Object.keys(datosActualizados).forEach(key => {
+      if (datosActualizados[key] === '' || datosActualizados[key] === 'null' || datosActualizados[key] === 'undefined') {
+        datosActualizados[key] = null;
+      }
+    });
     const usuarioActualizado = await usuarioService.actualizarUsuario(id, datosActualizados);
 
+    if (!usuarioActualizado) {
+      const error = new Error("Usuario no encontrado");
+      error.statusCode = 404;
+      throw error;
+    }
+    res.status(200).json(usuarioActualizado);
+    
+  } catch (err) {
+    console.error('❌ Error en putActualizarUsuario:', err);
+    if (req.file) {
+      const rutaArchivo = path.join(__dirname, '../uploads/fotoPerfil', req.file.filename);
+      if (fs.existsSync(rutaArchivo)) {
+        fs.unlinkSync(rutaArchivo);
+        console.log('🗑️ Archivo eliminado por error:', req.file.filename);
+      }
+    }
+    
+    next(err);
+  }
+};
+export const putActualizarCurriculum = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    if (req.usuario.id !== parseInt(id)) {
+      const error = new Error("No tienes permisos para actualizar este usuario");
+      error.statusCode = 403;
+      throw error;
+    }
+    if (req.usuario.rol !== 'Candidato') {
+      const error = new Error("Solo los empleados pueden subir curriculum");
+      error.statusCode = 403;
+      throw error;
+    }
+    if (!req.file) {
+      const error = new Error("No se subió ningún archivo");
+      error.statusCode = 400;
+      throw error;
+    }
+    const usuarioActualizado = await usuarioService.actualizarCurriculum(
+      id, 
+      req.file.filename
+    );
     if (!usuarioActualizado) {
       const error = new Error("Usuario no encontrado");
       error.statusCode = 404;
@@ -60,73 +178,20 @@ export const putActualizarUsuario = async (req, res, next) => {
     next(err);
   }
 };
-
-export const putActualizarFotoPerfil = (req, res, next) => {
-  uploadProfile.single('fotoPerfil')(req, res, async (err) => {
-    try {
-      if (err) return next(err);
-
-      const { id } = req.params;
-      if (!req.file) {
-        const error = new Error("No se subió ninguna imagen");
-        error.statusCode = 400;
-        throw error;
-      }
-
-      const usuarioActualizado = await usuarioService.actualizarFotoPerfil(id, req.file.path);
-
-      if (!usuarioActualizado) {
-        const error = new Error("Usuario no encontrado");
-        error.statusCode = 404;
-        throw error;
-      }
-
-      res.status(200).json(usuarioActualizado);
-    } catch (err) {
-      next(err);
-    }
-  });
-};
-
-export const putActualizarCurriculum = (req, res, next) => {
-  uploadCV.single('curriculum')(req, res, async (err) => {
-    try {
-      if (err) return next(err);
-
-      const { id } = req.params;
-      if (!req.file) {
-        const error = new Error("No se subió ningún archivo");
-        error.statusCode = 400;
-        throw error;
-      }
-
-      const usuarioActualizado = await usuarioService.actualizarCurriculum(id, req.file.path);
-
-      if (!usuarioActualizado) {
-        const error = new Error("Usuario no encontrado");
-        error.statusCode = 404;
-        throw error;
-      }
-
-      res.status(200).json(usuarioActualizado);
-    } catch (err) {
-      next(err);
-    }
-  });
-};
-
 export const deleteUsuario = async (req, res, next) => {
   try {
     const { id } = req.params;
-
+    if (req.usuario.id !== parseInt(id)) {
+      const error = new Error("No tienes permisos para eliminar este usuario");
+      error.statusCode = 403;
+      throw error;
+    }
     const eliminado = await usuarioService.eliminarUsuario(id);
-
     if (!eliminado) {
       const error = new Error("Usuario no encontrado");
       error.statusCode = 404;
       throw error;
     }
-
     res.status(200).json({ mensaje: "Usuario eliminado correctamente" });
   } catch (err) {
     next(err);

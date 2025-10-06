@@ -1,51 +1,62 @@
+// backend/src/Services/usuarioService.js
 import bcrypt from "bcrypt";
 import Usuario from '../Models/Usuario.js';
-
-// Crear un nuevo usuario
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 export const crearUsuario = async (nombre, correo, password, rol) => {
-  try {
-    // 🔹 Generar el hash
-    const saltRounds = 10; // nivel de encriptado (recomendado 10-12)
+    try {
+    const existe = await Usuario.findOne({ where: { correo } });
+    if (existe) {
+        const error = new Error("El correo ya está registrado");
+        error.statusCode = 400;
+        throw error;
+    }
+    const saltRounds = 10; 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // 🔹 Crear el usuario con la contraseña encriptada
     const nuevoUsuario = await Usuario.create({
-      nombre, correo, password: hashedPassword, rol
+        nombre, correo, password: hashedPassword, rol
     });
 
     return nuevoUsuario;
-  } catch (err) {
+    } catch (err) {
     throw err;
-  }
+    }
 };
-//Login de usuario
 export const loginUsuario = async (correo, password) => {
-  try {
-    const usuario = await Usuario.findOne({ where: { correo } });
-    if (!usuario) {
-      throw new Error("Usuario no encontrado");
-    }
-    const esValida = await bcrypt.compare(password, usuario.password);
-    if (!esValida) {
-      throw new Error("Contraseña incorrecta");
-    }
-    return usuario; // login exitoso
-  } catch (err) {
-    throw err;
-  }
-};
-
-// Obtener todos los usuarios
-export const obtenerUsuarios = async () => {
     try {
-        const usuarios = await Usuario.findAll();
-        return usuarios;
+        const usuario = await Usuario.findOne({ where: { correo } });
+        
+        if (!usuario) {
+            const error = new Error("Usuario no encontrado");
+            error.statusCode = 401;
+            throw error;
+        }
+        
+        const esValida = await bcrypt.compare(password, usuario.password);
+        
+        if (!esValida) {
+            const error = new Error("Contraseña incorrecta");
+            error.statusCode = 401;
+            throw error;
+        }
+        
+        return {
+            id: usuario.id,
+            nombre: usuario.nombre,
+            correo: usuario.correo,
+            rol: usuario.rol,
+            idempresa: usuario.idempresa,
+            foto_perfil: usuario.foto_perfil,
+            curriculum_path: usuario.curriculum_path
+        };
     } catch (err) {
         throw err;
     }
 };
 
-// Obtener usuario por ID
 export const obtenerUsuarioPorId = async (id) => {
     try {
         const usuario = await Usuario.findByPk(id);
@@ -54,74 +65,78 @@ export const obtenerUsuarioPorId = async (id) => {
         throw err;
     }
 };
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-// Obtener usuario por correo
-export const obtenerUsuarioPorCorreo = async (correo) => {
-    try {
-        const usuario = await Usuario.findOne({
-            where: { correo }
-        });
-        return usuario;
-    } catch (err) {
-        throw err;
-    }
-};
-
-// Actualizar usuario
 export const actualizarUsuario = async (id, datosActualizados) => {
     try {
-        const [numFilasActualizadas] = await Usuario.update(datosActualizados, {
-            where: { id }
-        });
+        if (datosActualizados.foto_perfil) {
+        const usuarioActual = await Usuario.findByPk(id);
         
-        if (numFilasActualizadas === 0) {
-            return null;
+        if (usuarioActual && usuarioActual.foto_perfil) {
+            const rutaAnterior = path.join(__dirname, '../uploads/fotoPerfil', usuarioActual.foto_perfil);
+            
+            if (fs.existsSync(rutaAnterior)) {
+            try {
+                fs.unlinkSync(rutaAnterior);
+                console.log('🗑️ Foto anterior eliminada:', usuarioActual.foto_perfil);
+            } catch (error) {
+                console.error('⚠️ Error al eliminar foto anterior:', error);
+            }
+            }
         }
-        
-        const usuarioActualizado = await Usuario.findByPk(id);
-        return usuarioActualizado;
+    }
+
+    const [numFilasActualizadas] = await Usuario.update(datosActualizados, {
+        where: { id }
+    });
+    
+    if (numFilasActualizadas === 0) {
+        return null;
+    }
+    const usuarioActualizado = await Usuario.findByPk(id, {
+        attributes: { exclude: ['password', 'contraseña'] }
+    });
+    
+    return usuarioActualizado;
     } catch (err) {
-        throw err;
+    throw err;
     }
 };
 
-// Actualizar foto de perfil
-export const actualizarFotoPerfil = async (id, nombreArchivo) => {
-    try {
-        const [numFilasActualizadas] = await Usuario.update(
-            { foto_perfil: nombreArchivo },
-            { where: { id } }
-        );
-        
-        if (numFilasActualizadas === 0) {
-            return null;
-        }
-        
-        return await Usuario.findByPk(id);
-    } catch (err) {
-        throw err;
-    }
-};
-
-// Actualizar curriculum
 export const actualizarCurriculum = async (id, nombreArchivo) => {
     try {
-        const [numFilasActualizadas] = await Usuario.update(
-            { curriculum_path: nombreArchivo },
-            { where: { id } }
-        );
+        const usuarioActual = await Usuario.findByPk(id);
         
-        if (numFilasActualizadas === 0) {
-            return null;
-        }
-        
-        return await Usuario.findByPk(id);
+        if (usuarioActual && usuarioActual.curriculum_path) {
+            const rutaAnterior = path.join(__dirname, '../uploads/curriculums', usuarioActual.curriculum_path);
+
+            if (fs.existsSync(rutaAnterior)) {
+            try {
+                fs.unlinkSync(rutaAnterior);
+                console.log('🗑️ Curriculum anterior eliminado:', usuarioActual.curriculum_path);
+            } catch (error) {
+                console.error('⚠️ Error al eliminar curriculum anterior:', error);
+            }
+            }
+    }
+
+    const [numFilasActualizadas] = await Usuario.update(
+        { curriculum_path: nombreArchivo },
+        { where: { id } }
+    );
+    
+    if (numFilasActualizadas === 0) {
+        return null;
+    }
+
+    return await Usuario.findByPk(id, {
+        attributes: { exclude: ['password', 'contraseña'] }
+    });
     } catch (err) {
-        throw err;
+    throw err;
     }
 };
-
-// Eliminar usuario
 export const eliminarUsuario = async (id) => {
     try {
         const numFilasEliminadas = await Usuario.destroy({
@@ -133,14 +148,3 @@ export const eliminarUsuario = async (id) => {
     }
 };
 
-// Buscar usuarios por rol
-export const obtenerUsuariosPorRol = async (rol) => {
-    try {
-        const usuarios = await Usuario.findAll({
-            where: { rol }
-        });
-        return usuarios;
-    } catch (err) {
-        throw err;
-    }
-};
