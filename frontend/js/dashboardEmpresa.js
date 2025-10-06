@@ -50,11 +50,6 @@ async function cargarDashboard() {
   }
 }
 
-/**
- * Muestra el mensaje de bienvenida dinámico.
- * @param {object} usuario - El objeto del usuario logueado.
- * @param {object|null} empresa - El objeto de la empresa o null si no existe.
- */
 function renderizarBienvenida(usuario, empresa) {
   const elementoMensaje = document.getElementById('mensaje-bienvenida');
   if (empresa && empresa.nombre) {
@@ -64,10 +59,7 @@ function renderizarBienvenida(usuario, empresa) {
   }
 }
 
-/**
- * Muestra el número total de trabajos publicados.
- * @param {Array} ofertas - El arreglo de ofertas de la empresa.
- */
+
 function renderizarEstadisticas(ofertas) {
   const elementoTotal = document.getElementById('total-trabajos');
   elementoTotal.textContent = ofertas.length;

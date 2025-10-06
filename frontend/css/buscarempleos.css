@@ -26,3 +26,33 @@ footer p {
 footer a:hover {
   text-decoration: underline;
 }
+
+#filtrosDropdown {
+            width: 999px; /* Ancho para el dropdown */
+            padding: 10px;
+        }
+        
+        #filtrosDropdown .row {
+            margin: 0;
+            gap: 30px;
+        }
+        
+        #filtrosDropdown .col-md-2 {
+            flex: 1;
+            min-width: 140px;
+        }
+        
+        #filtrosDropdown h6 {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        #filtrosDropdown label {
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .dropdown-menu {
+            position: fixed !important;
+            margin-top: 10px !important;
+        }

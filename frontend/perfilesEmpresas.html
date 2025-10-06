@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkLink - Buscar Empleos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/buscarempleos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav gap-4">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empleadores.html">Empleadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="candidatos.html">Candidatos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="recursos.html">Recursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="foro.html">Foro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="perfilesEmpresas.html">Empresas</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="buscarCandidatos.html">Buscar candidatos</a></li>
+            
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+        <div class="ms-5 ps-5 d-flex align-items-center">
+            <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
+            <h2 class="fw-bold">WorkLink</h2>
+        </div>
+
+        <!-- ACA ESTOS BOTONES DE INICIAR SESION Y REGISTRARSE DEBEN MOSTRARSE SI SE ACCEDE SIN INICIAR SESION, SI HA INICIADO SESION SE DEBE MOSTRAR LA IMAGEN DE PERFIL COMO EN LAS DEMAS PAGINAS -->
+        <div class="me-5 pe-5 d-flex">
+            <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
+            <a href="crear-cuenta.html" class="btn btn-primary">Registrarse</a>
+            <div class="me-5 pe-5">
+                <img src="./imagenes/imagen.png" alt="User" class="rounded-circle ms-2"
+                    style="max-width: 40px; border-radius: 50%;">
+            </div>
+        </div>
+    </div>
+
+  <!-- Buscador -->
+  <div class="bg-light py-4 mb-4">
+    <div class="container">
+      <form class="row g-2">
+        <div class="col-md-3">
+          <input type="text" class="form-control" placeholder="⌕ Nombre de empresa">
+        </div>
+        <div class="col-md-2 d-grid">
+          <button class="btn btn-primary w-50" type="submit">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cards de empleos -->
+  <div class="container pb-5">
+    <div class="row g-3">
+
+      <!-- Card ejemplo -->
+      <div class="col-md-4">
+        <a href="detalleEmpresa.html" class="text-decoration-none">
+          <div class="job-card shadow-sm p-3 h-100">
+          
+          <img src="https://cdn-icons-png.flaticon.com/512/3670/3670215.png" width="32" height="32" class="me-2">
+          <h5 class="fw-bold">Reddit</h5>
+          <p class="text-muted small mb-1">Reino Unido</p>
+        </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="detalleEmpresa.html" class="text-decoration-none">
+          <div class="job-card shadow-sm p-3 h-100">
+          
+          <img src="https://cdn-icons-png.flaticon.com/512/3670/3670215.png" width="32" height="32" class="me-2">
+          <h5 class="fw-bold">Reddit</h5>
+          <p class="text-muted small mb-1">Reino Unido</p>
+        </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a href="detalleEmpresa.html" class="text-decoration-none">
+          <div class="job-card shadow-sm p-3 h-100">
+          
+          <img src="https://cdn-icons-png.flaticon.com/512/3670/3670215.png" width="32" height="32" class="me-2">
+          <h5 class="fw-bold">Reddit</h5>
+          <p class="text-muted small mb-1">Reino Unido</p>
+        </div>
+        </a>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-5">
+    <div class="container d-flex justify-content-between flex-wrap">
+      <div>
+        <h5 class="fw-bold"><i class="bi bi-briefcase-fill me-2"></i>WorkLink</h5>
+        <p>7777-7777<br>Santa Ana, El Salvador</p>
+      </div>
+      <div>
+        <h6 class="fw-bold">Candidatos</h6>
+        <p class="mb-1"><a href="vistaEmpleos.html" class="text-decoration-none text-light">Explorar empleos</a></p>
+
+        <!-- ESTE PANEL DEBE DIRIGIR A LA VISTA PRINCIPAL DE CANDIDATOS SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
+        <p><a href="homeCandidato.html" class="text-decoration-none text-light">Panel de candidatos</a></p>
+      </div>
+      <div>
+        <h6 class="fw-bold">Empleadores</h6>
+        <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
+        <p class="mb-1"><a href="publicarTrabajo.html" class="text-decoration-none text-light">Publicar un trabajo</a></p>
+        <p><a href="buscarCandidatos.html" class="text-decoration-none text-light">Buscar candidatos</a></p>
+      </div>
+      <div>
+        <h6 class="fw-bold">Soporte</h6>
+        <p class="mb-1"><a href="foro.html" class="text-decoration-none text-light">Foro</a></p>
+        <p class="mb-1"><a href="#" class="text-decoration-none text-light">Política de privacidad</a></p>
+        <p><a href="#" class="text-decoration-none text-light">Términos y condiciones</a></p>
+      </div>
+    </div>
+    <div class="text-center mt-4 small">
+      © 2025 WorkLink. All rights reserved
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
