@@ -145,39 +145,6 @@ export const putActualizarUsuario = async (req, res, next) => {
     next(err);
   }
 };
-export const putActualizarCurriculum = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    if (req.usuario.id !== parseInt(id)) {
-      const error = new Error("No tienes permisos para actualizar este usuario");
-      error.statusCode = 403;
-      throw error;
-    }
-    if (req.usuario.rol !== 'Candidato') {
-      const error = new Error("Solo los empleados pueden subir curriculum");
-      error.statusCode = 403;
-      throw error;
-    }
-    if (!req.file) {
-      const error = new Error("No se subió ningún archivo");
-      error.statusCode = 400;
-      throw error;
-    }
-    const usuarioActualizado = await usuarioService.actualizarCurriculum(
-      id, 
-      req.file.filename
-    );
-    if (!usuarioActualizado) {
-      const error = new Error("Usuario no encontrado");
-      error.statusCode = 404;
-      throw error;
-    }
-
-    res.status(200).json(usuarioActualizado);
-  } catch (err) {
-    next(err);
-  }
-};
 export const deleteUsuario = async (req, res, next) => {
   try {
     const { id } = req.params;

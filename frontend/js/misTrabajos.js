@@ -81,11 +81,6 @@ async function cargarOfertas() {
     contenedor.innerHTML = `<p class="text-danger text-center">${error.message}</p>`;
   }
 }
-
-/**
- * Elimina una oferta de trabajo específica.
- * @param {number} idoferta El ID de la oferta a eliminar.
- */
 async function eliminarOferta(idoferta) {
   if (!confirm('¿Estás seguro de que quieres eliminar esta oferta de trabajo? Esta acción no se puede deshacer.')) {
     return;
@@ -107,8 +102,7 @@ async function eliminarOferta(idoferta) {
     }
 
     alert('✅ Oferta eliminada correctamente.');
-    
-    // Volvemos a cargar la lista de ofertas para que se refleje el cambio
+
     cargarOfertas();
 
   } catch (error) {

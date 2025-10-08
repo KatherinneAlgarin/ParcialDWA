@@ -1,277 +1,71 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WorkLink - Encuentra tu próximo trabajo</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
+  <div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav gap-4">
+            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="vistaEmpleos.html">Buscar Empleos</a></li>
+            </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center p-3 bg-white">
+      <div class="d-flex align-items-center">
+        <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
+        <h2 class="fw-bold">WorkLink</h2>
+      </div>
+      
+      <div id="estado-sesion" class="d-flex align-items-center me-3">
+        <div id="auth-invitado">
+          <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
+          <a href="crear-cuenta.html" class="btn btn-outline-primary">Registrarse</a>
+        </div>
+        <div id="auth-usuario" class="d-flex align-items-center" style="display: none;">
+          <a id="panel-link" href="#" class="text-decoration-none text-dark">
+            <span id="nombre-usuario" class="me-3 fw-bold"></span>
+          </a>
+          <img id="foto-perfil-usuario" src="./imagenes/imagen.png" alt="User" class="rounded-circle" style="max-width: 40px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="empleadores.html">Empleadores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="candidatos.html">Candidatos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="recursos.html">Recursos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="foro.html">Foro</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="perfilesEmpresas.html">Empresas</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="buscarCandidatos.html">Buscar candidatos</a></li>
-            
-                        <!-- <li class="nav-item">
-                    <a class="nav-link" href="signin.html">Iniciar Sesión</a>
-                </li>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="crear-cuenta.html">Registrarse</a>
-                </li> -->
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
-        <div class="ms-5 ps-5 d-flex align-items-center">
-            <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
-            <h2 class="fw-bold">WorkLink</h2>
-        </div>
-        <div class="me-5 pe-5">
-            <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
-            <a href="crear-cuenta.html" class="btn btn-primary">Registrarse</a>
-        </div>
-    </div>
-
-    <div class="row m-5 d-flex justify-content-center align-items-center">
-        <div class="col-md-6 w-50 ms-5 ps-5">
+        <div class="row my-5 d-flex justify-content-center align-items-center">
+            <div class="col-lg-6">
             <h1>Encuentra un trabajo que se adapte a tus intereses y habilidades.</h1>
             <p>Algunos detalles aplicados según lo que deseas. Empezar con lo mejor que podemos ofrecerte.</p>
-            <div class="search-bar">
-                <input type="text" placeholder="Nombre del puesto o ubicación">
-                <button>Buscar Trabajo</button>
+            <div class="search-bar mt-4">
+                <input type="text" id="busqueda-principal" placeholder="Nombre del puesto o palabra clave">
+                <button id="btn-busqueda-principal">Buscar Trabajo</button>
             </div>
-        </div>
-        <img class="col-md-6" src="./imagenes/4565.jpg" alt="Trabajo" style="max-width: 600px;">
-
-        <div class="d-flex justify-content-evenly align-items-center p-3 mt-5">
-            <div class="text-center rounded-3 p-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded"
-                style="background-color: rgb(255, 255, 255); width: 15%;">
-                <h2>1,75M</h2>
-                <p>Trabajos</p>
-                <i class="bi bi-suitcase-lg fs-1"></i>
             </div>
-            <div class="text-center b rounded-3 p-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded"
-                style="background-color: rgb(255, 255, 255); width: 15%;">
-                <h2>97K</h2>
-                <p>Empleados</p>
-                <i class="bi bi-buildings fs-1"></i>
-            </div>
-            <div class="text-center b rounded-3 p-4 shadow-lg p-3 mb-5 bg-body-tertiary rounded"
-                style="background-color: rgb(255, 255, 255); width: 15%;">
-                <h2>38M</h2>
-                <p>Candidatos</p>
-                <i class="bi bi-person-workspace fs-1"></i>
+            <div class="col-lg-6 text-center">
+            <img class="img-fluid" src="./imagenes/4565.jpg" alt="Trabajo" style="max-width: 500px;">
             </div>
         </div>
     </div>
 
-
-
-    <div class="bg-body-secondary text-center p-5">
-        <h2 class="text-center fw-bold mb-5">Cómo funciona WorkLink</h2>
-        <div class="d-flex justify-content-around align-items-center mt-4">
-            <div style=" width: 25%;">
-                <i class="bi bi-person-plus text-primary text-center fs-2 rounded-circle bg-white p-3 mb-5"></i>
-                <h3 class="mt-3">Crea una cuenta</h3>
-                <p>Rellena tus datos personales para comenzar tu viaje profesional.</p>
-            </div>
-            <div style=" width: 25%;">
-                <i class="bi bi-cloud-upload text-primary text-center fs-2 rounded-circle bg-white p-3 mb-5"></i>
-                <h3 class="mt-3">Sube tu currículum</h3>
-                <p>Adjunta tu CV para aplicar a trabajos rápidamente.</p>
-            </div>
-            <div style=" width: 25%;">
-                <i class="bi bi-patch-check text-primary text-center fs-2 rounded-circle bg-white p-3 mb-5"></i>
-                <h3 class="mt-3">Aplica a trabajos</h3>
-                <p>Encuentra el puesto ideal y aplica fácilmente.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="container my-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-semibold ">Trabajos Destacados</h2>
-            <a href="vistaEmpleos.html" class="border-1 border border-primary p-2 text-primary bg-white rounded-2 text-decoration-none" >Ver más</a>
-        </div>
-        <div class="job-card">
-            <div>
-                <h3>Vacante</h3>
-                <div class="d-flex gap-2 align-items-center">
-                    <span class="badge text-secondary">Tipo</span>
-                    <div class="d-flex gap-1 align-items-center p-0">
-                        <i class="bi bi-currency-dollar text-secondary"></i>
-                        <span class="badge text-secondary">salario</span>
-                    </div>
-                    <div class="d-flex gap-1 align-items-center p-0">
-                        <i class="bi bi-geo-alt text-secondary"></i>
-                        <span class="badge text-secondary">ubicación</span>
-                    </div>
-
-                </div>
-            </div>
-            <a href="detalleEmpleo.html" class="bg-primary-subtle text-primary text-decoration-none rounded-1 p-1 border-primary pe-4 ps-4">Aplicar</a>
-        </div>
-
-        <div class="job-card">
-            <div>
-                <h3>Vacante</h3>
-                <div class="d-flex gap-2 align-items-center">
-                    <span class="badge text-secondary">Tipo</span>
-                    <div class="d-flex gap-1 align-items-center p-0">
-                        <i class="bi bi-currency-dollar text-secondary"></i>
-                        <span class="badge text-secondary">salario</span>
-                    </div>
-                    <div class="d-flex gap-1 align-items-center p-0">
-                        <i class="bi bi-geo-alt text-secondary"></i>
-                        <span class="badge text-secondary">ubicación</span>
-                    </div>
-
-                </div>
-            </div>
-            <a href="detalleEmpleo.html" class="bg-primary-subtle text-primary text-decoration-none rounded-1 p-1 border-primary pe-4 ps-4">Aplicar</a>
-        </div>
-
-        <div class="job-card">
-            <div>
-                <h3>Vacante</h3>
-                <div class="d-flex gap-2 align-items-center">
-                    <span class="badge text-secondary">Tipo</span>
-                    <div class="d-flex gap-1 align-items-center p-0">
-                        <i class="bi bi-currency-dollar text-secondary"></i>
-                        <span class="badge text-secondary">salario</span>
-                    </div>
-                    <div class="d-flex gap-1 align-items-center p-0">
-                        <i class="bi bi-geo-alt text-secondary"></i>
-                        <span class="badge text-secondary">ubicación</span>
-                    </div>
-
-                </div>
-            </div>
-            <a class="bg-primary-subtle text-primary text-decoration-none rounded-1 p-1 border-primary pe-4 ps-4" href="detalleEmpleo.html">Aplicar</a>
-        </div>
-    </div>
-
-    <div class="justify-content-center align-items-center">
-        <h2 class="text-primary-emphasis text-center">Principales Empresas</h2>
-        <div class="d-flex justify-content-center align-items-center p-5">
-            <div class="border border-primary rounded-3 p-3 m-2">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
-                    <div>
-                        <h6>Dribbble</h6>
-                        <div class="d-flex align-items-center text-secondary">
-                            <i class="bi bi-geo-alt"></i>
-                            <h6 class="mt-2">ubicación</h6>
-                        </div>
-                        
-                    </div>
-                </div>
-                <a class="bg-primary-subtle text-primary text-decoration-none rounded-1 p-1 border-primary pe-4 ps-4" href="detalleEmpresa.html">Ver empresa</a>
-            </div>
-
-            <div class="border border-primary rounded-3 p-3 m-2">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
-                    <div>
-                        <h6>Dribbble</h6>
-                        <div class="d-flex align-items-center text-secondary">
-                            <i class="bi bi-geo-alt"></i>
-                            <h6 class="mt-2">ubicación</h6>
-                        </div>
-                        
-                    </div>
-                </div>
-                <a class="bg-primary-subtle text-primary text-decoration-none rounded-1 p-1 border-primary pe-4 ps-4" href="detalleEmpresa.html">Ver empresa</a>
-            </div>
-
-            <div class="border border-primary rounded-3 p-3 m-2">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
-                    <div>
-                        <h6>Dribbble</h6>
-                        <div class="d-flex align-items-center text-secondary">
-                            <i class="bi bi-geo-alt"></i>
-                            <h6 class="mt-2">ubicación</h6>
-                        </div>
-                        
-                    </div>
-                </div>
-                <a class="bg-primary-subtle text-primary text-decoration-none rounded-1 p-1 border-primary pe-4 ps-4" href="detalleEmpresa.html">Ver empresa</a>
-            </div>
-
-            <div class="border border-primary rounded-3 p-3 m-2">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="./imagenes/4565.jpg" alt="Dribbble" style=" width: 50%;">
-                    <div>
-                        <h6>Dribbble</h6>
-                        <div class="d-flex align-items-center text-secondary">
-                            <i class="bi bi-geo-alt"></i>
-                            <h6 class="mt-2">ubicación</h6>
-                        </div>
-                        
-                    </div>
-                </div>
-                <a class="bg-primary-subtle text-primary text-decoration-none rounded-1 p-1 border-primary pe-4 ps-4" href="detalleEmpresa.html">Ver empresa</a>
-            </div>
-        </div>
-
-
-    </div>
-
-    <div class="d-flex justify-content-around align-items-center p-5 bg-body-secondary">
-        <div class="rounded-3 bg-white p-5">
-            <h3>Convierte en Candidato</h3>
-            <p>Únete a nosotros y encuentra las mejores oportunidades de empleo.</p>
-            <button class="bg-primary text-white rounded-2 border border-primary-subtle w-50 p-2">Registrarse</button>
-        </div>
-        <div class="rounded-3 bg-primary-subtle p-5">
-            <h3>Convierte en Empleador</h3>
-            <p>Publica vacantes y encuentra candidatos ideales para tu empresa.</p>
-            <button class="bg-primary text-white rounded-2 border border-primary-subtle w-50 p-2">Registrarse</button>
-        </div>
-    </div>
-
-    <div class="footer">
+    <footer class="footer">
         <p>&copy; 2025 WorkLink. Todos los derechos reservados.</p>
-    </div>
-    </div>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-
-</body>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/index.js"></script> </body>
 </html>

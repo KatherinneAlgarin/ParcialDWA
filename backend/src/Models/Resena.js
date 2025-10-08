@@ -1,7 +1,6 @@
+// backend/src/Models/Resena.js
 import { DataTypes } from "sequelize";
 import sequelize from "../Config/db.js";
-import Usuario from "./Usuario.js";
-import Empresa from "./Empresa.js";
 
 const Resena = sequelize.define("Resena", {
   idcalificacion: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -12,10 +11,5 @@ const Resena = sequelize.define("Resena", {
   tableName: "resenas",
   timestamps: false
 });
-Resena.belongsTo(Usuario, { foreignKey: "idusuario" });
-Usuario.hasMany(Resena, { foreignKey: "idusuario" });
-
-Resena.belongsTo(Empresa, { foreignKey: "idempresa" });
-Empresa.hasMany(Resena, { foreignKey: "idempresa" });
-
+ 
 export default Resena;

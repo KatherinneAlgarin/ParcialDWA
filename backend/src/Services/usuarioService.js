@@ -104,39 +104,6 @@ export const actualizarUsuario = async (id, datosActualizados) => {
     }
 };
 
-export const actualizarCurriculum = async (id, nombreArchivo) => {
-    try {
-        const usuarioActual = await Usuario.findByPk(id);
-        
-        if (usuarioActual && usuarioActual.curriculum_path) {
-            const rutaAnterior = path.join(__dirname, '../uploads/curriculums', usuarioActual.curriculum_path);
-
-            if (fs.existsSync(rutaAnterior)) {
-            try {
-                fs.unlinkSync(rutaAnterior);
-                console.log('🗑️ Curriculum anterior eliminado:', usuarioActual.curriculum_path);
-            } catch (error) {
-                console.error('⚠️ Error al eliminar curriculum anterior:', error);
-            }
-            }
-    }
-
-    const [numFilasActualizadas] = await Usuario.update(
-        { curriculum_path: nombreArchivo },
-        { where: { id } }
-    );
-    
-    if (numFilasActualizadas === 0) {
-        return null;
-    }
-
-    return await Usuario.findByPk(id, {
-        attributes: { exclude: ['password', 'contraseña'] }
-    });
-    } catch (err) {
-    throw err;
-    }
-};
 export const eliminarUsuario = async (id) => {
     try {
         const numFilasEliminadas = await Usuario.destroy({

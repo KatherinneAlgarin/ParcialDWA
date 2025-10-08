@@ -1,253 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkLink - Foro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/frontend/css/foro.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/foro.css">
 </head>
-
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav gap-4">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="empleadores.html">Empleadores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="candidatos.html">Candidatos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="recursos.html">Recursos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="foro.html">Foro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfilesEmpresas.html">Empresas</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="buscarCandidatos.html">Buscar candidatos</a></li>
-            
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav gap-4">
+          <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="foro.html">Foro</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+    <div class="d-flex justify-content-between align-items-center p-3" style="background-color: white;">
         <div class="ms-5 ps-5 d-flex align-items-center">
             <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
             <h2 class="fw-bold">WorkLink</h2>
         </div>
-
-        <!-- ACA ESTOS BOTONES DE INICIAR SESION Y REGISTRARSE DEBEN MOSTRARSE SI SE ACCEDE SIN INICIAR SESION, SI HA INICIADO SESION SE DEBE MOSTRAR LA IMAGEN DE PERFIL COMO EN LAS DEMAS PAGINAS -->
-        <div class="me-5 pe-5 d-flex">
-            <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
-            <a href="crear-cuenta.html" class="btn btn-primary">Registrarse</a>
-            <div class="me-5 pe-5">
-                <img src="./imagenes/imagen.png" alt="User" class="rounded-circle ms-2"
-                    style="max-width: 40px; border-radius: 50%;">
+        <div id="estado-sesion" class="me-5 pe-5 d-flex align-items-center">
+            <div id="auth-invitado">
+                <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
+                <a href="crear-cuenta.html" class="btn btn-outline-primary">Registrarse</a>
+            </div>
+            <div id="auth-usuario" class="d-flex align-items-center" style="display: none;">
+                <a id="panel-link" href="#"><span id="nombre-usuario" class="me-3 fw-bold"></span></a>
+                <img id="foto-perfil-usuario" src="./imagenes/imagen.png" class="rounded-circle" style="max-width: 40px;">
             </div>
         </div>
     </div>
 
-    <!-- Foro -->
     <div class="text-center p-2 mb-4 bg-body-secondary">
         <h2 class="my-2 text-center">Foro de Discusión</h2>
     </div>
+
     <div class="container">
         <div class="row">
-
-            <!-- Sidebar -->
             <aside class="col-md-4 col-lg-3 mb-4">
-                <!-- Búsqueda -->
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
                         <h6 class="fw-bold mb-3">Búsqueda</h6>
-                        <input type="text" class="form-control" placeholder="Buscar">
+                        <input type="text" id="input-busqueda-foro" class="form-control" placeholder="Buscar por título...">
                     </div>
                 </div>
+                </aside>
 
-                <!-- Categorías -->
-                <div class="accordion mb-4" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Categorías
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="programacion">
-                            <label class="form-check-label" for="programacion">Programación</label>
-                        </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
+            <main class="col-md-8 col-lg-9">
+                <div class="d-flex justify-content-end mb-3">
+                    <button type="button" class="btn btn-primary" id="btn-abrir-modal-foro">
+                        <i class="bi bi-plus-circle me-2"></i>Crear Nuevo Tema
+                    </button>
                 </div>
 
-                <!-- Publicaciones recientes -->
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h6 class="fw-bold mb-3">Publicaciones Recientes</h6>
-                        <div>
-                            <p class="mb-2"><small>12 de marzo 2025</small><br>Mejores cursos de programación</p>
+                <div id="temas-container">
+                    <div class="text-center p-5"><div class="spinner-border text-primary"></div></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postModalLabel">Crear un nuevo tema de discusión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <form id="form-nuevo-tema">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nuevo-tema-titulo" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="nuevo-tema-titulo" placeholder="Un título claro y conciso" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nuevo-tema-descripcion" class="form-label">Descripción (Opcional)</label>
+                            <textarea class="form-control" id="nuevo-tema-descripcion" rows="5" placeholder="Describe tu pregunta o el punto que quieres discutir..."></textarea>
                         </div>
                     </div>
-                </div>
-            </aside>
-
-            <!-- Publicaciones -->
-            <div class="col-md-8 col-lg-9">
-                <!-- ESTE BOTON DE PUBLCAR DEBE DEJAR PUBLICAR SOLO SI EL USUARIO HA INICIADO SESION -->
-
-                <!-- MODAL -->
-            <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="postModalLabel">Discusión de foro</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="topic" class="form-label">Tema</label>
-                                    <input type="text" class="form-control" id="topic" placeholder="Tema de foro">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="description" rows="3" placeholder="Escribe tu biografía aquí. Deja que los empleadores sepan quién eres..."></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" id="publishPost">Publicar</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btn-publicar-tema">Publicar</button>
                     </div>
-                </div>
-            </div>
-
-            <!-- Botón para abrir el modal -->
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#postModal">
-                    Publicar En El Foro
-                </button>
-            </div>
-
-            <script>
-                // O
-                // publicación del formulario o cierre del modal aquí
-                document.getElementById('publishPost').addEventListener('click', function() {
-                    const topic = document.getElementById('topic').value;
-                    const description = document.getElementById('description').value;
-
-                    if(topic && description) {
-                        // Aquí puedes implementar la funcionalidad para enviar los datos o simplemente mostrarlos en consola
-                        console.log('Tema:', topic);
-                        console.log('Descripción:', description);
-
-                        // Cerrar el modal después de la publicación
-                        var modal = bootstrap.Modal.getInstance(document.getElementById('postModal'));
-                        modal.hide();
-                    } else {
-                        alert('Por favor, complete todos los campos.');
-                    }
-                });
-            </script>
-
-
-                <!--FIN MODAL-->
-
-                <div class="card shadow-sm mb-4">
-                    <div class="card-body">
-                        <small class="text-muted">12 de Noviembre 2024</small>
-                        <h5 class="mt-2">Entrevistas en el sector financiero</h5>
-                        <p class="text-muted">Me gustaría saber qué preguntas son comunes en entrevistas de banca y
-                            finanzas. Estoy aplicando a un banco regional.</p>
-                        <a href="publicarForo.html" class="fw-bold text-decoration-none">Respuestas →</a>
-                    </div>
-                </div>
-
-                <div class="card shadow-sm mb-4">
-                    <div class="card-body">
-                        <small class="text-muted">10 de Noviembre 2024</small>
-                        <h5 class="mt-2">Recomendaciones de empresas de marketing digital</h5>
-                        <p class="text-muted">¿Alguien tiene experiencia trabajando en agencias de marketing digital en
-                            Latinoamérica? ¿Cuáles recomiendan?</p>
-                        <a href="publicarForo.html" class="fw-bold text-decoration-none">Respuestas →</a>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white pt-5 pb-3 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 mb-4">
-                    <h5 class="fw-bold">Work Link</h5>
-                    <p>7777-7777<br>Santa Ana, Santa Ana El Salvador</p>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h6 class="fw-bold">Candidatos</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="vistaEmpleos.html" class="text-white text-decoration-none">Explorar empleos</a></li>
-
-                         <!-- ESTE PANEL DEBE DIRIGIR A LA VISTA PRINCIPAL DE CANDIDATOS SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
-                        <li><a href="homeCandidato.html" class="text-white text-decoration-none">Panel de candidatos</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h6 class="fw-bold">Empleadores</h6>
-
-                    <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
-                    <ul class="list-unstyled">
-                        <li><a href="publicarTrabajo.html" class="text-white text-decoration-none">Publicar un trabajo</a></li>
-                        <li><a href="buscarCandidatos.html" class="text-white text-decoration-none">Buscar Candidatos</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <h6 class="fw-bold">Soporte</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="foro.html" class="text-white text-decoration-none">Foro</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Políticas de Privacidad</a></li>
-                        <li><a href="#" class="text-white text-decoration-none">Términos y Condiciones</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="border-light">
-            <div class="d-flex justify-content-between">
-                <p class="mb-0">© 2025 - Work Link. Todos los derechos Reservados</p>
-                <div>
-                    <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5"></footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
+    <script src="js/auth.js"></script>
+    <script src="js/foro.js"></script> </body>
 </html>

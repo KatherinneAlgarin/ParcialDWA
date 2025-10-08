@@ -4,134 +4,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkLink - Buscar Empleos</title>
+    <title>WorkLink - Buscar Candidatos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/buscarempleos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/buscarempleos.css">
 </head>
 
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            protegerPagina('Empleador');
+        });
+    </script>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav gap-4">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="empleadores.html">Empleadores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="candidatos.html">Candidatos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="recursos.html">Recursos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="foro.html">Foro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfilesEmpresas.html">Empresas</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="buscarCandidatos.html">Buscar candidatos</a></li>
-            
+                    <li class="nav-item"><a class="nav-link" href="empresa.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="recursos.html">Recursos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="foro.html">Foro</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="buscarCandidatos.html">Buscar candidatos</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
+    <div class="d-flex justify-content-between align-items-center p-3" style="background-color: white;">
         <div class="ms-5 ps-5 d-flex align-items-center">
             <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
             <h2 class="fw-bold">WorkLink</h2>
         </div>
-
-        <!-- ACA ESTOS BOTONES DE INICIAR SESION Y REGISTRARSE DEBEN MOSTRARSE SI SE ACCEDE SIN INICIAR SESION, SI HA INICIADO SESION SE DEBE MOSTRAR LA IMAGEN DE PERFIL COMO EN LAS DEMAS PAGINAS -->
-        <div class="me-5 pe-5 d-flex">
-            <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
-            <a href="crear-cuenta.html" class="btn btn-primary">Registrarse</a>
-            <div class="me-5 pe-5">
-                <img src="./imagenes/imagen.png" alt="User" class="rounded-circle ms-2"
-                    style="max-width: 40px; border-radius: 50%;">
+        <div id="estado-sesion" class="me-5 pe-5 d-flex align-items-center">
+            <div id="auth-invitado">
+                <a href="signin.html" class="btn btn-primary me-2">Iniciar Sesión</a>
+                <a href="crear-cuenta.html" class="btn btn-outline-primary">Registrarse</a>
+            </div>
+            <div id="auth-usuario" class="d-flex align-items-center" style="display: none;">
+                <a id="panel-link" href="#"><span id="nombre-usuario" class="me-3 fw-bold"></span></a>
+                <img id="foto-perfil-usuario" src="./imagenes/imagen.png" class="rounded-circle" style="max-width: 40px;">
             </div>
         </div>
     </div>
 
-    <!-- Buscador -->
     <div class="bg-light py-4 mb-4">
         <div class="container">
-            <form class="row g-2">
-                 <div class="col-md-3">
-        <select class="form-select">
-          <option selected>☰ Categoría</option>
-        </select>
-      </div>
-                <div class="col-md-2 d-grid">
-                    <button class="btn btn-primary w-50" type="submit">Buscar</button>
+            <form id="form-busqueda-candidatos" class="row g-2 align-items-end">
+                <div class="col-md-5">
+                    <label for="filtro-oferta" class="form-label small fw-bold">Filtrar por oferta de trabajo</label>
+                    <select class="form-select" id="filtro-oferta">
+                        <option value="">Todas mis ofertas</option>
+                        </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="filtro-nombre-candidato" class="form-label small fw-bold">Buscar por nombre de candidato</label>
+                    <input type="text" class="form-control" id="filtro-nombre-candidato" placeholder="⌕ Nombre del candidato">
+                </div>
+                <div class="col-md-3 d-grid">
+                    <button class="btn btn-primary mt-3 mt-md-0" type="submit">Buscar Candidatos</button>
                 </div>
             </form>
         </div>
     </div>
 
     <div class="container pb-5">
-    <div class="row g-3">
-        <div class="d-flex gap-5 align-items-center">
-            <div class="d-flex justify-content-between">
-                <div class="rounded bg-secondary me-3" style="width:50px; height:50px;"></div>
-                <div>
-                    <div class="fw-bold">Guy Hawkins</div>
-                    <small class="text-muted">Technical Support Specialist</small>
+        <h5 class="fw-bold mb-3" id="titulo-resultados">Mostrando todos los candidatos</h5>
+        <div id="candidatos-container" class="list-group">
+            <div class="text-center p-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
                 </div>
-            </div>
-            <div class="ms-auto">
-                <a type="button" href="perfilCandidato.html" class="btn btn-primary text-decoration-none px-4 py-2">
-                    Ver Perfil
-                </a>
             </div>
         </div>
     </div>
-</div>
+    
+    <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="perfilModalLabel">Perfil del Candidato</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body-content" class="modal-body">
+                    <div class="text-center p-5">
+                        <div class="spinner-border text-primary"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Footer -->
     <footer class="bg-dark text-light py-5">
-        <div class="container d-flex justify-content-between flex-wrap">
-            <div>
-                <h5 class="fw-bold"><i class="bi bi-briefcase-fill me-2"></i>WorkLink</h5>
-                <p>7777-7777<br>Santa Ana, El Salvador</p>
-            </div>
-            <div>
-                <h6 class="fw-bold">Candidatos</h6>
-                <p class="mb-1"><a href="vistaEmpleos.html" class="text-decoration-none text-light">Explorar empleos</a>
-                </p>
-
-                <!-- ESTE PANEL DEBE DIRIGIR A LA VISTA PRINCIPAL DE CANDIDATOS SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
-                <p><a href="homeCandidato.html" class="text-decoration-none text-light">Panel de candidatos</a></p>
-            </div>
-            <div>
-                <h6 class="fw-bold">Empleadores</h6>
-                <!-- ESTOS DEBEN DIRIGIR A LA VISTA DE PUBLICAR TRABAJO SI YA TIENE SESION INICIADA, DE LO CONTRARIO DEBE INICIAR SESION -->
-                <p class="mb-1"><a href="publicarTrabajo.html" class="text-decoration-none text-light">Publicar un
-                        trabajo</a></p>
-                <p><a href="buscarCandidatos.html" class="text-decoration-none text-light">Buscar candidatos</a></p>
-            </div>
-            <div>
-                <h6 class="fw-bold">Soporte</h6>
-                <p class="mb-1"><a href="foro.html" class="text-decoration-none text-light">Foro</a></p>
-                <p class="mb-1"><a href="#" class="text-decoration-none text-light">Política de privacidad</a></p>
-                <p><a href="#" class="text-decoration-none text-light">Términos y condiciones</a></p>
-            </div>
-        </div>
-        <div class="text-center mt-4 small">
-            © 2025 WorkLink. All rights reserved
-        </div>
-    </footer>
+        </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/buscarCandidatos.js"></script>
 </body>
-
 </html>

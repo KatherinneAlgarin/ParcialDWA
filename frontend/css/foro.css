@@ -21,3 +21,17 @@
 .accordion-body {
     background-color: #ffffff;
 }
+.indentation-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px; /* Grosor de la línea */
+    background-color: #dee2e6; /* Color de la línea (gris claro de Bootstrap) */
+    border-radius: 1px;
+    margin-top: 10px; /* Ajusta la posición vertical de inicio */
+}
+
+/* Ajuste para el contenedor de respuestas anidadas para alinear correctamente */
+.nested-replies-container {
+    padding-left: 10px; /* Ajuste adicional para la visualización de la línea */
+}

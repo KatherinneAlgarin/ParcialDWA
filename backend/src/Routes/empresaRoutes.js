@@ -13,10 +13,7 @@ import uploadLogo from "../Config/multerProfile.js";
 
 const router = Router();
 
-router.get(
-    '/',
-    empresaController.getTodasLasEmpresas
-);
+router.get('/', empresaController.getEmpresasPublicas);
 router.get(
     '/buscar',
     runValidations(buscarEmpresaValidators),
@@ -27,11 +24,7 @@ router.get(
     runValidations(idEmpresaValidator),
     empresaController.getEmpresaPorId
 );
-router.get(
-    '/usuario/mi-empresa',
-    verificarToken,
-    empresaController.getEmpresaDelUsuario
-);
+
 router.post('/', verificarToken, (req, res, next) => { uploadLogo.single('logo')(req, res, (err) => {
         if (err) {
             console.error('❌ Error de Multer:', err);

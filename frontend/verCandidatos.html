@@ -1,228 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Candidatos - WorkLink</title>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidatos Aplicantes - WorkLink</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/verCandidatos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./css/verCandidatos.css">
 </head>
 <body class="bg-light">
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      protegerPagina('Empleador');  
-    });
-  </script>
-  <!-- Top Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav gap-4">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="empleadores.html">Empleadores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="candidatos.html">Candidatos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="recursos.html">Recursos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="foro.html">Foro</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="perfilesEmpresas.html">Empresas</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="buscarCandidatos.html">Buscar candidatos</a></li>
-            
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            protegerPagina('Empleador');
+        });
+    </script>
 
-        <div class=" d-flex justify-content-between align-items-center p-3" style="background-color: white;">
-        <div class="ms-5 ps-5 d-flex align-items-center">
-            <img src="./imagenes/Logo.PNG" alt="Logo" style="max-width: 65px; margin: 10px;">
-            <h2 class="fw-bold">WorkLink</h2>
+    <!-- Navbar y Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"><!-- ... tu navbar ... --></nav>
+    <div class="d-flex justify-content-between align-items-center p-3" style="background-color: white;"><!-- ... tu header ... --></div>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
+            <!-- ... tu sidebar ... -->
         </div>
-        <div class="me-5 pe-5">
-            <a href="publicarTrabajo.html" class="btn btn-outline-primary">Publicar Trabajo</a>
-            <img src="./imagenes/imagen.png" alt="User" class="rounded-circle" style="max-width: 40px; border-radius: 50%;">
+
+        <!-- Contenido Principal -->
+        <div class="flex-grow-1 p-4">
+            <a href="trabajosPVistaEmpresas.html" class="btn btn-outline-secondary btn-sm mb-3"><i class="bi bi-arrow-left"></i> Volver a Mis Trabajos</a>
+            <h5 class="fw-bold text-uppercase mb-4" id="titulo-oferta">Cargando candidatos...</h5>
+
+            <!-- Contenedor dinámico para la lista de candidatos -->
+            <div id="lista-candidatos-container" class="list-group">
+                <div class="text-center p-5"><div class="spinner-border text-primary"></div></div>
+            </div>
         </div>
     </div>
 
-  <!-- Layout principal -->
-  <div class="d-flex">
+    <!-- Modal para ver el perfil completo del candidato -->
+    <div class="modal fade" id="perfilModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="perfilModalLabel">Perfil del Candidato</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div id="modal-body-content" class="modal-body">
+                    <!-- El perfil del candidato se cargará aquí -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-muted small py-3"><!-- ... tu footer ... --></footer>
     
-    <div class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
-  <h6 class="fw-bold text-secondary">PANEL DE EMPLEADORES</h6>
-  <ul class="nav flex-column mt-3">
-    <li class="nav-item"><a class="nav-link" href="empresa.html"><i class="bi bi-grid me-2"></i>General</a></li>
-    <li class="nav-item"><a class="nav-link" href="publicarTrabajo.html"><i class="bi bi-plus-square me-2"></i>Publicar trabajo</a></li>
-    <li class="nav-item"><a class="nav-link active" href="trabajosPVistaEmpresas.html"><i class="bi bi-briefcase me-2"></i>Mis trabajos</a></li>
-    <li class="nav-item"><a class="nav-link" href="ajustesEmpresa.html"><i class="bi bi-gear me-2"></i>Ajustes</a></li>
-  </ul>
-  <div class="mt-auto">
-    <button id="btnLogout" onclick="cerrarSesion()" class="btn btn-link text-danger text-decoration-none p-0 border-0 bg-transparent">
-      <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
-    </button>
-  </div>
-</div>
-
-    <div class="flex-grow-1 p-4">
-
-      <h6 class="fw-bold text-uppercase text-center mb-4">Candidatos</h6>
-
-      <div class="list-group">
-        
-        <div class="list-group-item d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <div class="rounded bg-secondary me-3" style="width:50px; height:50px;"></div>
-            <div>
-              <div class="fw-bold">Guy Hawkins</div>
-              <small class="text-muted">Technical Support Specialist</small>
-            </div>
-          </div>
-          <div class="d-flex align-items-center gap-2">
-            
-
-            <!-- Modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#perfilModal">
-    Ver Perfil
-  </button>
-
-  <!-- Modal perfil candidato -->
-  <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <!-- Header -->
-        <div class="modal-header">
-          <h5 class="modal-title" id="perfilModalLabel">Perfil Candidato - Esther Howard</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <!-- Body -->
-        <div class="modal-body">
-          <div class="container my-5">
-            <div class="card shadow-lg p-4 rounded-4">
-
-              <div class="d-flex justify-content-between align-items-start mb-3">
-                <div class="d-flex align-items-center">
-                  <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center me-3" style="width:60px; height:60px; font-size:24px;">
-                    EH
-                  </div>
-                  <div>
-                    <h5 class="mb-0 fw-bold">Esther Howard</h5>
-                    <small class="text-muted">Website Designer (UI/UX)</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <!-- Columna izquierda -->
-                <div class="col-md-8">
-                  <!-- Biografía -->
-                  <h6 class="fw-bold mb-2">BIOGRAFÍA</h6>
-                  <p class="text-muted small">
-                    I’ve been passionate about graphic design and digital art from an early age with a keen interest in Website and Mobile Application User Interfaces...
-                    <br><br>
-                    *Website User Experience and Interface (UI/UX) Design – for all kinds of Professional and Personal websites.
-                    <br>
-                    *Mobile Application User Experience and Interface Design – for all kinds of IOS/Android and Hybrid Mobile Applications.
-                    <br>
-                    *Wireframe Designs.
-                  </p>
-
-                  <!-- Carta de presentación -->
-                  <h6 class="fw-bold mb-2">CARTA DE PRESENTACIÓN</h6>
-                  <p class="small">
-                    Dear Sir, <br><br>
-                    I am writing to express my interest in the fourth grade instructional position that is currently available...
-                    <br><br>
-                    I have just completed my Bachelor of Science degree in Elementary Education and have successfully completed Praxis I and Praxis II...
-                    <br><br>
-                    Sincerely, <br>
-                    Esther Howard
-                  </p>
-
-                  <!-- Redes sociales -->
-                  <h6 class="fw-bold mb-2">Redes sociales</h6>
-                  <div class="d-flex gap-2">
-                    <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="btn btn-outline-info btn-sm"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="btn btn-outline-dark btn-sm"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" class="btn btn-outline-secondary btn-sm"><i class="bi bi-github"></i></a>
-                    <a href="#" class="btn btn-outline-danger btn-sm"><i class="bi bi-youtube"></i></a>
-                    <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-instagram"></i></a>
-                  </div>
-                </div>
-
-                <!-- Columna derecha -->
-                <div class="col-md-4">
-                  <ul class="list-unstyled small">
-                    <li class="mb-2"><i class="bi bi-calendar-event me-2"></i><b>Fecha de Nacimiento:</b> 14 Junio, 2021</li>
-                    <li class="mb-2"><i class="bi bi-flag me-2"></i><b>Nacionalidad:</b> Salvadoreña</li>
-                    <li class="mb-2"><i class="bi bi-person me-2"></i><b>Marital Status:</b> Single</li>
-                    <li class="mb-2"><i class="bi bi-gender-female me-2"></i><b>Género:</b> Femenino</li>
-                    <li class="mb-2"><i class="bi bi-briefcase me-2"></i><b>Experiencia:</b> 7 años</li>
-                    <li class="mb-2"><i class="bi bi-mortarboard me-2"></i><b>Educación:</b> Master Degree</li>
-                  </ul>
-
-                  <!-- Currículum -->
-                  <div class="card p-3 mb-3 border-0 shadow-sm rounded-3">
-                    <h6 class="fw-bold">Currículum</h6>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <span>Esther Howard PDF</span>
-                      <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-download"></i></a>
-                    </div>
-                  </div>
-
-                  <!-- Contacto -->
-                  <div class="card p-3 border-0 shadow-sm rounded-3">
-                    <h6 class="fw-bold">Contacto</h6>
-                    <ul class="list-unstyled small mb-0">
-                      <li class="mb-2"><i class="bi bi-globe me-2"></i><a href="#">www.estherhoward.com</a></li>
-                      <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>Santa Ana, El Salvador <br><span class="text-muted">Zone/Block Basement 1 Unit B2, 1372 Spring Avenue, Portland</span></li>
-                      <li class="mb-2"><i class="bi bi-telephone me-2"></i>+503 7777-7777</li>
-                      <li><i class="bi bi-envelope me-2"></i>esther.howard@gmail.com</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal Footer (Optional) -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="text-center text-muted small py-3">
-    © 2025 WorkLink ~ All rights Reserved
-  </footer>
-  <script src="js/auth.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/verCandidatos.js"></script>
 </body>
 </html>

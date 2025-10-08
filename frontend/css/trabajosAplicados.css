@@ -1,0 +1,95 @@
+body {
+        background-color: #f8f9fa;
+      }
+      .navbar {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .job-row {
+        background: white;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+      }
+      .job-row:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .job-title {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.25rem;
+      }
+      .company-name {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+      }
+      .status-active {
+        color: #28a745;
+        font-weight: 500;
+      }
+      .status-pending {
+        color: #ffc107;
+        font-weight: 500;
+      }
+      .status-rejected {
+        color: #dc3545;
+        font-weight: 500;
+      }
+      .footer {
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 3rem;
+      }
+      .sidebar {
+        background-color: white;
+        border-right: 1px solid #dee2e6;
+        min-height: calc(100vh - 150px);
+      }
+      .nav-link {
+        color: #6c757d;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+      .nav-link:hover {
+        background-color: #f8f9fa;
+        color: #007bff;
+      }
+      .nav-link.active {
+        background-color: #007bff;
+        color: white !important;
+      }
+      .nav-link i {
+        width: 20px;
+      }
+      .job-row {
+  padding: 10px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.job-title {
+  font-weight: 600;
+}
+
+.company-name {
+  font-size: 0.9rem;
+}
+
+.status-active {
+  color: #198754;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+.status-rejected {
+  color: #dc3545;
+  font-weight: 600;
+}

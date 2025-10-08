@@ -8,6 +8,12 @@ import { errorHandler } from "../Middleware/errorHandler.js";
 import initModels from "../Models/initModels.js";
 import empresaRoutes from '../Routes/empresaRoutes.js';
 import ofertasRouter from "../Routes/ofertaRoutes.js";
+import '../Models/associations.js'
+import resenaRouter from "../Routes/resenaRoutes.js";
+import aplicacionRoutes from "../Routes/aplicacionRoutes.js";
+import foroRoutes from "../Routes/foroRoutes.js";
+import company from "../Routes/empresaRoute.js";
+import respuestaForoRoutes from "../Routes/respuestaForoRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -26,6 +32,11 @@ app.use('/api/usuarios', usuariosRouter);
 app.use('/api/auth', passwordRecoveryRouter); 
 app.use('/api/empresas', empresaRoutes);
 app.use('/api/ofertas', ofertasRouter);
+app.use('/api/aplicaciones', aplicacionRoutes);
+app.use('/api/resenas', resenaRouter);
+app.use('/api/foros', foroRoutes);
+app.use('/api/empresa', company);
+app.use('/api/respuestas-foro', respuestaForoRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT;

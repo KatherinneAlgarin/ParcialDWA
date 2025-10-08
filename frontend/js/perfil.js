@@ -55,7 +55,6 @@ async function precargarDatosUsuario() {
     document.getElementById('youtube').value = redesSociales.youtube || '';
 
     // Contacto
-    document.getElementById('telefono').value = usuario.telefono || '';
     document.getElementById('correo').value = usuario.correo || '';
 
     // Foto de perfil
@@ -157,7 +156,7 @@ async function guardarCambios() {
     
     // Campos opcionales del perfil
     const camposOpcionales = {
-        'direccion': 'direccion', 'telefono': 'telefono', 'biografia': 'biografia', 
+        'direccion': 'direccion', 'biografia': 'biografia', 
         'experiencia': 'experiencia', 'educacion': 'educacion', 'nacionalidad': 'nacionalidad', 
         'estadoCivil': 'estado_civil', 'fechaNacimiento': 'fecha_nacimiento'
     };

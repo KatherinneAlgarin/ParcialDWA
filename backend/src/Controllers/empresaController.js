@@ -40,17 +40,12 @@ export const getEmpresaDelUsuario = async (req, res, next) => {
         next(err);
     }
 };
-export const getTodasLasEmpresas = async (req, res, next) => {
+export const getEmpresasPublicas = async (req, res, next) => {
     try {
-        console.log('📋 Obteniendo todas las empresas');
-        
-        const empresas = await empresaService.obtenerTodasLasEmpresas();
-        
-        console.log(`✅ ${empresas.length} empresas encontradas`);
+        const { nombre } = req.query; 
+        const empresas = await empresaService.obtenerEmpresasConValoracion(nombre);
         res.status(200).json(empresas);
-        
     } catch (err) {
-        console.error('❌ Error en getTodasLasEmpresas:', err);
         next(err);
     }
 };

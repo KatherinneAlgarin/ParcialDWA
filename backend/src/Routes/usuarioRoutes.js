@@ -23,13 +23,5 @@ router.put(
   },
   userController.putActualizarUsuario
 );
-
-router.put(
-  '/:id/curriculum', 
-  verificarToken, 
-  verificarRol('Candidato'), 
-  uploadCV.single('curriculum'), 
-  userController.putActualizarCurriculum
-);
 router.delete('/:id', verificarToken, userController.deleteUsuario);
 export default router;

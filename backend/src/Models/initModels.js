@@ -5,7 +5,7 @@ import Aplicacion from "./Aplicacion.js";
 import Resena from "./Resena.js";
 import Foro from "./Foro.js";
 import RespuestaForo from "./RespuestaForo.js";
-
+import Recurso from "./Recurso.js";
 const initModels = () => {
   return {
     Usuario,
@@ -15,6 +15,7 @@ const initModels = () => {
     Resena,
     Foro,
     RespuestaForo,
+    Recurso
   };
 };
 

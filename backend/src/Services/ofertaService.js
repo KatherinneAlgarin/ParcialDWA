@@ -20,7 +20,12 @@ export const crearOferta = async (datosOferta) => {
 };
 export const obtenerOfertaPorId = async (idoferta) => {
   try {
-    const oferta = await Oferta.findByPk(idoferta);
+    const oferta = await Oferta.findByPk(idoferta, {
+      include: [{
+        model: Empresa 
+      }]
+    });
+
     if (!oferta) {
       const error = new Error('Oferta no encontrada');
       error.statusCode = 404;
@@ -31,7 +36,6 @@ export const obtenerOfertaPorId = async (idoferta) => {
     throw err;
   }
 };
-
 
 export const obtenerOfertasPorEmpresa = async (idempresa) => {
   try {
@@ -49,13 +53,16 @@ export const obtenerTodasLasOfertas = async () => {
   try {
     const ofertas = await Oferta.findAll({
       order: [['idoferta', 'DESC']],
+      include: [{
+        model: Empresa,
+        attributes: ['nombre', 'logo'] 
+      }]
     });
     return ofertas;
   } catch (err) {
     throw err;
   }
 };
-
 export const actualizarOferta = async (idoferta, datosActualizados) => {
   try {
     const oferta = await obtenerOfertaPorId(idoferta); 
@@ -91,13 +98,18 @@ export const buscarOfertas = async (criterios) => {
     if (criterios.rubro) {
       whereClause.rubro = { [Op.like]: `%${criterios.rubro}%` };
     }
-    
+    if (criterios.tipo_contrato) {
+        whereClause.tipo_contrato = { [Op.like]: `%${criterios.tipo_contrato}%` };
+    }
 
     const ofertas = await Oferta.findAll({
       where: whereClause,
       order: [['idoferta', 'DESC']],
+      include: [{
+        model: Empresa,
+        attributes: ['nombre', 'logo']
+      }]
     });
-
     return ofertas;
   } catch (err) {
     throw err;

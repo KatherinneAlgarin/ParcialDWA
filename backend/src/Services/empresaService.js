@@ -6,18 +6,61 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
+import { fn, col } from 'sequelize';
+import Resena from '../Models/Resena.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 export const obtenerEmpresaPorId = async (idempresa) => {
     try {
-        const empresa = await Empresa.findByPk(idempresa);
+        const empresa = await Empresa.findByPk(idempresa, {
+        attributes: {
+            include: [
+            [fn('AVG', col('Resenas.calificacion')), 'valoracionPromedio'],
+            [fn('COUNT', col('Resenas.idcalificacion')), 'totalResenas']
+            ]
+        },
+        include: [{
+            model: Resena,
+            attributes: [] 
+        }],
+        group: ['Empresa.idempresa']
+        });
+        
         if (!empresa) {
-            const error = new Error("Empresa no encontrada");
-            error.statusCode = 404;
-            throw error;
+        const error = new Error("Empresa no encontrada");
+        error.statusCode = 404;
+        throw error;
         }
+        
         return empresa;
+    } catch (err) {
+        throw err;
+    }
+};
+export const obtenerEmpresasConValoracion = async (nombre = '') => {
+    try {
+        const whereClause = {};
+        if (nombre) {
+            whereClause.nombre = { [Op.like]: `%${nombre}%` };
+        }
+
+        const empresas = await Empresa.findAll({
+            where: whereClause,
+            attributes: {
+                include: [
+                    [fn('AVG', col('Resenas.calificacion')), 'valoracionPromedio'],
+                    [fn('COUNT', col('Resenas.idcalificacion')), 'totalResenas']
+                ]
+            },
+            include: [{
+                model: Resena,
+                as: 'Resenas', 
+                attributes: [] 
+            }],
+            group: ['Empresa.idempresa'],
+            subQuery: false // 
+        });
+        return empresas;
     } catch (err) {
         throw err;
     }
@@ -144,14 +187,6 @@ export const buscarEmpresasPorNombre = async (nombre) => {
     }
 };
 
-export const obtenerTodasLasEmpresas = async () => {
-    try {
-        const empresas = await Empresa.findAll();
-        return empresas;
-    } catch (err) {
-        throw err;
-    }
-};
 export const existeEmpresa = async (idempresa) => {
     try {
         const empresa = await Empresa.findByPk(idempresa);

@@ -77,3 +77,11 @@ export const getOfertaPorId = async (req, res, next) => {
     next(err);
   }
 };
+export const getBuscarOfertas = async (req, res, next) => {
+  try {
+    const ofertas = await ofertaService.buscarOfertas(req.query);
+    res.status(200).json(ofertas);
+  } catch (err) {
+    next(err);
+  }
+};

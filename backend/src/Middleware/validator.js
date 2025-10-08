@@ -154,3 +154,77 @@ export const updateOfertaValidators = [
 export const idOfertaValidator = [
   param('id').isInt({ min: 1 }).withMessage('ID de oferta inválido'),
 ];
+export const createResenaValidators = [
+  param('idempresa')
+    .isInt({ min: 1 })
+    .withMessage('El ID de la empresa es inválido.'),
+  body('calificacion')
+    .isInt({ min: 1, max: 5 })
+    .withMessage('La calificación debe ser un número entero entre 1 y 5.'),
+  body('comentario')
+    .trim()
+    .notEmpty().withMessage('El comentario no puede estar vacío.')
+    .isLength({ min: 10 }).withMessage('El comentario debe tener al menos 10 caracteres.')
+];
+export const updateResenaValidators = [
+  param('id') 
+    .isInt({ min: 1 })
+    .withMessage('El ID de la reseña es inválido.'),
+  body('calificacion')
+    .optional()
+    .isInt({ min: 1, max: 5 })
+    .withMessage('La calificación debe ser un número entero entre 1 y 5.'),
+  body('comentario')
+    .optional()
+    .trim()
+    .notEmpty().withMessage('El comentario no puede estar vacío.')
+];
+export const createForoValidators = [
+  body('titulo')
+    .trim()
+    .notEmpty().withMessage('El título del tema es obligatorio.')
+    .isLength({ min: 5 }).withMessage('El título debe tener al menos 5 caracteres.'),
+  body('descripcion')
+    .optional()
+    .trim()
+];
+export const createRespuestaForoValidators = [
+  body('idforo')
+    .isInt({ min: 1 })
+    .withMessage('ID de foro inválido.'),
+  body('contenido')
+    .trim()
+    .notEmpty()
+    .withMessage('El contenido de la respuesta no puede estar vacío.'),
+  body('parent_id')
+    .optional({ nullable: true }) 
+    .isInt({ min: 1 })
+    .withMessage('ID de respuesta padre inválido.')
+];
+export const updateForoValidators = [
+  param('id')
+    .isInt({ min: 1 })
+    .withMessage('ID de foro inválido.'),
+  body('titulo')
+    .optional()
+    .trim()
+    .notEmpty().withMessage('El título no puede quedar vacío.')
+    .isLength({ min: 5 }).withMessage('El título debe tener al menos 5 caracteres.'),
+  body('descripcion')
+    .optional()
+    .trim()
+];
+export const createRecursoValidators = [
+  body('titulo').trim().notEmpty().withMessage('El título es obligatorio.'),
+  body('link').trim().notEmpty().withMessage('El link es obligatorio.').isURL().withMessage('El link debe ser una URL válida.'),
+  body('descripcion').optional().trim(),
+  body('tipoRecurso').optional().trim(),
+];
+
+export const updateRecursoValidators = [
+  param('id').isInt({ min: 1 }).withMessage('El ID del recurso es inválido.'),
+  body('titulo').optional().trim().notEmpty().withMessage('El título no puede estar vacío.'),
+  body('link').optional().trim().isURL().withMessage('El link debe ser una URL válida.'),
+  body('descripcion').optional().trim(),
+  body('tipoRecurso').optional().trim(),
+];
