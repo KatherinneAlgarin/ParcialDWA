@@ -13,6 +13,7 @@ import resenaRouter from "../Routes/resenaRoutes.js";
 import aplicacionRoutes from "../Routes/aplicacionRoutes.js";
 import foroRoutes from "../Routes/foroRoutes.js";
 import company from "../Routes/empresaRoute.js";
+import recursoRoutes from "../Routes/recursoRoutes.js";
 import respuestaForoRoutes from "../Routes/respuestaForoRoutes.js";
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use('/api/aplicaciones', aplicacionRoutes);
 app.use('/api/resenas', resenaRouter);
 app.use('/api/foros', foroRoutes);
 app.use('/api/empresa', company);
+app.use('/api/recursos', recursoRoutes);
 app.use('/api/respuestas-foro', respuestaForoRoutes);
 app.use(errorHandler);
 

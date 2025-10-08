@@ -47,3 +47,14 @@ export const deleteRecurso = async (req, res, next) => {
         next(err);
     }
 };
+export const getMisRecursos = async (req, res, next) => {
+    try {
+        const idempresa = req.usuario.idempresa;
+        if (!idempresa) return res.json([]); 
+        
+        const recursos = await recursoService.obtenerRecursosPorEmpresa(idempresa);
+        res.status(200).json(recursos);
+    } catch (err) {
+        next(err);
+    }
+};

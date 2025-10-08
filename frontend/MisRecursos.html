@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Recurso - WorkLink</title>
+    <title>Mis Recursos - WorkLink</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/misRecursos.css">
 </head>
 <body>
     <script>
@@ -13,6 +14,7 @@
             protegerPagina('Empleador');
         });
     </script>
+    
     <div class="container-fluid">
         <!-- Navbar (placeholder, ajústalo como en otros archivos) -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -20,7 +22,13 @@
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav gap-4">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="empresa.html">Home</a>
+                            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="vistaEmpleos.html">Buscar Empleos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empleadores.html">Empleadores</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="candidatos.html">Candidatos</a>
@@ -30,6 +38,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="foro.html">Foro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="valoracion.html">Empresas</a>
                         </li>
                     </ul>
                 </div>
@@ -51,12 +62,9 @@
         <!-- Layout principal: Row con Sidebar y Contenido -->
         <div class="row min-vh-100">
             <!-- Sidebar (Panel de Empleadores) - Columna izquierda fija -->
-            <div class="col-md-2 bg-white border-end p-4 d-flex flex-column">
+            <div class="col-md-2 bg-white border-end p-4 d-flex flex-column min-vh-100">
                 <h6 class="fw-bold text-secondary">PANEL DE EMPLEADORES</h6>
                 <ul class="nav flex-column mt-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="empresa.html"><i class="bi bi-grid me-2"></i>General</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="publicarTrabajo.html"><i class="bi bi-plus-square me-2"></i>Publicar trabajo</a>
                     </li>
@@ -64,7 +72,10 @@
                         <a class="nav-link" href="trabajosPVistaEmpresas.html"><i class="bi bi-briefcase me-2"></i>Mis trabajos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="agregarRecurso.html"><i class="bi bi-grid me-2"></i>Agregar un recurso</a>
+                        <a class="nav-link active" href="MisRecursos.html"><i class="bi bi-grid me-2"></i>Mis recursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="agregarRecurso.html"><i class="bi bi-grid me-2"></i>Agregar un recurso</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="ajustesEmpresa.html"><i class="bi bi-gear me-2"></i>Ajustes</a>
@@ -79,44 +90,50 @@
 
             <!-- Contenido Principal - Columna derecha -->
             <div class="col-md-10 p-4">
-                <h4 class="fw-bold mb-4">AGREGAR RECURSO</h4>
-                <p class="text-muted mb-4">Comparte un artículo, video o guía externa para ayudar a los candidatos.</p>
-
-                <form id="form-recurso">
-                    <div class="mb-3">
-                        <label for="titulo" class="form-label fw-bold">Título del Recurso</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Ej: 10 consejos para tu CV" required>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h4 class="fw-bold mb-1">MIS RECURSOS</h4>
+                        <p class="text-muted mb-0">Administra los recursos que has publicado</p>
                     </div>
+                    <a href="agregarRecurso.html" class="btn btn-primary">
+                        <i class="bi bi-plus-circle me-2"></i>Agregar Nuevo Recurso
+                    </a>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label fw-bold">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe brevemente de qué trata el recurso..."></textarea>
-                    </div>
+                <div class="row mb-4">
+                    <!-- Aquí puedes agregar filtros o búsqueda si lo necesitas -->
+                </div>
 
-                    <div class="mb-3">
-                        <label for="tipoRecurso" class="form-label fw-bold">Categoría del Recurso</label>
-                        <select class="form-select" id="tipoRecurso" name="tipoRecurso">
-                            <option value="">Selecciona una categoría (opcional)</option>
-                            <option value="Preparación para entrevistas">Preparación para entrevistas</option>
-                            <option value="CV y cartas de presentación">CV y cartas de presentación</option>
-                            <option value="Desarrollo de habilidades">Desarrollo de habilidades</option>
-                        </select>
-                    </div>
+                <div id="estadisticas-container" class="row mb-4">
+                    <!-- Tu JS llenará esto con cards de stats (ej. total recursos, vistas, etc.) -->
+                </div>
 
-                    <div class="mb-4">
-                        <label for="link" class="form-label fw-bold">Enlace (URL) del Recurso</label>
-                        <input type="url" class="form-control" id="link" name="link" placeholder="https://ejemplo.com/articulo" required>
+                <div id="lista-recursos-container" class="row g-4">
+                    <div class="text-center p-5">
+                        <div class="spinner-border text-primary"></div>
+                        <p class="mt-2 text-muted">Cargando tus recursos...</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <div class="d-flex gap-2">
-                        <button type="submit" id="btn-publicar" class="btn btn-primary">
-                            <i class="bi bi-check-circle me-2"></i>Publicar Recurso
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='recursos.html'">
-                            <i class="bi bi-x-circle me-2"></i>Cancelar
-                        </button>
-                    </div>
-                </form>
+    <!-- Modal de Confirmación para Eliminar -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este recurso?</p>
+                    <p class="text-danger small"><i class="bi bi-exclamation-triangle-fill"></i> Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -128,6 +145,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/auth.js"></script>
-    <script src="js/agregarRecursos.js"></script>
+    <script src="js/misRecursos.js"></script>
 </body>
 </html>

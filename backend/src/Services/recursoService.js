@@ -66,3 +66,13 @@ export const eliminarRecurso = async (idrecurso, idempresaUsuario) => {
         throw err;
     }
 };
+export const obtenerRecursosPorEmpresa = async (idempresa) => {
+    try {
+        return await Recurso.findAll({
+            where: { idempresa },
+            order: [['idrecurso', 'DESC']]
+        });
+    } catch (err) {
+        throw err;
+    }
+};
