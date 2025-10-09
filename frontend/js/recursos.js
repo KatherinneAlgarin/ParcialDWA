@@ -2,7 +2,7 @@ let debounceTimer;
 
 document.addEventListener('DOMContentLoaded', () => {
     gestionarHeader();
-    cargarRecursos(); // Carga inicial de todos los recursos
+    cargarRecursos(); 
 
     const formBusqueda = document.getElementById('form-busqueda-recursos');
     formBusqueda.addEventListener('submit', (e) => {
@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
         cargarRecursos(document.getElementById('input-busqueda').value);
     });
 
-    // Búsqueda en tiempo real con debounce
+    
     const inputBusqueda = document.getElementById('input-busqueda');
     inputBusqueda.addEventListener('keyup', () => {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             cargarRecursos(inputBusqueda.value);
-        }, 500); // Espera 500ms antes de buscar
+        }, 500); 
     });
 });
 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * @param {string} [busqueda=''] - Término para filtrar por título.
  */
 async function cargarRecursos(busqueda = '') {
-    // Mostramos spinners en todas las secciones
+    
     const contenedores = ['entrevistas-container', 'cv-container', 'habilidades-container'];
     contenedores.forEach(id => {
         const el = document.getElementById(id);
@@ -42,8 +42,7 @@ async function cargarRecursos(busqueda = '') {
         if (!response.ok) throw new Error('No se pudieron cargar los recursos.');
 
         const recursos = await response.json();
-        
-        // Clasificamos los recursos por su tipo
+      
         const recursosAgrupados = {
             'Preparación para entrevistas': [],
             'CV y cartas de presentación': [],
@@ -59,7 +58,6 @@ async function cargarRecursos(busqueda = '') {
             }
         });
 
-        // Renderizamos cada categoría
         renderizarCategoria('entrevistas-container', recursosAgrupados['Preparación para entrevistas']);
         renderizarCategoria('cv-container', recursosAgrupados['CV y cartas de presentación']);
         renderizarCategoria('habilidades-container', recursosAgrupados['Desarrollo de habilidades']);
@@ -75,7 +73,7 @@ async function cargarRecursos(busqueda = '') {
 
 /**
  * Renderiza las tarjetas de recursos en un contenedor específico.
- * @param {string} containerId - El ID del div contenedor.
+ * @param {string} containerId - id del div contenedor.
  * @param {Array} recursos - El arreglo de recursos para esa categoría.
  */
 function renderizarCategoria(containerId, recursos) {

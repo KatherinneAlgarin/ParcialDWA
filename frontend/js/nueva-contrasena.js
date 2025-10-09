@@ -1,26 +1,21 @@
-// js/nueva-contrasena.js
 
-// Configuración de la API
 const API_URL = 'http://localhost:3000/api/auth';
 
-// Verificar que venimos de la página de recuperación
 const correoRecuperacion = sessionStorage.getItem('recovery_email');
 const otpRecuperacion = sessionStorage.getItem('recovery_otp');
 
 if (!correoRecuperacion || !otpRecuperacion) {
-  // Si no hay datos, redirigir a recuperar contraseña
+  
   alert('Sesión inválida. Por favor, solicita un nuevo código.');
   window.location.href = 'recuperar-contrasena.html';
 }
 
-// Elementos del DOM
 const formNuevaContrasena = document.getElementById('formNuevaContrasena');
 const nuevaPasswordInput = document.getElementById('nuevaPassword');
 const confirmarPasswordInput = document.getElementById('confirmarPassword');
 const btnRestablecerPassword = document.getElementById('btnRestablecerPassword');
 const alertaContainer = document.getElementById('alertaContainer');
 
-// Función para mostrar alertas
 function mostrarAlerta(mensaje, tipo = 'danger') {
   alertaContainer.innerHTML = `
     <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
@@ -34,7 +29,6 @@ function mostrarAlerta(mensaje, tipo = 'danger') {
   }, 5000);
 }
 
-// Toggle para mostrar/ocultar contraseñas
 document.querySelectorAll('.password-toggle').forEach(button => {
   button.addEventListener('click', () => {
     const targetId = button.getAttribute('data-target');

@@ -1,14 +1,13 @@
 let calificacionSeleccionada = 0;
 let modoEdicion = { activado: false, idresena: null };
-let modalConfigurado = false; // ✅ Bandera para configurar modal una sola vez
+let modalConfigurado = false; 
 
-// --- INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
     gestionarHeader();
     cargarPaginaCompleta();
 });
 
-// --- LÓGICA PRINCIPAL DE CARGA DE DATOS ---
+
 async function cargarPaginaCompleta() {
     const container = document.getElementById('detalle-empresa-container');
     const params = new URLSearchParams(window.location.search);
@@ -144,9 +143,8 @@ function renderizarResenas(resenas) {
     configurarBotonesDeAccion();
 }
 
-// --- LÓGICA DE VALORACIÓN (MODAL Y ACCIONES) ---
 function configurarModalValoracion(empresa) {
-    // ✅ Si ya está configurado, solo actualizamos el botón
+    
     if (modalConfigurado) {
         const btnAbrirModal = document.getElementById('btn-abrir-modal-valorar');
         if (btnAbrirModal) {
@@ -161,16 +159,15 @@ function configurarModalValoracion(empresa) {
     const modalEl = document.getElementById('modal-valorar');
     const modalValorar = new bootstrap.Modal(modalEl);
 
-    // ✅ Configurar botón de abrir modal
+  
     btnAbrirModal.addEventListener('click', () => abrirModalValorar(empresa));
 
-    // ✅ Configurar el formulario
     document.getElementById('form-valoracion').addEventListener('submit', (e) => {
         e.preventDefault();
         enviarValoracion(empresa.idempresa);
     });
 
-    // ✅ Configurar las estrellas
+    
     document.querySelectorAll('#rating-input i').forEach(estrella => {
         estrella.addEventListener('mouseover', () => pintarEstrellas(estrella.dataset.value));
         estrella.addEventListener('mouseout', () => pintarEstrellas(calificacionSeleccionada));
@@ -179,10 +176,10 @@ function configurarModalValoracion(empresa) {
         });
     });
 
-    modalConfigurado = true; // ✅ Marcar como configurado
+    modalConfigurado = true; 
 }
 
-// ✅ Nueva función para abrir el modal
+
 function abrirModalValorar(empresa) {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
     const token = localStorage.getItem('token');

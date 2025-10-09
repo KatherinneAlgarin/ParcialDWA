@@ -77,7 +77,6 @@ async function precargarDatosEmpresa() {
             return null;
         }
 
-        // Si la respuesta no es OK (ej. 401, 403, 500), lanzamos un error.
         if (!res.ok) {
             const errorData = await res.json().catch(() => ({ message: 'Error desconocido obteniendo la empresa' }));
             throw new Error(errorData.message);
@@ -90,18 +89,16 @@ async function precargarDatosEmpresa() {
     } catch (err) {
         console.error('Error crítico en precargarDatosEmpresa:', err);
 
-        // Si el error parece ser de autenticación, cerramos sesión por seguridad.
-        // Intentamos detectarlo revisando propiedades comunes.
         const status = err.statusCode || err.status || (err.response && err.response.status);
 
         if (status === 401 || status === 403) {
             alert('Tu sesión no es válida. Se cerrará la sesión por seguridad.');
             cerrarSesion();
         } else {
-            // Para otros errores no forzamos logout: mostramos aviso y permitimos reintentos.
+            
             console.warn('No se pudo cargar la empresa. Intenta de nuevo o revisa el servidor.');
             alert('Hubo un problema al cargar los datos de tu empresa. Intenta recargar la página o contacta al administrador.');
-            // Opcional: limpiarFormulario(); // si quieres dejar el formulario vacío
+      
         }
 
         return null;
@@ -153,13 +150,10 @@ async function guardarCambios(e) {
     btnGuardar.textContent = 'Guardando...';
 
     try {
-        // --- ¡LA CORRECCIÓN ESTÁ AQUÍ! ---
-        // 1. Creamos un FormData vacío.
         const formData = new FormData();
 
-        // 2. Añadimos los campos de texto simples manualmente.
         const nombreInput = document.querySelector('input[name="nombre"]');
-        if (!nombreInput.disabled) { // Solo añadimos/validamos el nombre si está habilitado (modo creación)
+        if (!nombreInput.disabled) { 
             const nombre = nombreInput.value.trim();
             if (!nombre) throw new Error('El nombre de la empresa es obligatorio.');
             formData.append('nombre', nombre);
@@ -168,7 +162,6 @@ async function guardarCambios(e) {
         formData.append('descripcion', document.querySelector('textarea[name="descripcion"]').value.trim());
         formData.append('direccion', document.querySelector('input[name="direccion"]').value.trim());
 
-        // 3. Creamos el objeto para las redes sociales y lo añadimos como JSON.
         const redes = {
             facebook: document.querySelector('input[name="facebook"]').value.trim(),
             twitter: document.querySelector('input[name="twitter"]').value.trim(),
@@ -178,14 +171,11 @@ async function guardarCambios(e) {
         if (Object.values(redes).some(url => url)) {
             formData.append('redesSociales', JSON.stringify(redes));
         }
-
-        // 4. Añadimos el archivo del logo si el usuario seleccionó uno nuevo.
         const inputLogo = document.getElementById('logoInput');
         if (inputLogo && inputLogo.files[0]) {
             formData.append('logo', inputLogo.files[0]);
         }
         
-        // --- El resto de tu lógica de envío y manejo de respuesta ya es correcta ---
         const empresaExistente = JSON.parse(localStorage.getItem('empresa'));
         const metodo = (empresaExistente && empresaExistente.idempresa) ? 'PUT' : 'POST';
         const url = (metodo === 'PUT')

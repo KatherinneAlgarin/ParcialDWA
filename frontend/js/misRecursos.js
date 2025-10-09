@@ -50,13 +50,13 @@ function renderizarRecursos(recursos) {
                 <i class="bi bi-folder-x fs-1 text-muted"></i>
                 <h5 class="mt-3">No has publicado ningún recurso</h5>
                 <p class="text-muted">Comparte artículos o guías para ayudar a la comunidad.</p>
-                <a href="agregarRecursos.html" class="btn btn-primary mt-2">Agregar un Recurso</a>
+                <a href="agregarRecurso.html" class="btn btn-primary mt-2">Agregar un Recurso</a>
             </div>`;
         return;
     }
 
     recursos.forEach(recurso => {
-        // No hay preview, mostramos ícono y texto
+        
         const previewHTML = `
             <div class="card-img-top bg-dark text-white d-flex align-items-center justify-content-center" style="height: 180px;">
                 <div class="text-center p-3">
@@ -88,7 +88,7 @@ function renderizarRecursos(recursos) {
 function renderizarEstadisticas(recursos) {
     const container = document.getElementById('estadisticas-container');
     const total = recursos.length;
-    // Contamos cuántos recursos hay de cada tipo
+    
     const conteoPorTipo = recursos.reduce((acc, recurso) => {
         const tipo = recurso.tipoRecurso || 'otros';
         acc[tipo] = (acc[tipo] || 0) + 1;

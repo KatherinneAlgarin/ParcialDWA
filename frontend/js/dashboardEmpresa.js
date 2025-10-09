@@ -38,14 +38,14 @@ async function cargarDashboard() {
         } else if (empresaRes.ok) {
             empresa = await empresaRes.json();
         } else {
-            // Si falla aquí, probablemente el token expiró, lo que se manejará en el catch.
+            
             console.error('Error al cargar la información de la empresa.');
         }
 
-        // La petición de ofertas puede fallar si el token expiró, pero no debería fallar con 404.
+        
         const ofertas = ofertasRes.ok ? await ofertasRes.json() : [];
 
-        // Actualizamos la interfaz
+      
         renderizarBienvenida(usuario, empresa);
         renderizarEstadisticas(ofertas);
         renderizarOfertasRecientes(ofertas);

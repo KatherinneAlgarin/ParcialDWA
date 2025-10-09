@@ -49,7 +49,7 @@ function renderizarEmpresas(empresas) {
             ? `http://localhost:3000/uploads/fotoPerfil/${empresa.logo}` 
             : './imagenes/logo_empresa_default.png';
         
-        // El promedio viene en un campo especial 'dataValues' por la agregación de Sequelize
+        
         const valoracion = empresa.valoracionPromedio;
         const totalResenas = empresa.totalResenas || 0;
 
@@ -78,11 +78,6 @@ function renderizarEmpresas(empresas) {
     });
 }
 
-/**
- * Genera el HTML para las estrellas de valoración.
- * @param {number | null} valoracion - La calificación promedio (de 0 a 5).
- * @returns {string} El HTML de las 5 estrellas.
- */
 function renderizarEstrellas(valoracion) {
     let estrellasHTML = '';
     const rating = parseFloat(valoracion) || 0;
@@ -108,15 +103,13 @@ function gestionarHeader() {
     const authUsuario = document.getElementById('auth-usuario');
 
     if (token && usuario) {
-        // --- Usuario Logueado ---
-        authInvitado.style.display = 'none'; // Ocultar botones de Iniciar Sesión/Registro
-        authUsuario.style.display = 'flex';   // Mostrar contenedor del usuario
+        
+        authInvitado.style.display = 'none'; 
+        authUsuario.style.display = 'flex';   
 
-        // Actualizar el nombre
         const nombreUsuarioEl = document.getElementById('nombre-usuario');
         nombreUsuarioEl.textContent = `Bienvenido, ${usuario.nombre}`;
 
-        // Actualizar el enlace al panel correcto según el rol
         const panelLink = document.getElementById('panel-link');
         if (usuario.rol === 'Candidato') {
             panelLink.href = 'homeCandidato.html';
@@ -124,15 +117,13 @@ function gestionarHeader() {
             panelLink.href = 'empresa.html';
         }
 
-        // Actualizar foto de perfil (opcional)
         const fotoPerfilEl = document.getElementById('foto-perfil-usuario');
         if (usuario.foto_perfil) {
             fotoPerfilEl.src = `http://localhost:3000/uploads/fotoPerfil/${usuario.foto_perfil}`;
         }
 
     } else {
-        // --- Usuario No Logueado ---
-        authInvitado.style.display = 'flex';   // Mostrar botones
-        authUsuario.style.display = 'none';    // Ocultar contenedor
+        authInvitado.style.display = 'flex';   
+        authUsuario.style.display = 'none';    
     }
 }

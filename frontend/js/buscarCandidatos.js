@@ -1,9 +1,9 @@
-let todasLasAplicaciones = []; // Guardaremos todas las aplicaciones aquí
-let ofertasDelEmpleador = [];   // Guardaremos las ofertas para el filtro
+let todasLasAplicaciones = []; 
+let ofertasDelEmpleador = [];   
 
 document.addEventListener('DOMContentLoaded', () => {
     protegerPagina('Empleador');
-    gestionarHeader(); // Reutilizamos la función de auth.js
+    gestionarHeader(); 
     
     inicializarPagina();
 
@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 async function inicializarPagina() {
     const token = localStorage.getItem('token');
     try {
-        // Obtenemos las ofertas y las aplicaciones al mismo tiempo
+    
         const [ofertasRes, aplicacionesRes] = await Promise.all([
             fetch('http://localhost:3000/api/ofertas/mi-empresa/ofertas', { headers: { 'Authorization': `Bearer ${token}` } }),
-            // Necesitamos un nuevo endpoint para traer TODAS las aplicaciones de una empresa
+        
             fetch('http://localhost:3000/api/aplicaciones/empresa/todas', { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
@@ -75,7 +75,7 @@ function renderizarCandidatos(aplicaciones) {
     }
 
     aplicaciones.forEach(app => {
-        // Reutilizamos la misma lógica de renderizado y acciones de verCandidatos.js
+    
         const candidato = app.Usuario;
         const fotoUrl = candidato.foto_perfil ? `http://localhost:3000/uploads/fotoPerfil/${candidato.foto_perfil}` : './imagenes/imagen.png';
 
@@ -121,7 +121,6 @@ function verPerfil(idaplicacion) {
         ? `http://localhost:3000/uploads/fotoPerfil/${candidato.foto_perfil}` 
         : './imagenes/imagen.png';
 
-    // Procesar redes sociales de forma segura
     const redesSocialesHTML = (() => {
         if (!candidato.redes_sociales) return '';
         try {
@@ -130,12 +129,10 @@ function verPerfil(idaplicacion) {
             if (redes.facebook) html += `<a href="${redes.facebook}" target="_blank" class="btn btn-outline-primary btn-sm"><i class="bi bi-facebook"></i></a>`;
             if (redes.twitter) html += `<a href="${redes.twitter}" target="_blank" class="btn btn-outline-info btn-sm"><i class="bi bi-twitter-x"></i></a>`;
             if (redes.instagram) html += `<a href="${redes.instagram}" target="_blank" class="btn btn-outline-danger btn-sm"><i class="bi bi-instagram"></i></a>`;
-            // Añade más redes si las tienes
+        
             return html ? `<h6 class="fw-bold mt-4 mb-2">Redes Sociales</h6><div class="d-flex gap-2">${html}</div>` : '';
         } catch { return ''; }
     })();
-
-    // Construimos el HTML del modal dinámicamente
     modalBody.innerHTML = `
         <div class="card border-0 p-3">
             <div class="d-flex align-items-center mb-4">
@@ -199,7 +196,7 @@ async function actualizarEstado(idaplicacion, nuevoEstado) {
             throw new Error(errorData.message || 'No se pudo actualizar el estado.');
         }
 
-        // Para no recargar toda la página, actualizamos el dato en nuestro arreglo local
+    
         const aplicacionIndex = todasLasAplicaciones.findIndex(app => app.idaplicacion === idaplicacion);
         if (aplicacionIndex > -1) {
             todasLasAplicaciones[aplicacionIndex].estado = nuevoEstado;
@@ -208,7 +205,7 @@ async function actualizarEstado(idaplicacion, nuevoEstado) {
     } catch (error) {
         console.error('Error al actualizar estado:', error);
         alert(`Error: ${error.message}`);
-        // Si falla, recargamos la lista para revertir el cambio visual en el select
+
         renderizarListaCandidatos(todasLasAplicaciones);
     }
 }

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Cuando la página cargue, pedimos las ofertas al backend
   cargarOfertas();
 });
 async function cargarOfertas() {

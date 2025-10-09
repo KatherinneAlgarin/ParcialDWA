@@ -56,7 +56,6 @@ export const getAplicacionesPorOferta = async (req, res, next) => {
         const { idoferta } = req.params;
         const idempresaUsuario = req.usuario.idempresa;
 
-        // Verificamos que el empleador tenga una empresa
         if (!idempresaUsuario) {
             const error = new Error('No tienes una empresa asignada.');
             error.statusCode = 403;

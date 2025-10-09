@@ -49,7 +49,7 @@ const connectWithRetry = async (retries = 5, delay = 5000) => {
       console.log('✅ Conexión a la base de datos establecida');
       const models = initModels();
       
-      await sequelize.sync(); 
+      await sequelize.sync({alter:false}); 
       console.log('✅ Base de datos sincronizada');
       
       app.listen(PORT, () => {

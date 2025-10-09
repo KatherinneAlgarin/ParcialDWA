@@ -1,6 +1,6 @@
-const API_URL = 'http://localhost:3000/api/auth'; // Ajusta el puerto según tu backend
+const API_URL = 'http://localhost:3000/api/auth'; 
 
-// Elementos del DOM
+
 const alertContainer = document.getElementById('alertContainer');
 const emailInput = document.getElementById('email');
 const btnEnviarCodigo = document.getElementById('btnEnviarCodigo');
@@ -10,12 +10,12 @@ const btnValidarOtp = document.getElementById('btnValidarOtp');
 
 let correoGuardado = '';
 
-// Función para mostrar alertas
+
 function mostrarAlerta(mensaje, tipo = 'danger', icono = '') {
-  // Limpiar alertas anteriores
+  
   alertContainer.innerHTML = '';
   
-  // Iconos según el tipo
+  
   const iconos = {
     success: '<i class="bi bi-check-circle-fill me-2"></i>',
     danger: '<i class="bi bi-exclamation-triangle-fill me-2"></i>',
@@ -35,7 +35,7 @@ function mostrarAlerta(mensaje, tipo = 'danger', icono = '') {
   
   alertContainer.appendChild(alertDiv);
   
-  // Auto-cerrar después de 8 segundos (excepto errores)
+  
   if (tipo === 'success' || tipo === 'info') {
     setTimeout(() => {
       alertDiv.remove();
@@ -43,17 +43,17 @@ function mostrarAlerta(mensaje, tipo = 'danger', icono = '') {
   }
 }
 
-// Función para limpiar alertas
+
 function limpiarAlertas() {
   alertContainer.innerHTML = '';
 }
 
-// Habilitar botón "Enviar código" cuando el email sea válido
+
 emailInput.addEventListener('input', () => {
   const esValido = emailInput.checkValidity();
   btnEnviarCodigo.disabled = !esValido;
   
-  // Limpiar clases de validación
+
   emailInput.classList.remove('is-invalid', 'is-valid');
   
   if (emailInput.value.length > 0) {
@@ -65,7 +65,7 @@ emailInput.addEventListener('input', () => {
   }
 });
 
-// Enviar código OTP
+
 btnEnviarCodigo.addEventListener('click', async () => {
   if (!emailInput.checkValidity()) {
     emailInput.classList.add('is-invalid');
@@ -76,10 +76,10 @@ btnEnviarCodigo.addEventListener('click', async () => {
   const correo = emailInput.value.trim();
   correoGuardado = correo;
 
-  // Limpiar alertas anteriores
+ 
   limpiarAlertas();
 
-  // Deshabilitar botón y mostrar loading
+  
   btnEnviarCodigo.disabled = true;
   btnEnviarCodigo.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Enviando código...';
 
@@ -95,22 +95,22 @@ btnEnviarCodigo.addEventListener('click', async () => {
     const data = await response.json();
 
     if (response.ok) {
-      // Éxito - mostrar sección OTP
+      
       mostrarAlerta(
         `Código enviado exitosamente a <strong>${correo}</strong>. Revisa tu bandeja de entrada y spam.`, 
         'success'
       );
       
-      // Mostrar sección OTP
+      
       otpSection.classList.remove('d-none');
       
-      // Bloquear email y cambiar texto del botón
+    
       emailInput.disabled = true;
       btnEnviarCodigo.textContent = 'Código enviado';
       btnEnviarCodigo.classList.remove('btn-primary');
       btnEnviarCodigo.classList.add('btn-secondary');
       
-      // Focus en input OTP
+     
       otpInput.focus();
 
     } else {
@@ -118,7 +118,7 @@ btnEnviarCodigo.addEventListener('click', async () => {
       const mensajeError = data.error || data.message || 'Error al enviar el código';
       mostrarAlerta(mensajeError, 'danger');
       
-      // Restaurar botón
+      
       btnEnviarCodigo.disabled = false;
       btnEnviarCodigo.innerHTML = 'Enviar código';
     }
@@ -136,15 +136,15 @@ btnEnviarCodigo.addEventListener('click', async () => {
   }
 });
 
-// Habilitar botón validar cuando se escriba en OTP
+
 otpInput.addEventListener('input', () => {
-  // Solo permitir números
+  
   otpInput.value = otpInput.value.replace(/[^0-9]/g, '');
   
-  // Habilitar botón si tiene 6 dígitos
+  
   btnValidarOtp.disabled = otpInput.value.length !== 6;
   
-  // Validación visual
+  
   otpInput.classList.remove('is-invalid', 'is-valid');
   if (otpInput.value.length === 6) {
     otpInput.classList.add('is-valid');
@@ -153,7 +153,7 @@ otpInput.addEventListener('input', () => {
   }
 });
 
-// Validar OTP
+
 btnValidarOtp.addEventListener('click', async () => {
   const otp = otpInput.value.trim();
 
@@ -163,10 +163,10 @@ btnValidarOtp.addEventListener('click', async () => {
     return;
   }
 
-  // Limpiar alertas anteriores
+
   limpiarAlertas();
 
-  // Deshabilitar botón y mostrar loading
+ 
   btnValidarOtp.disabled = true;
   btnValidarOtp.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verificando código...';
 

@@ -15,7 +15,7 @@ async function cargarAplicaciones() {
         if (!response.ok) throw new Error('Error al cargar tus aplicaciones.');
         
         const aplicaciones = await response.json();
-        container.innerHTML = ''; // Limpiar el spinner
+        container.innerHTML = ''; 
 
         if (aplicaciones.length === 0) {
             container.innerHTML = `
@@ -54,7 +54,7 @@ async function cargarAplicaciones() {
             container.innerHTML += appHTML;
         });
 
-        // Añadir listeners a los botones de eliminar
+        
         document.querySelectorAll('.btn-eliminar').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const id = e.currentTarget.dataset.idaplicacion;
@@ -83,7 +83,7 @@ async function eliminarAplicacion(idaplicacion) {
         }
         
         alert('Has retirado tu aplicación correctamente.');
-        cargarAplicaciones(); // Recargar la lista
+        cargarAplicaciones();
 
     } catch (error) {
         alert(`Error: ${error.message}`);

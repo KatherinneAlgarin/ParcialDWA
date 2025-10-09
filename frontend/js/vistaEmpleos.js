@@ -46,11 +46,11 @@ async function buscarOfertas(event) {
   contenedor.innerHTML = `<div class="text-center p-5"><div class="spinner-border text-primary" role="status"></div></div>`;
   
   const titulo = document.getElementById('filtro-titulo').value;
-  // ... (recolectar otros filtros) ...
+ 
   
   const params = new URLSearchParams();
   if (titulo) params.append('titulo', titulo);
-  // ... (append otros filtros) ...
+  
   
   const queryString = params.toString();
   const url = `http://localhost:3000/api/ofertas${queryString ? `/buscar?${queryString}` : ''}`;
@@ -58,11 +58,8 @@ async function buscarOfertas(event) {
   try {
     const response = await fetch(url);
 
-    // --- MANEJO DE ERRORES MEJORADO ---
     if (!response.ok) {
-      // Intentamos leer el JSON del error que envía el backend
       const errorData = await response.json().catch(() => ({}));
-      // Creamos un mensaje de error detallado si hay errores de validación
       const mensajeError = errorData.errors 
         ? errorData.errors.map(err => err.msg).join('\n') 
         : errorData.message;
@@ -74,7 +71,6 @@ async function buscarOfertas(event) {
 
   } catch (error) {
     console.error('Error al buscar ofertas:', error);
-    // ¡CORRECCIÓN! Mostramos el error en un alert
     alert(`Error: ${error.message}`);
     contenedor.innerHTML = `<p class="text-center text-danger">Ocurrió un error al realizar la búsqueda.</p>`;
   } finally {
@@ -88,7 +84,7 @@ async function buscarOfertas(event) {
  */
 function renderizarOfertas(ofertas) {
   const contenedor = document.getElementById('ofertas-container');
-  contenedor.innerHTML = ''; // Limpiar el contenedor
+  contenedor.innerHTML = '';
 
   if (ofertas.length === 0) {
     contenedor.innerHTML = `
@@ -102,20 +98,15 @@ function renderizarOfertas(ofertas) {
   }
 
   ofertas.forEach(oferta => {
-    // ---- LÓGICA MEJORADA Y MÁS SEGURA ----
     
-    // 1. Obtenemos los datos de la empresa de forma segura
     const nombreEmpresa = oferta.Empresa?.nombre || 'Empresa no disponible';
     const logoUrl = oferta.Empresa?.logo 
-      ? `http://localhost:3000/uploads/fotoPerfil/${oferta.Empresa.logo}?t=${Date.now()}` // Agregamos cache-buster
+      ? `http://localhost:3000/uploads/fotoPerfil/${oferta.Empresa.logo}?t=${Date.now()}` 
       : './imagenes/logo_empresa_default.png';
 
-    // 2. Formateamos el salario para mostrarlo de forma amigable
     const salario = (oferta.salario_minimo && oferta.salario_maximo)
       ? `$${oferta.salario_minimo} - $${oferta.salario_maximo} / ${oferta.tipo_salario}`
       : `Salario a convenir`;
-
-    // 3. Creamos la tarjeta HTML con los datos seguros
     const ofertaCardHTML = `
       <div class="col-lg-4 col-md-6 mb-4">
         <a href="detalleEmpleo.html?id=${oferta.idoferta}" class="text-decoration-none">

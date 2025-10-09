@@ -27,9 +27,6 @@ function gestionarEstadoLogin() {
   }
 }
 
-/**
- * Carga los detalles de la oferta desde el backend y los renderiza en la página.
- */
 async function cargarDetalleOferta() {
   const contenedor = document.getElementById('detalle-oferta-contenedor');
   const params = new URLSearchParams(window.location.search);
@@ -47,7 +44,7 @@ async function cargarDetalleOferta() {
     }
     const oferta = await response.json();
 
-    // Renderizamos la información y configuramos los eventos
+  
     renderizarOferta(oferta);
     configurarEventosAplicacion(oferta);
 
@@ -57,10 +54,6 @@ async function cargarDetalleOferta() {
   }
 }
 
-/**
- * "Pinta" los datos de la oferta y la empresa en el HTML.
- * @param {object} oferta - El objeto de la oferta con la empresa incluida.
- */
 function renderizarOferta(oferta) {
   const contenedor = document.getElementById('detalle-oferta-contenedor');
   const empresa = oferta.Empresa;
@@ -80,7 +73,7 @@ function renderizarOferta(oferta) {
         let html = '';
         if (redes.facebook) html += `<a href="${redes.facebook}" target="_blank" class="text-dark"><i class="bi bi-facebook fs-5"></i></a>`;
         if (redes.twitter) html += `<a href="${redes.twitter}" target="_blank" class="text-dark"><i class="bi bi-twitter fs-5"></i></a>`;
-        // ... otras redes
+        
         return html;
     } catch { return ''; }
   })();
@@ -126,23 +119,18 @@ function renderizarOferta(oferta) {
   contenedor.innerHTML = detalleHTML;
 }
 
-/**
- * Configura todos los eventos relacionados con el proceso de aplicación.
- * @param {object} oferta - El objeto de la oferta de trabajo.
- */
 function configurarEventosAplicacion(oferta) {
   const btnAbrirModal = document.getElementById('btn-abrir-modal');
   const modalElement = document.getElementById('modalAplicar');
   const modalAplicar = new bootstrap.Modal(modalElement);
   const usuario = JSON.parse(localStorage.getItem('usuario'));
 
-  // Evento para abrir el modal
   btnAbrirModal.addEventListener('click', () => {
     if (usuario && usuario.rol === 'Candidato') {
       document.getElementById('modalAplicarLabel').textContent = `Aplicar a: ${oferta.titulo}`;
-      // El input de archivo debe permitir seleccionar un PDF, no mostrar un texto
+      
       const inputCV = document.getElementById('documento');
-      inputCV.value = ''; // Limpiar selección anterior
+      inputCV.value = ''; 
       modalAplicar.show();
     } else if (usuario && usuario.rol === 'Empleador') {
       alert('Los empleadores no pueden aplicar a ofertas de trabajo.');
@@ -152,8 +140,6 @@ function configurarEventosAplicacion(oferta) {
       }
     }
   });
-
-  // Evento para enviar el formulario de aplicación
   const formAplicacion = document.getElementById('form-aplicacion');
   formAplicacion.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -161,10 +147,7 @@ function configurarEventosAplicacion(oferta) {
   });
 }
 
-/**
- * Envía el formulario de aplicación al backend con el CV.
- * @param {number} idOferta - El ID de la oferta a la que se aplica.
- */
+
 async function enviarAplicacion(idOferta) {
   const btnEnviar = document.getElementById('btn-enviar-aplicacion');
   btnEnviar.disabled = true;
@@ -180,9 +163,8 @@ async function enviarAplicacion(idOferta) {
       throw new Error('Por favor, selecciona un archivo PDF para tu CV.');
     }
 
-    // Usamos FormData porque estamos enviando un archivo
     const formData = new FormData();
-    formData.append('cv', cvFile); // El nombre 'cv' debe coincidir con el de la ruta (uploadCV.single('cv'))
+    formData.append('cv', cvFile); 
     formData.append('carta_presentacion', cartaPresentacion);
 
     const response = await fetch(`http://localhost:3000/api/ofertas/${idOferta}/aplicar`, {
@@ -201,11 +183,9 @@ async function enviarAplicacion(idOferta) {
 
     alert('✅ ¡Has aplicado exitosamente a esta oferta!');
     
-    // Cerramos el modal
     const modal = bootstrap.Modal.getInstance(document.getElementById('modalAplicar'));
     modal.hide();
     
-    // Deshabilitamos el botón principal para evitar re-aplicaciones
     const btnAbrirModal = document.getElementById('btn-abrir-modal');
     btnAbrirModal.disabled = true;
     btnAbrirModal.textContent = 'Aplicación Enviada';

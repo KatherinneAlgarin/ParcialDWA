@@ -19,26 +19,26 @@ async function precargarDatosUsuario() {
     const usuario = await res.json();
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
-    // Información básica
+  
     document.getElementById('nombreCompleto').value = usuario.nombre || '';
     document.getElementById('direccion').value = usuario.direccion || '';
     document.getElementById('experiencia').value = usuario.experiencia || '';
     document.getElementById('educacion').value = usuario.educacion || '';
 
-    // Datos personales
+  
     const nacionalidad = document.getElementById('nacionalidad');
     if (nacionalidad && usuario.nacionalidad) {
       setTimeout(() => {
         nacionalidad.value = usuario.nacionalidad;
         mostrarBanderaSeleccionada();
-      }, 300); // esperar a que se carguen opciones de países
+      }, 300); 
     }
 
     document.getElementById('fechaNacimiento').value = usuario.fecha_nacimiento || '';
     document.getElementById('estadoCivil').value = usuario.estado_civil || '';
     document.getElementById('biografia').value = usuario.biografia || '';
 
-    // Redes sociales
+    
     let redesSociales = {};
     if (usuario.redes_sociales) {
       try {
@@ -54,10 +54,10 @@ async function precargarDatosUsuario() {
     document.getElementById('instagram').value = redesSociales.instagram || '';
     document.getElementById('youtube').value = redesSociales.youtube || '';
 
-    // Contacto
+    
     document.getElementById('correo').value = usuario.correo || '';
 
-    // Foto de perfil
+
     mostrarFotoPerfil(usuario.foto_perfil);
 
   } catch (err) {
@@ -65,7 +65,6 @@ async function precargarDatosUsuario() {
   }
 }
 
-// Mostrar foto de perfil
 function mostrarFotoPerfil(rutaFoto) {
   const uploadBox = document.querySelector('.upload-box');
   if (!uploadBox) return;
@@ -150,11 +149,9 @@ async function guardarCambios() {
   try {
     const formData = new FormData();
     
-    // Campos principales
     formData.append('nombre', document.getElementById('nombreCompleto').value.trim());
     formData.append('correo', document.getElementById('correo').value.trim());
     
-    // Campos opcionales del perfil
     const camposOpcionales = {
         'direccion': 'direccion', 'biografia': 'biografia', 
         'experiencia': 'experiencia', 'educacion': 'educacion', 'nacionalidad': 'nacionalidad', 
@@ -167,8 +164,6 @@ async function guardarCambios() {
             formData.append(key, el.value);
         }
     }
-
-    // Redes sociales como un solo objeto JSON
     const redes = {};
     ['facebook', 'twitter', 'instagram', 'youtube'].forEach(id => {
       const val = document.getElementById(id).value.trim();
@@ -178,7 +173,7 @@ async function guardarCambios() {
       formData.append('redes_sociales', JSON.stringify(redes));
     }
 
-    // Foto de perfil
+    
     const inputFoto = document.getElementById('fotoPerfil');
     if (inputFoto && inputFoto.files[0]) {
       formData.append('fotoPerfil', inputFoto.files[0]);
@@ -199,12 +194,12 @@ async function guardarCambios() {
     localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
 
     alert('✅ Cambios guardados correctamente');
-    // Recargamos la página para asegurar que todos los datos se muestren actualizados
+    
     window.location.reload();
 
   } catch (error) {
     console.error('Error al guardar cambios:', error);
-    // ¡CORRECCIÓN CLAVE! Mostrar el error real.
+  
     alert(`Cambios guardados correctamente`); 
   } finally {
     btnGuardar.disabled = false;
@@ -212,7 +207,6 @@ async function guardarCambios() {
   }
 }
 
-// DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   precargarDatosUsuario();
 

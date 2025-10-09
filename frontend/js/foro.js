@@ -113,7 +113,6 @@ function renderizarTemas(temas) {
 }
 
 
-// --- ACCIONES ---
 
 function configurarBotonesDeAccion() {
     document.querySelectorAll('.btn-editar-tema').forEach(btn => {
@@ -126,7 +125,7 @@ function configurarBotonesDeAccion() {
             document.getElementById('nuevo-tema-descripcion').value = descripcion;
             document.getElementById('btn-publicar-tema').textContent = 'Guardar Cambios';
 
-            // Reutilizamos la instancia del modal
+
             const postModal = bootstrap.Modal.getInstance(document.getElementById('postModal'));
             postModal.show();
         });

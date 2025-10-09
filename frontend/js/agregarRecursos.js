@@ -5,9 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/**
- * Recolecta los datos del formulario y los envía al backend para crear un nuevo recurso.
- */
 async function agregarRecurso(e) {
     e.preventDefault();
 
@@ -19,11 +16,10 @@ async function agregarRecurso(e) {
         return;
     }
 
-    // Deshabilitar el botón para evitar envíos duplicados
+
     btnPublicar.disabled = true;
     btnPublicar.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Publicando...';
 
-    // Recolectar datos como un objeto JSON
     const recursoData = {
         titulo: document.getElementById('titulo').value,
         descripcion: document.getElementById('descripcion').value,
@@ -35,7 +31,7 @@ async function agregarRecurso(e) {
         const response = await fetch('http://localhost:3000/api/recursos', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json', // Ahora usamos JSON, no FormData
+                'Content-Type': 'application/json', 
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(recursoData)
@@ -50,7 +46,6 @@ async function agregarRecurso(e) {
 
         alert('✅ ¡Recurso publicado exitosamente!');
         
-        // Redirigir a la página principal de recursos después de un segundo
         setTimeout(() => {
             window.location.href = 'recursos.html';
         }, 1000);
@@ -59,7 +54,6 @@ async function agregarRecurso(e) {
         console.error('Error al publicar recurso:', error);
         alert(`Error: ${error.message}`);
     } finally {
-        // Volver a habilitar el botón
         btnPublicar.disabled = false;
         btnPublicar.innerHTML = '<i class="bi bi-check-circle me-2"></i>Publicar Recurso';
     }

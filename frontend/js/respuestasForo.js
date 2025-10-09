@@ -82,17 +82,15 @@ function crearHtmlRespuesta(respuesta, nivel) {
         ? `http://localhost:3000/uploads/fotoPerfil/${respuesta.Usuario.foto_perfil}`
         : './imagenes/imagen.png';
 
-    // ✅ Regla: cualquier nivel > 0 recibe UNA sangría fija (30px). El nivel 0 no tiene sangría.
+    
     const paddingLeft = (nivel > 0) ? 30 : 0;
-    const paddingInterno = 16 + paddingLeft; // espacio base + posible sangría
+    const paddingInterno = 16 + paddingLeft; 
 
-    // mención al usuario padre (si existe)
     let mencionHtml = '';
     if (respuesta.Padre && respuesta.Padre.Usuario) {
         mencionHtml = `<a href="#" class="fw-bold text-decoration-none me-1">@${respuesta.Padre.Usuario.nombre}</a>`;
     }
 
-    // comenzar a construir HTML de la respuesta
     let html = `
         <div id="respuesta-${respuesta.idrespuesta}" class="mb-3 reply-item">
             <div class="card shadow-sm reply-card">
@@ -117,18 +115,18 @@ function crearHtmlRespuesta(respuesta, nivel) {
         </div>
     `;
 
-    // Renderizar las hijas (si las hay)
+   
     if (respuesta.Hijas && respuesta.Hijas.length > 0) {
-        // NOTA: no aumentamos la sangría aquí; la sangría se controla por `nivel` arriba.
+        
         html += `<div class="nested-replies-container mt-2">`;
         respuesta.Hijas.forEach(hija => {
-            // importante: pasar nivel + 1 para que `nivel > 0` siga siendo true en hijas
+            
             html += crearHtmlRespuesta(hija, nivel + 1);
         });
         html += `</div>`;
     }
 
-    html += `</div>`; // cierre del wrapper de la respuesta
+    html += `</div>`; 
     return html;
 }
 

@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function publicarOferta(e) {
-  e.preventDefault(); // Evita que la página se recargue
+  e.preventDefault(); 
 
   const btnPublicar = document.getElementById('btn-publicar');
   const textoOriginal = btnPublicar.textContent;
@@ -57,7 +57,7 @@ async function publicarOferta(e) {
     const nuevaOferta = await response.json();
     console.log('Oferta creada:', nuevaOferta);
     
-    alert('✅ ¡Oferta de trabajo publicada exitosamente!');
+    alert(' ¡Oferta de trabajo publicada exitosamente!');
     setTimeout(() => {
       window.location.href = 'trabajosPVistaEmpresas.html';
     }, 1000);
