@@ -1,0 +1,56 @@
+<div class="bg-light py-4 mb-4">
+  <div class="container">
+    <form (ngSubmit)="cargarEmpresas()" class="row g-2">
+      <div class="col-md-5">
+        <input type="text" class="form-control" placeholder="⌕ Buscar empresa por nombre..."
+               [(ngModel)]="filtroNombre" name="nombre">
+      </div>
+      <div class="col-md-3 d-grid">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container pb-5">
+  <div class="row g-4">
+    
+    <div *ngIf="isLoading" class="col-12 text-center p-5">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+
+    <div *ngIf="!isLoading && empresas.length === 0" class="col-12 text-center p-5 border rounded">
+      <h5>No se encontraron empresas</h5>
+      <p class="text-muted">Intenta con otro término de búsqueda o revisa más tarde.</p>
+    </div>
+
+    <div *ngFor="let empresa of empresas" class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          
+          <img [src]="getLogoUrl(empresa)" class="rounded-circle mb-3 empresa-logo">
+          
+          <h5 class="card-title fw-bold">{{ empresa.nombre }}</h5>
+          <p class="card-text text-muted small">{{ empresa.direccion || 'Ubicación no disponible' }}</p>
+
+          <div class="text-warning mb-2" [title]="'Valoración promedio: ' + getValoracionNumerica(empresa.valoracionPromedio) + ' de 5'">
+            <ng-container *ngFor="let tipo of getEstrellas(empresa.valoracionPromedio)">
+              <i *ngIf="tipo === 'full'" class="bi bi-star-fill"></i>
+              <i *ngIf="tipo === 'half'" class="bi bi-star-half"></i>
+              <i *ngIf="tipo === 'empty'" class="bi bi-star"></i>
+            </ng-container>
+          </div>
+          
+          <small class="text-muted">({{ empresa.totalResenas || 0 }} valoraciones)</small>
+        </div>
+        
+        <div class="card-footer bg-white border-0 text-center">
+          <a [routerLink]="['/candidato/empresas', empresa.idempresa]" class="btn btn-outline-success btn-sm">
+            <i class="bi bi-star-fill me-1"></i> Valorar
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

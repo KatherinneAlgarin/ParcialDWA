@@ -15,6 +15,7 @@ const sequelize = new Sequelize(
       timezone: 'Etc/GMT-6',
     },
     pool: {
+      
       max: 10,
       min: 0,
       acquire: 30000,

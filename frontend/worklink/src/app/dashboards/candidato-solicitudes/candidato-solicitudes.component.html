@@ -1,0 +1,59 @@
+<h5 class="mb-4 fw-bold">TRABAJOS APLICADOS</h5>
+
+<div class="row fw-semibold border-bottom pb-2 mb-3 px-3 d-none d-md-flex">
+  <div class="col-md-4">Trabajo</div>
+  <div class="col-md-3">Fecha de aplicación</div>
+  <div class="col-md-2">Estado</div>
+  <div class="col-md-3">Acciones</div>
+</div>
+
+<div *ngIf="isLoading" class="text-center p-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="!isLoading && !errorMessage && aplicaciones.length === 0" 
+    class="text-center p-5 border rounded mt-3">
+  <i class="bi bi-journal-x fs-1 text-muted"></i>
+  <h5 class="mt-3">Aún no has aplicado a ningún trabajo</h5>
+  <a routerLink="/candidato/empleos" class="btn btn-primary mt-2">Buscar Empleos</a>
+</div>
+
+<div *ngIf="!isLoading && !errorMessage && aplicaciones.length > 0">
+
+  <div *ngFor="let app of aplicaciones" 
+      class="row align-items-center px-3 border-bottom py-3 job-row">
+
+    <div class="col-md-4 mb-2 mb-md-0">
+      <div class="job-title fw-semibold">{{ app.Oferta?.titulo || 'N/A' }}</div>
+      <div class="company-name text-muted">{{ app.Oferta?.Empresa?.nombre || 'N/A' }}</div>
+    </div>
+
+    <div class="col-md-3 text-muted">
+      <span class="fw-bold d-md-none">Fecha: </span>
+      {{ formatearFecha(app.fecha_aplicacion) }}
+    </div>
+
+    <div class="col-md-2">
+      <span class="badge" [ngClass]="getStatusInfo(app.estado).clase">
+        {{ getStatusInfo(app.estado).texto }}
+      </span>
+    </div>
+
+    <div class="col-md-3 d-flex gap-2 mt-2 mt-md-0">
+      <a [routerLink]="['/candidato/oferta', app.Oferta?.idoferta]" class="btn btn-outline-primary btn-sm">
+        Ver Oferta
+      </a>
+      <button (click)="onEliminarAplicacion(app.idaplicacion)" 
+              class="btn btn-outline-danger btn-sm">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  </div>
+
+</div>

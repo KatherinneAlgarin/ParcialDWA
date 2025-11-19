@@ -1,0 +1,92 @@
+<h4 class="fw-bold mb-4">AJUSTES</h4>
+
+<div *ngIf="isLoading" class="text-center p-5">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<form *ngIf="!isLoading" (ngSubmit)="onSubmit()">
+  
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <label class="form-label">Logo de la Empresa</label>
+      
+      <div class="border d-flex align-items-center justify-content-center bg-light" 
+           style="height:150px; cursor: pointer;"
+           (click)="fileInput.click()">
+        
+        <div class="text-center" *ngIf="!logoPreview">
+          <i class="bi bi-image fs-1 text-muted mb-2"></i>
+          <p class="mb-0 text-muted small">Logo Placeholder<br><em>Haz clic para seleccionar una imagen</em></p>
+        </div>
+
+        <img *ngIf="logoPreview" [src]="logoPreview" 
+             style="max-height: 100%; max-width: 100%; object-fit: contain;" 
+             alt="Logo Preview">
+      </div>
+
+      <input type="file" #fileInput class="form-control mt-2 d-none" accept="image/*" 
+             (change)="onLogoSelected($event)">
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Nombre de la Empresa</label>
+    <input type="text" class="form-control" name="nombre" 
+           placeholder="Nombre de tu empresa asociada"
+           [(ngModel)]="formEmpresa.nombre" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Sobre la Empresa</label>
+    <textarea class="form-control" name="descripcion" rows="4" 
+              placeholder="Descripción de la empresa..."
+              [(ngModel)]="formEmpresa.descripcion"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Dirección</label>
+    <input type="text" class="form-control" name="direccion" 
+           placeholder="Dirección"
+           [(ngModel)]="formEmpresa.direccion">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Redes Sociales de la Empresa</label>
+    
+    <div class="input-group mb-2">
+      <span class="input-group-text bg-white"><i class="bi bi-facebook text-primary"></i> Facebook</span>
+      <input type="url" name="facebook" class="form-control" placeholder="Enlace de Facebook..."
+             [(ngModel)]="formEmpresa.redesSociales.facebook">
+    </div>
+    
+    <div class="input-group mb-2">
+      <span class="input-group-text bg-white"><i class="bi bi-twitter text-info"></i> Twitter</span>
+      <input type="url" name="twitter" class="form-control" placeholder="Enlace de Twitter..."
+             [(ngModel)]="formEmpresa.redesSociales.twitter">
+    </div>
+
+    <div class="input-group mb-2">
+      <span class="input-group-text bg-white"><i class="bi bi-instagram text-danger"></i> Instagram</span>
+      <input type="url" name="instagram" class="form-control" placeholder="Enlace de Instagram..."
+             [(ngModel)]="formEmpresa.redesSociales.instagram">
+    </div>
+
+    <div class="input-group mb-2">
+      <span class="input-group-text bg-white"><i class="bi bi-youtube text-danger"></i> Youtube</span>
+      <input type="url" name="youtube" class="form-control" placeholder="Enlace de Youtube..."
+             [(ngModel)]="formEmpresa.redesSociales.youtube">
+    </div>
+  </div>
+
+  <div class="mb-4" *ngIf="empresa">
+    <h6 class="fw-bold">Eliminar Empresa Asociada</h6>
+    <p class="small text-muted">Si eliminas la empresa asociada, perderás acceso a funciones relacionadas con empleadores. El usuario quedará sin empresa asignada.</p>
+    <button type="button" class="btn btn-outline-danger" (click)="eliminarEmpresa()">Eliminar Empresa</button>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="isSaving">
+    <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2"></span>
+    {{ isSaving ? 'Guardando...' : 'Guardar Cambios' }}
+  </button>
+
+</form>

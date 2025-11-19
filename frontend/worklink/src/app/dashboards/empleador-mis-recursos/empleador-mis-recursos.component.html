@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="fw-bold mb-1">MIS RECURSOS</h4>
+    <p class="text-muted mb-0">Administra los recursos que has publicado</p>
+  </div>
+  <a routerLink="/empleador/agregar-recurso" class="btn btn-primary">
+    <i class="bi bi-plus-circle me-2"></i>Agregar Nuevo Recurso
+  </a>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card text-center"><div class="card-body">
+      <h3 class="text-primary mb-0">{{ estadisticas.total }}</h3>
+      <small class="text-muted">Total Recursos</small>
+    </div></div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center"><div class="card-body">
+      <h3 class="text-success mb-0">{{ estadisticas.cv }}</h3>
+      <small class="text-muted">Guías de CV</small>
+    </div></div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center"><div class="card-body">
+      <h3 class="text-info mb-0">{{ estadisticas.entrevistas }}</h3>
+      <small class="text-muted">Entrevistas</small>
+    </div></div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center"><div class="card-body">
+      <h3 class="text-warning mb-0">{{ estadisticas.habilidades }}</h3>
+      <small class="text-muted">Habilidades</small>
+    </div></div>
+  </div>
+</div>
+
+<div class="row g-4">
+  
+  <div *ngIf="isLoading" class="col-12 text-center p-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2 text-muted">Cargando tus recursos...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="col-12 alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage && recursos.length === 0" class="col-12 text-center p-5 border rounded bg-light">
+    <i class="bi bi-folder-x fs-1 text-muted"></i>
+    <h5 class="mt-3">No has publicado ningún recurso</h5>
+    <p class="text-muted">Comparte artículos o guías para ayudar a la comunidad.</p>
+    <a routerLink="/empleador/agregar-recurso" class="btn btn-primary mt-2">Agregar un Recurso</a>
+  </div>
+
+  <div *ngFor="let recurso of recursos" class="col-md-4">
+    <div class="card recurso-card h-100 shadow-sm">
+      
+      <div class="card-img-top bg-dark text-white d-flex align-items-center justify-content-center" style="height: 180px;">
+        <div class="text-center p-3">
+          <i class="bi bi-link-45deg" style="font-size: 3rem;"></i>
+          <p class="mb-0 mt-2 small text-truncate" style="max-width: 250px;">{{ recurso.link }}</p>
+        </div>
+      </div>
+
+      <div class="card-body d-flex flex-column">
+        <span class="badge bg-primary badge-tipo align-self-start mb-2">
+          {{ recurso.tipoRecurso || 'General' }}
+        </span>
+        <h5 class="card-title">{{ recurso.titulo }}</h5>
+        <p class="card-text text-muted small flex-grow-1">
+          {{ recurso.descripcion || 'Sin descripción.' }}
+        </p>
+        
+        <div class="d-flex justify-content-end align-items-center mt-3">
+          <button class="btn btn-sm btn-outline-danger" (click)="eliminarRecurso(recurso.idrecurso)">
+            <i class="bi bi-trash me-1"></i>Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

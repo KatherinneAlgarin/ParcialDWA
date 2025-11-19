@@ -1,0 +1,10 @@
+.badge-tipo {
+  font-size: 0.75rem;
+}
+
+.recurso-card {
+  transition: transform 0.2s;
+}
+.recurso-card:hover {
+  transform: translateY(-5px);
+}

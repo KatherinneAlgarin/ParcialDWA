@@ -1,0 +1,90 @@
+<div class="bg-light py-4">
+  <div class="container">
+    <form (ngSubmit)="ejecutarBusqueda()" #formBusqueda="ngForm" class="row g-2 align-items-end">
+      <div class="col-lg-12 mb-2">
+        <label for="filtro-titulo" class="form-label small fw-bold">Título del puesto o palabra clave</label>
+        <input type="text" class="form-control" id="filtro-titulo" name="titulo"
+               [(ngModel)]="filtros.titulo"
+               placeholder="⌕ Ej: Ingeniero de Software, Diseñador UX...">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <label for="filtro-rubro" class="form-label small">Rubro</label>
+        <select class="form-select" id="filtro-rubro" name="rubro" [(ngModel)]="filtros.rubro">
+          <option value="">Todos</option>
+          <option>Tecnología</option>
+          <option>Diseño</option>
+          <option>Marketing</option>
+          <option>Ventas</option>
+          <option>Administración</option>
+        </select>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <label for="filtro-experiencia" class="form-label small">Experiencia</label>
+        <select class="form-select" id="filtro-experiencia" name="experiencia" [(ngModel)]="filtros.experiencia">
+          <option value="">Cualquiera</option>
+          <option value="Sin experiencia">Sin experiencia</option>
+          <option value="0-12 meses">0-12 meses</option>
+          <option value="1-5 años">1-5 años</option>
+          <option value="5-10 años">5-10 años</option>
+          <option value="Más de 10 años">Más de 10 años</option>
+        </select>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <label for="filtro-salario-min" class="form-label small">Salario Mínimo (Mensual)</label>
+        <input type="number" class="form-control" id="filtro-salario-min" name="salario_min"
+               [(ngModel)]="filtros.salario_min"
+               placeholder="$" min="0">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <button type="submit" id="btn-buscar" class="btn btn-primary w-100 mt-3 mt-md-0" [disabled]="isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          {{ isLoading ? 'Buscando...' : 'Buscar Empleos' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5>{{ tituloResultados }}</h5>
+  </div>
+  
+  <div class="row">
+    <div *ngIf="isLoading" class="col-12 text-center p-5">
+      <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+        <span class="visually-hidden">Cargando ofertas...</span>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && ofertas.length === 0" class="col-12">
+      <div class="text-center p-5 border rounded mt-3">
+        <i class="bi bi-search fs-1 text-muted"></i>
+        <h5 class="mt-3">No se encontraron ofertas</h5>
+        <p class="text-muted">Intenta ajustar tus filtros de búsqueda o revisa más tarde.</p>
+      </div>
+    </div>
+
+    <div *ngFor="let oferta of ofertas" class="col-lg-4 col-md-6 mb-4">
+      <a [routerLink]="['/candidato/oferta', oferta.idoferta]" class="text-decoration-none text-dark">
+        <div class="job-card shadow-sm p-3 h-100">
+          <div class="d-flex align-items-center mb-2">
+            <img [src]="getLogoUrl(oferta.Empresa)" 
+                 class="me-3 border rounded" 
+                 style="width: 40px; height: 40px; object-fit: contain;"
+                 [alt]="oferta.Empresa?.nombre">
+            <div>
+              <h6 class="mb-0 text-muted">{{ oferta.Empresa?.nombre || 'Empresa no disponible' }}</h6>
+            </div>
+          </div>
+          <h5 class="fw-bold">{{ oferta.titulo }}</h5>
+          <p class="text-muted small mb-2">{{ oferta.rubro }}</p>
+          <p class="text-primary fw-semibold small">
+            {{ oferta.tipo_contrato }} • {{ formatearSalario(oferta) }}
+          </p>
+        </div>
+      </a>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div *ngIf="isLoading" class="container my-5 text-center p-5">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<div *ngIf="errorMessage" class="container my-5 alert alert-danger text-center">
+  {{ errorMessage }}
+</div>
+
+<ng-container *ngIf="!isLoading && empresa">
+
+  <div class="container my-5">
+    <div class="card p-4 shadow-sm">
+      <div class="d-flex flex-column flex-md-row align-items-center mb-4">
+        <img [src]="getLogoUrl(empresa.logo)" 
+             class="rounded-circle me-md-4 mb-3 mb-md-0" 
+             width="100" height="100" 
+             style="object-fit: contain; border: 1px solid #eee;">
+        <div>
+          <h2 class="fw-bold">{{ empresa.nombre }}</h2>
+          <p *ngIf="empresa.direccion" class="mb-1 text-muted">
+            <i class="bi bi-geo-alt-fill me-1"></i>{{ empresa.direccion }}
+          </p>
+        </div>
+        <div class="ms-md-auto mt-3 mt-md-0">
+          <button class="btn btn-primary" (click)="abrirModalValorar()">
+            <i class="bi bi-star-fill me-2"></i>Valorar Empresa
+          </button>
+        </div>
+      </div>
+
+      <ng-container *ngIf="empresa.descripcion">
+        <h5 class="fw-bold mt-3">Sobre la Empresa</h5>
+        <p class="text-muted" style="white-space: pre-wrap;">{{ empresa.descripcion }}</p>
+      </ng-container>
+
+      <ng-container *ngIf="redesSociales">
+        <h5 class="fw-bold mt-4">Síguenos</h5>
+        <div class="d-flex gap-2">
+          <a *ngIf="redesSociales.facebook" [href]="redesSociales.facebook" target="_blank" class="text-dark me-2"><i class="bi bi-facebook fs-4"></i></a>
+          <a *ngIf="redesSociales.twitter" [href]="redesSociales.twitter" target="_blank" class="text-dark me-2"><i class="bi bi-twitter-x fs-4"></i></a>
+          <a *ngIf="redesSociales.instagram" [href]="redesSociales.instagram" target="_blank" class="text-dark me-2"><i class="bi bi-instagram fs-4"></i></a>
+          <a *ngIf="redesSociales.youtube" [href]="redesSociales.youtube" target="_blank" class="text-dark me-2"><i class="bi bi-youtube fs-4"></i></a>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="container my-5">
+    <h4 class="fw-bold mb-4">Valoraciones de los Usuarios</h4>
+    
+    <div *ngIf="resenas.length === 0" class="text-center p-4 border rounded text-muted">
+      Aún no hay valoraciones para esta empresa. ¡Sé el primero en dejar una!
+    </div>
+
+    <div *ngFor="let resena of resenas" class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex align-items-start">
+          <div class="d-flex align-items-center flex-grow-1">
+            <img [src]="getFotoUsuario(resena.Usuario?.foto_perfil)" 
+                 class="rounded-circle me-3" width="40" height="40">
+            <div>
+              <h6 class="mb-0 fw-bold">{{ resena.Usuario?.nombre || 'Anónimo' }}</h6>
+              <small class="text-muted">{{ formatearFecha(resena.fecha) }}</small>
+            </div>
+          </div>
+          
+          <div class="text-warning me-2">
+            <i *ngFor="let star of getEstrellasArray(resena.calificacion)" 
+               class="bi" 
+               [ngClass]="star === 'full' ? 'bi-star-fill' : 'bi-star'"></i>
+          </div>
+
+          <div *ngIf="esAutor(resena)" class="dropdown">
+            <button class="btn btn-sm btn-light" type="button" data-bs-toggle="dropdown">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><button class="dropdown-item" (click)="abrirModalEditar(resena)">Editar</button></li>
+              <li><button class="dropdown-item text-danger" (click)="eliminarResena(resena.idcalificacion)">Eliminar</button></li>
+            </ul>
+          </div>
+        </div>
+        <p class="card-text mt-2 fst-italic">"{{ resena.comentario }}"</p>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
+
+<div class="modal fade" id="modal-valorar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="enviarValoracion()" #valoracionForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {{ modoEdicion ? 'Editar tu valoración' : 'Escribe tu valoración' }}
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <div class="mb-3">
+            <label class="form-label">Tu calificación:</label>
+            <div class="fs-2 text-warning" style="cursor: pointer;" (mouseleave)="hoverRating = 0">
+              <i *ngFor="let i of [1, 2, 3, 4, 5]" 
+                 class="bi"
+                 [ngClass]="(hoverRating || formValoracion.calificacion) >= i ? 'bi-star-fill' : 'bi-star'"
+                 (mouseover)="hoverRating = i"
+                 (click)="setRating(i)">
+              </i>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="comentario-valoracion" class="form-label">Tu comentario:</label>
+            <textarea class="form-control" id="comentario-valoracion" rows="4" 
+                      placeholder="Comparte tu experiencia con esta empresa..." 
+                      required
+                      name="comentario" [(ngModel)]="formValoracion.comentario"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="isSubmitting || valoracionForm.invalid || formValoracion.calificacion === 0">
+            {{ modoEdicion ? 'Guardar Cambios' : 'Publicar Valoración' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

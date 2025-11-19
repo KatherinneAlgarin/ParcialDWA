@@ -1,6 +1,4 @@
 const API_URL = 'http://localhost:3000/api/auth'; 
-
-
 const alertContainer = document.getElementById('alertContainer');
 const emailInput = document.getElementById('email');
 const btnEnviarCodigo = document.getElementById('btnEnviarCodigo');

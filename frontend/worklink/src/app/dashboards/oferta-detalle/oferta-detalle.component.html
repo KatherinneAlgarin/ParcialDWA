@@ -1,0 +1,96 @@
+<div *ngIf="isLoading" class="text-center p-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Cargando detalles...</span>
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger text-center">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="oferta && !isLoading" class="container mb-5">
+  <h3 class="bg-body-secondary text-center p-3 mb-3">Detalles del trabajo</h3>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card p-4 shadow-sm mb-4">
+        <div class="d-flex align-items-center mb-3">
+          <img [src]="getLogoUrl(oferta.Empresa)" class="rounded-circle me-3" width="60" height="60" style="object-fit: contain;">
+          <div>
+            <h4 class="fw-bold">{{ oferta.titulo }}</h4>
+            <p class="mb-1 text-muted">{{ oferta.Empresa?.nombre || 'Empresa' }}</p>
+          </div>
+          <div class="ms-auto">
+            <button 
+              class="btn btn-primary"
+              data-bs-toggle="modal" 
+              data-bs-target="#modalAplicar"
+              [disabled]="aplicacionEnviada"
+              [textContent]="aplicacionEnviada ? 'Aplicación Enviada' : 'Aplicar'">
+            </button>
+          </div>
+        </div>
+        
+        <h6 class="fw-bold mt-3">Descripción del trabajo</h6>
+        <p class="text-muted" style="white-space: pre-wrap;">{{ oferta.descripcion }}</p>
+        
+        <ng-container *ngIf="oferta.responsabilidades">
+          <h6 class="fw-bold mt-4">Responsabilidades</h6>
+          <div class="text-muted" style="white-space: pre-wrap;">{{ oferta.responsabilidades }}</div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card p-3 shadow-sm mb-4">
+        <h6 class="fw-bold">Resumen del trabajo</h6>
+        <ul class="list-unstyled small mt-3">
+          <li class="mb-2"><i class="bi bi-mortarboard-fill me-2 text-primary"></i><b>Educación:</b> {{ oferta.educacion || 'No especificada' }}</li>
+          <li class="mb-2"><i class="bi bi-briefcase-fill me-2 text-primary"></i><b>Experiencia:</b> {{ oferta.experiencia || 'No especificada' }}</li>
+          <li class="mb-2"><i class="bi bi-cash-stack me-2 text-primary"></i><b>Salario:</b> {{ formatearSalario(oferta) }}</li>
+          <li class="mb-2"><i class="bi bi-file-earmark-text-fill me-2 text-primary"></i><b>Contrato:</b> {{ oferta.tipo_contrato }}</li>
+        </ul>
+      </div>
+      
+      <div class="card p-3 shadow-sm" *ngIf="oferta.Empresa">
+        <h6 class="fw-bold">{{ oferta.Empresa.nombre || 'Sobre la empresa' }}</h6>
+        <p class="small text-muted mb-1">{{ oferta.Empresa.descripcion || '' }}</p>
+        <p *ngIf="oferta.Empresa.direccion" class="small mb-2"><i class="bi bi-geo-alt-fill me-2"></i>{{ oferta.Empresa.direccion }}</p>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalAplicar" tabindex="-1" aria-labelledby="modalAplicarLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="enviarAplicacion()" #formAplicacion="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAplicarLabel">Aplicar a: {{ oferta?.titulo }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="cv-usuario" class="form-label">Tu Currículum (PDF)</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)" accept=".pdf" required>
+          </div>
+          <div class="mb-3">
+            <label for="informacionAdicional" class="form-label">Carta de presentación (Opcional)</label>
+            <textarea class="form-control" id="informacionAdicional" name="cartaPresentacion" 
+                      rows="4" placeholder="Escribe un mensaje para el empleador..."
+                      [(ngModel)]="cartaPresentacion"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" 
+                  [disabled]="isSubmitting || !selectedFile">
+            <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            {{ isSubmitting ? 'Enviando...' : 'Enviar Aplicación' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

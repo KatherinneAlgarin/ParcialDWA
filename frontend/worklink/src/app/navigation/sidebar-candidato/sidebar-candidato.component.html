@@ -1,0 +1,33 @@
+<div class="bg-white border-end p-4 d-flex flex-column min-vh-100">
+  <h6 class="fw-bold text-secondary">PANEL DE CANDIDATOS</h6>
+
+  <ul class="nav flex-column mt-3">
+    <li class="nav-item">
+      <a class="nav-link" 
+          routerLink="/candidato/general" 
+          routerLinkActive="active">
+        <i class="bi bi-grid me-2"></i>General
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" 
+          routerLink="/candidato/solicitudes" 
+          routerLinkActive="active">
+        <i class="bi bi-suitcase-lg me-2"></i>Solicitudes enviadas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" 
+          routerLink="/candidato/ajustes" 
+          routerLinkActive="active">
+        <i class="bi bi-gear me-2"></i>Ajustes
+      </a>
+    </li>
+  </ul>
+
+  <div class="mt-auto">
+    <button (click)="logout()" class="btn btn-link text-danger text-decoration-none p-0 border-0 bg-transparent">
+      <i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión
+    </button>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+<h4 class="fw-bold mb-4">AJUSTES</h4>
+
+<div *ngIf="isLoading" class="text-center p-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+
+<form *ngIf="!isLoading" (ngSubmit)="onSubmit()" #formPerfil="ngForm">
+  
+  <div class="card shadow-sm p-4 mb-4">
+    <h5 class="fw-bold mb-3">Información Básica</h5>
+    <div class="row g-3">
+      <div class="col-md-3 text-center">
+        <div class="border rounded p-4 d-flex align-items-center justify-content-center flex-column upload-box">
+          <img *ngIf="fotoPreview" [src]="fotoPreview" alt="Foto de perfil" class="profile-pic-preview mb-2">
+          <i *ngIf="!fotoPreview" class="bi bi-person-circle fs-1 mb-2"></i>
+          
+          <p *ngIf="!fotoPreview" class="small">Seleccione un archivo<br /><span class="text-muted">Máx. 5 MB</span></p>
+          
+          <input type="file" (change)="onFileSelected($event)" class="form-control mt-2" accept="image/*" />
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="nombreCompleto" class="form-label">Nombre Completo</label>
+            <input type="text" id="nombreCompleto" name="nombreCompleto" class="form-control" placeholder="Nombre Completo"
+                  [(ngModel)]="perfil.nombre" required />
+          </div>
+          <div class="col-md-6">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Dirección"
+                  [(ngModel)]="perfil.direccion" />
+          </div>
+          <div class="col-md-6">
+            <label for="experiencia" class="form-label fw-semibold">Experiencia</label>
+            <select id="experiencia" name="experiencia" class="form-select" [(ngModel)]="perfil.experiencia">
+              <option value="">Seleccione...</option>
+              <option value="0-12 meses">0-12 meses</option>
+              <option value="1-5 años">1-5 años</option>
+              <option value="5-10 años">5-10 años</option>
+              <option value="Más de 10 años">Más de 10 años</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="educacion" class="form-label fw-semibold">Educación</label>
+            <select id="educacion" name="educacion" class="form-select" [(ngModel)]="perfil.educacion">
+              <option value="">Seleccione...</option>
+              <option value="Sin Educación Académica Formal">Sin Educación Académica Formal</option>
+              <option value="Educación Media Completa">Educación Media Completa</option>
+              <option value="Educación Media Incompleta">Educación Media Incompleta</option>
+              <option value="Bachillerato Técnico">Bachillerato Técnico</option>
+              <option value="Bachillerato General">Bachillerato General</option>
+              <option value="Estudio Universitario Completo">Estudio Universitario Completo</option>
+              <option value="Estudio Universitario Incompleto">Estudio Universitario Incompleto</option>
+              <option value="Técnico">Técnico</option>
+              <option value="Postgrado/Maestría/Doctorado">Postgrado/Maestría/Doctorado</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm p-4 mb-4">
+    <div class="row g-3">
+      <div class="col-md-6 d-flex align-items-center gap-2">
+        <input type="text" class="form-control" placeholder="Buscar nacionalidad"
+              [(ngModel)]="filtroNacionalidad" (ngModelChange)="filtrarPaises()" name="filtroNacionalidad" />
+        
+        <select id="nacionalidad" name="nacionalidad" class="form-select" style="max-width: 250px;"
+                [(ngModel)]="perfil.nacionalidad" (ngModelChange)="actualizarBandera()">
+          <option value="">Seleccione Nacionalidad...</option>
+          <option *ngFor="let pais of paisesFiltrados" [value]="pais.cca2">
+            {{ pais.nombreMostrado }}
+          </option>
+        </select>
+        
+        <div class="ms-2">
+          <img *ngIf="banderaSeleccionada" [src]="banderaSeleccionada" alt="Bandera" class="flag-icon" />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control"
+              [(ngModel)]="perfil.fecha_nacimiento" />
+      </div>
+      <div class="col-md-3">
+        <label for="estadoCivil" class="form-label fw-semibold">Estado Civil</label>
+        <select id="estadoCivil" name="estadoCivil" class="form-select" [(ngModel)]="perfil.estado_civil">
+          <option value="">Seleccione...</option>
+          <option value="Casado">Casado</option>
+          <option value="Soltero">Soltero</option>
+          <option value="Viudo">Viudo</option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <label for="biografia" class="form-label">Biografía</label>
+        <textarea id="biografia" name="biografia" class="form-control" rows="4" placeholder="Escriba su biografía..."
+                  [(ngModel)]="perfil.biografia"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm p-4 mb-4" *ngIf="perfil.redes_sociales">
+    <h5 class="fw-bold mb-3">Redes Sociales</h5>
+    <div class="row g-3">
+      <div class="col-md-6 d-flex align-items-center">
+        <i class="bi bi-facebook me-2 text-primary fs-4"></i>
+        <input type="url" id="facebook" name="facebook" class="form-control" placeholder="Facebook link"
+              [(ngModel)]="perfil.redes_sociales.facebook" />
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <i class="bi bi-twitter-x me-2 text-info fs-4"></i>
+        <input type="url" id="twitter" name="twitter" class="form-control" placeholder="Twitter link"
+              [(ngModel)]="perfil.redes_sociales.twitter" />
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <i class="bi bi-instagram me-2 text-danger fs-4"></i>
+        <input type="url" id="instagram" name="instagram" class="form-control" placeholder="Instagram link"
+              [(ngModel)]="perfil.redes_sociales.instagram" />
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <i class="bi bi-youtube me-2 text-danger fs-4"></i>
+        <input type="url" id="youtube" name="youtube" class="form-control" placeholder="YouTube link"
+              [(ngModel)]="perfil.redes_sociales.youtube" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm p-4 mb-4">
+    <h5 class="fw-bold mb-3">Contacto (No editable)</h5>
+    <div class="row g-3">
+      <div class="col-md-12">
+        <input type="email" id="correo" name="correo" class="form-control" placeholder="Correo electrónico"
+              [(ngModel)]="perfil.correo" readonly disabled />
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end align-items-center mb-4">
+    <button type="submit" id="btnGuardar" class="btn btn-primary" [disabled]="isSaving || formPerfil.invalid">
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      {{ isSaving ? 'Guardando...' : 'Guardar Cambios' }}
+    </button>
+  </div>
+</form>

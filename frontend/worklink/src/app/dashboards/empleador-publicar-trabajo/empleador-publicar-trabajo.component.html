@@ -1,0 +1,107 @@
+<h5 class="mb-4 fw-bold">PUBLICAR TRABAJO</h5>
+
+<form (ngSubmit)="onSubmit()" #formPublicar="ngForm" class="needs-validation">
+  
+  <div class="p-3 border rounded mb-4">
+    <h6 class="fw-semibold mb-3">Información Básica</h6>
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título del puesto</label>
+      <input type="text" class="form-control" id="titulo" name="titulo"
+             placeholder="Ej: Desarrollador Full-Stack" required
+             [(ngModel)]="oferta.titulo">
+    </div>
+    <div class="mb-3">
+      <label for="rubro" class="form-label">Rubro Profesional</label>
+      <select class="form-select" id="rubro" name="rubro" required [(ngModel)]="oferta.rubro">
+        <option value="" disabled selected>Seleccionar...</option>
+        <option *ngFor="let r of rubros" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="p-3 border rounded mb-4">
+    <h6 class="fw-semibold mb-3">Detalles del Puesto</h6>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="tipo-contrato" class="form-label">Tipo de Contrato</label>
+        <select class="form-select" id="tipo-contrato" name="tipo_contrato" required [(ngModel)]="oferta.tipo_contrato">
+          <option value="" disabled selected>Seleccionar...</option>
+          <option *ngFor="let t of tiposContrato" [value]="t">{{ t }}</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="cantidad-plazas" class="form-label">Cantidad de Plazas</label>
+        <input type="number" class="form-control" id="cantidad-plazas" name="cantidad_plazas"
+               min="1" required
+               [(ngModel)]="oferta.cantidad_plazas">
+      </div>
+    </div>
+  </div>
+  
+  <div class="p-3 border rounded mb-4">
+    <h6 class="fw-semibold mb-3">Salario (Opcional)</h6>
+    <div class="row g-3 align-items-center">
+      <div class="col-md-3">
+        <label for="salario-minimo" class="form-label">Mínimo</label>
+        <input type="number" class="form-control" id="salario-minimo" name="salario_minimo"
+               placeholder="1000" min="0"
+               [(ngModel)]="oferta.salario_minimo">
+      </div>
+      <div class="col-md-3">
+        <label for="salario-maximo" class="form-label">Máximo</label>
+        <input type="number" class="form-control" id="salario-maximo" name="salario_maximo"
+               placeholder="1500" min="0"
+               [(ngModel)]="oferta.salario_maximo">
+      </div>
+      <div class="col-md-3">
+        <label for="tipo-salario" class="form-label">Período</label>
+        <select class="form-select" id="tipo-salario" name="tipo_salario" required [(ngModel)]="oferta.tipo_salario">
+          <option value="" disabled selected>Seleccionar...</option>
+          <option *ngFor="let t of tiposSalario" [value]="t">{{ t }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-3 border rounded mb-4">
+    <h6 class="fw-semibold mb-3">Requisitos del Candidato (Opcional)</h6>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="educacion" class="form-label">Nivel de Educación</label>
+        <select class="form-select" id="educacion" name="educacion" [(ngModel)]="oferta.educacion">
+          <option value="" selected>Cualquiera...</option>
+          <option *ngFor="let e of nivelesEducacion" [value]="e">{{ e }}</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="experiencia" class="form-label">Nivel de Experiencia</label>
+        <select class="form-select" id="experiencia" name="experiencia" [(ngModel)]="oferta.experiencia">
+          <option value="" selected>Cualquiera...</option>
+          <option *ngFor="let ex of nivelesExperiencia" [value]="ex">{{ ex }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-3 border rounded mb-4">
+    <h6 class="fw-semibold mb-3">Descripción Detallada</h6>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción del Puesto</label>
+      <textarea class="form-control" id="descripcion" name="descripcion" rows="5" required
+                placeholder="Describe las funciones principales..."
+                [(ngModel)]="oferta.descripcion"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="responsabilidades" class="form-label">Responsabilidades (Opcional)</label>
+      <textarea class="form-control" id="responsabilidades" name="responsabilidades" rows="5"
+                placeholder="Ej: - Desarrollar nuevas funcionalidades..."
+                [(ngModel)]="oferta.responsabilidades"></textarea>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary px-4 py-2" [disabled]="isSubmitting || formPublicar.invalid">
+    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
+    {{ isSubmitting ? 'Publicando...' : 'Publicar Trabajo' }}
+  </button>
+
+</form>

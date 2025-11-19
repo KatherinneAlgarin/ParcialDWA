@@ -1,0 +1,106 @@
+<div class="bg-light py-4">
+  <div class="container text-center">
+    <h1 class="fw-bold">Recursos para tu Carrera</h1>
+    <p class="lead text-muted">Artículos, guías y videos para ayudarte a crecer profesionalmente.</p>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-6">
+        <form (ngSubmit)="onSearchSubmit()">
+          <div class="input-group">
+            <input type="text" 
+                   class="form-control" 
+                   placeholder="Buscar recursos por título..."
+                   [(ngModel)]="searchTerm"
+                   (ngModelChange)="onSearchChange($event)"
+                   name="busquedaRecursos">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="container py-5">
+
+  <section class="mb-5">
+    <h3 class="fw-bold mb-4 border-bottom pb-2">Preparación para Entrevistas</h3>
+    <div class="row g-4">
+      <div *ngIf="isLoading" class="col-12 text-center p-5">
+        <div class="spinner-border text-secondary" role="status"></div>
+      </div>
+      <p *ngIf="!isLoading && recursosEntrevistas.length === 0" class="col-12 text-muted fst-italic">
+        No hay recursos en esta categoría por el momento.
+      </p>
+      <div *ngFor="let recurso of recursosEntrevistas" class="col-md-4">
+        <a [href]="recurso.link" target="_blank" rel="noopener noreferrer" class="card h-100 shadow-sm text-decoration-none recurso-card">
+          <div class="card-img-top bg-dark text-white d-flex align-items-center justify-content-center" style="height: 150px;">
+            <i class="bi bi-link-45deg" style="font-size: 3rem;"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ recurso.titulo }}</h5>
+            <p class="card-text small text-muted">{{ recurso.descripcion || '' }}</p>
+          </div>
+          <div class="card-footer bg-white border-0 d-flex align-items-center">
+            <img [src]="getLogoUrl(recurso.Empresa)" class="rounded-circle me-2" style="width: 24px; height: 24px; object-fit: contain;">
+            <small class="text-muted">Publicado por {{ recurso.Empresa?.nombre || 'Anónimo' }}</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <h3 class="fw-bold mb-4 border-bottom pb-2">CV y Cartas de Presentación</h3>
+    <div class="row g-4">
+      <div *ngIf="isLoading" class="col-12 text-center p-5">
+        <div class="spinner-border text-secondary" role="status"></div>
+      </div>
+      <p *ngIf="!isLoading && recursosCV.length === 0" class="col-12 text-muted fst-italic">
+        No hay recursos en esta categoría por el momento.
+      </p>
+      <div *ngFor="let recurso of recursosCV" class="col-md-4">
+        <a [href]="recurso.link" target="_blank" rel="noopener noreferrer" class="card h-100 shadow-sm text-decoration-none recurso-card">
+          <div class="card-img-top bg-dark text-white d-flex align-items-center justify-content-center" style="height: 150px;">
+            <i class="bi bi-link-45deg" style="font-size: 3rem;"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ recurso.titulo }}</h5>
+            <p class="card-text small text-muted">{{ recurso.descripcion || '' }}</p>
+          </div>
+          <div class="card-footer bg-white border-0 d-flex align-items-center">
+            <img [src]="getLogoUrl(recurso.Empresa)" class="rounded-circle me-2" style="width: 24px; height: 24px; object-fit: contain;">
+            <small class="text-muted">Publicado por {{ recurso.Empresa?.nombre || 'Anónimo' }}</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <h3 class="fw-bold mb-4 border-bottom pb-2">Desarrollo de Habilidades</h3>
+    <div class="row g-4">
+      <div *ngIf="isLoading" class="col-12 text-center p-5">
+        <div class="spinner-border text-secondary" role="status"></div>
+      </div>
+      <p *ngIf="!isLoading && recursosHabilidades.length === 0" class="col-12 text-muted fst-italic">
+        No hay recursos en esta categoría por el momento.
+      </p>
+      <div *ngFor="let recurso of recursosHabilidades" class="col-md-4">
+        <a [href]="recurso.link" target="_blank" rel="noopener noreferrer" class="card h-100 shadow-sm text-decoration-none recurso-card">
+          <div class="card-img-top bg-dark text-white d-flex align-items-center justify-content-center" style="height: 150px;">
+            <i class="bi bi-link-45deg" style="font-size: 3rem;"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ recurso.titulo }}</h5>
+            <p class="card-text small text-muted">{{ recurso.descripcion || '' }}</p>
+          </div>
+          <div class="card-footer bg-white border-0 d-flex align-items-center">
+            <img [src]="getLogoUrl(recurso.Empresa)" class="rounded-circle me-2" style="width: 24px; height: 24px; object-fit: contain;">
+            <small class="text-muted">Publicado por {{ recurso.Empresa?.nombre || 'Anónimo' }}</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>

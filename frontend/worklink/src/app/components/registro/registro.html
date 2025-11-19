@@ -1,0 +1,86 @@
+<div class="login-container">
+
+  <div class="form-panel">
+    <div class="form-content">
+      <div class="logo-header">
+        <img src="assets/imagenes/Logo.jpg" alt="Logo" class="logo-img">
+        <h1 class="title">WorkLink</h1>
+      </div>
+
+      <h3 class="subtitle">Registrarse</h3>
+
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="login-form">
+        
+        <div class="form-group">
+          <input 
+            type="text" 
+            name="nombre" 
+            class="form-input" 
+            placeholder="Nombre completo"
+            [(ngModel)]="registerData.nombre"
+            required>
+        </div>
+
+        <div class="form-group">
+          <input 
+            type="email" 
+            name="correo" 
+            class="form-input" 
+            placeholder="Correo"
+            [(ngModel)]="registerData.correo"
+            required
+            email> </div>
+
+        <div class="form-group password-wrapper">
+          <input 
+            [type]="passFieldType" 
+            name="password" 
+            class="form-input" 
+            placeholder="Contraseña"
+            [(ngModel)]="registerData.password"
+            required
+            minlength="6"> <button type="button" (click)="togglePasswordVisibility('pass')" class="toggle-password">
+            {{ passFieldType === 'password' ? 'Mostrar' : 'Ocultar' }}
+          </button>
+        </div>
+
+        <div class="form-group password-wrapper">
+          <input 
+            [type]="confirmPassFieldType" 
+            name="confirmPassword" 
+            class="form-input" 
+            placeholder="Confirmar contraseña"
+            [(ngModel)]="registerData.confirmPassword"
+            required>
+          <button type="button" (click)="togglePasswordVisibility('confirm')" class="toggle-password">
+            {{ confirmPassFieldType === 'password' ? 'Mostrar' : 'Ocultar' }}
+          </button>
+        </div>
+
+        <div class="form-group">
+            <select name="rol" class="form-input" [(ngModel)]="registerData.rolIndex" required>
+              <option value="" disabled selected>Selecciona el tipo de cuenta</option>
+              <option value="1">Empleador</option>   
+              <option value="2">Candidato</option> 
+            </select>
+        </div>
+        
+        <button type="submit" class="submit-button" [disabled]="registerForm.invalid">
+          Crear Cuenta
+        </button>
+      </form>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <p class="signup-link">
+        ¿Ya tienes una cuenta? <a routerLink="/login">Iniciar sesión</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="promo-panel">
+    </div>
+
+</div>

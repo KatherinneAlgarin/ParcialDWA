@@ -1,0 +1,132 @@
+<div class="mb-4">
+  <a routerLink="/empleador/mis-trabajos" class="btn btn-outline-secondary btn-sm mb-3">
+    <i class="bi bi-arrow-left"></i> Volver a Mis Trabajos
+  </a>
+  <h5 class="fw-bold text-uppercase">{{ tituloOferta }}</h5>
+</div>
+
+<div *ngIf="isLoading" class="text-center p-5">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<div *ngIf="!isLoading && errorMessage" class="alert alert-danger text-center">
+  {{ errorMessage }}
+</div>
+
+<div id="lista-candidatos-container" class="list-group" *ngIf="!isLoading && !errorMessage">
+  
+  <div *ngIf="aplicaciones.length === 0" class="list-group-item text-center text-muted p-4">
+    No hay candidatos para esta oferta todavía.
+  </div>
+
+  <div *ngFor="let app of aplicaciones" 
+       class="list-group-item d-flex justify-content-between align-items-center flex-wrap gap-2">
+    
+    <div class="d-flex align-items-center">
+      <img [src]="getFotoUrl(app.Usuario)" class="rounded-circle me-3" 
+           style="width:50px; height:50px; object-fit:cover;">
+      <div>
+        <div class="fw-bold">{{ app.Usuario?.nombre || 'Anónimo' }}</div>
+        <small class="text-muted">{{ app.Usuario?.correo }}</small>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+      
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="verPerfil(app)">
+        <i class="bi bi-person-fill"></i> Ver Perfil
+      </button>
+      
+      <a *ngIf="app.cv_path" [href]="getCvUrl(app.cv_path)" target="_blank" class="btn btn-outline-success btn-sm" download>
+        <i class="bi bi-download"></i> Descargar CV
+      </a>
+      <button *ngIf="!app.cv_path" class="btn btn-outline-secondary btn-sm" disabled>
+        <i class="bi bi-download"></i> Sin CV
+      </button>
+
+      <select class="form-select form-select-sm" style="width: auto;" 
+              [(ngModel)]="app.estado" 
+              (change)="actualizarEstado(app, app.estado)">
+        <option value="Activa">Activa</option>
+        <option value="En revisión">En revisión</option>
+        <option value="Aceptada">Aceptada</option>
+        <option value="Rechazada">Rechazada</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="perfilModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Perfil del Candidato</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body" *ngIf="candidatoSeleccionado">
+        <div class="card border-0 p-3">
+          <div class="d-flex align-items-center mb-4">
+            <img [src]="getFotoUrl(candidatoSeleccionado)" class="rounded-circle me-3" 
+                 style="width:80px; height:80px; object-fit:cover;">
+            <div>
+              <h5 class="fw-bold mb-0">{{ candidatoSeleccionado.nombre }}</h5>
+              <p class="text-muted mb-0">{{ candidatoSeleccionado.correo }}</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-7">
+              <div *ngIf="candidatoSeleccionado.biografia">
+                <h6 class="fw-bold mb-2">BIOGRAFÍA</h6>
+                <p class="text-muted small" style="white-space: pre-wrap;">{{ candidatoSeleccionado.biografia }}</p>
+              </div>
+
+              <div *ngIf="redesSocialesCandidato" class="mb-3">
+                <h6 class="fw-bold mt-4 mb-2">Redes Sociales</h6>
+                <div class="d-flex gap-2">
+                  <a *ngIf="redesSocialesCandidato.facebook" [href]="redesSocialesCandidato.facebook" target="_blank" class="btn btn-outline-primary btn-sm"><i class="bi bi-facebook"></i></a>
+                  <a *ngIf="redesSocialesCandidato.twitter" [href]="redesSocialesCandidato.twitter" target="_blank" class="btn btn-outline-info btn-sm"><i class="bi bi-twitter-x"></i></a>
+                  <a *ngIf="redesSocialesCandidato.instagram" [href]="redesSocialesCandidato.instagram" target="_blank" class="btn btn-outline-danger btn-sm"><i class="bi bi-instagram"></i></a>
+                </div>
+              </div>
+
+              <div *ngIf="aplicacionSeleccionada?.carta_presentacion">
+                <h6 class="fw-bold mt-4 mb-2">CARTA DE PRESENTACIÓN</h6>
+                <p class="small fst-italic" style="white-space: pre-wrap;">"{{ aplicacionSeleccionada.carta_presentacion }}"</p>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <div class="card bg-light border-0 p-3">
+                <h6 class="fw-bold border-bottom pb-2 mb-3">Información del Candidato</h6>
+                <ul class="list-unstyled small">
+                  <li *ngIf="candidatoSeleccionado.fecha_nacimiento" class="mb-2">
+                    <i class="bi bi-calendar-event me-2"></i><b>Nacimiento:</b> {{ formatearFecha(candidatoSeleccionado.fecha_nacimiento) }}
+                  </li>
+                  <li *ngIf="candidatoSeleccionado.nacionalidad" class="mb-2">
+                    <i class="bi bi-flag me-2"></i><b>Nacionalidad:</b> {{ candidatoSeleccionado.nacionalidad }}
+                  </li>
+                  <li *ngIf="candidatoSeleccionado.direccion" class="mb-2">
+                    <i class="bi bi-geo-alt me-2"></i><b>Ubicación:</b> {{ candidatoSeleccionado.direccion }}
+                  </li>
+                  <li *ngIf="candidatoSeleccionado.experiencia" class="mb-2">
+                    <i class="bi bi-briefcase me-2"></i><b>Experiencia:</b> {{ candidatoSeleccionado.experiencia }}
+                  </li>
+                  <li *ngIf="candidatoSeleccionado.educacion" class="mb-2">
+                    <i class="bi bi-mortarboard me-2"></i><b>Educación:</b> {{ candidatoSeleccionado.educacion }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
